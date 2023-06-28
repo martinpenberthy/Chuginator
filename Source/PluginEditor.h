@@ -25,6 +25,11 @@ public:
     void resized() override;
 
 private:
+    
+    juce::LookAndFeel_V4 lookAndFeel;
+    juce::Slider sliderInputGain;
+    juce::Label labelInputGain; 
+    
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     ChuginatorAudioProcessor& audioProcessor;
