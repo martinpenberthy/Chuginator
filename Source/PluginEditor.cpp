@@ -27,6 +27,9 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderInputGain);
     addAndMakeVisible(labelInputGain);
     
+    setSliderProperties(&sliderInputGain);
+    sliderInputGain.setLookAndFeel(&lookAndFeel);
+    labelInputGain.setText("InputGain(dB)", juce::dontSendNotification);
     
     
     
@@ -35,6 +38,21 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
 ChuginatorAudioProcessorEditor::~ChuginatorAudioProcessorEditor()
 {
 }
+
+void ChuginatorAudioProcessorEditor::makeSliderAttachments()
+{
+    sliderAttachmentInputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "INPUTGAIN", sliderInputGain);
+
+}
+
+void ChuginatorAudioProcessorEditor::setSliderProperties(juce::Slider *sliderToSet)
+{
+    
+    sliderToSet->setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
+    sliderToSet->setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
+    sliderToSet->setDoubleClickReturnValue(true, 0.0f);
+}
+
 
 //==============================================================================
 void ChuginatorAudioProcessorEditor::paint (juce::Graphics& g)
@@ -48,4 +66,11 @@ void ChuginatorAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+    
+    int leftOffest = 60;
+    int topOffset = 40;
+    int knobSize = 125;
+    
+    sliderInputGain.setBounds(leftOffest, topOffset, knobSize, knobSize);
+    labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY(), 76, 38);
 }

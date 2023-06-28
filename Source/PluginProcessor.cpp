@@ -19,13 +19,26 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), treeState(*this, nullptr, juce::Identifier("PARAMETERS"), createParameterLayout())
 #endif
 {
+    treeState.state.addListener(this);
+
 }
 
 ChuginatorAudioProcessor::~ChuginatorAudioProcessor()
 {
+}
+
+
+juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::createParameterLayout()
+{
+    std::vector <std::unique_ptr<juce::RangedAudioParameter>> params;
+    
+    //Input and Output parameters
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"INPUTGAIN", 1}, "InputGain", -96.0f, 48.0f, 0.0f));
+
+    return {params.begin(), params.end()};
 }
 
 //==============================================================================
