@@ -23,13 +23,19 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
-
+    void setSliderProperties(juce::Slider *sliderToSet);
+    void makeSliderAttachments();
+    
+    
 private:
     
     juce::LookAndFeel_V4 lookAndFeel;
     juce::Slider sliderInputGain;
-    juce::Label labelInputGain; 
+    juce::Label labelInputGain;
     
+    
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentInputGain;
+
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     ChuginatorAudioProcessor& audioProcessor;
