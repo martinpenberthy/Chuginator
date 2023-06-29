@@ -72,6 +72,8 @@ private:
     using IIRCoefs = juce::dsp::IIR::Coefficients<float>;
     juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> preEQ;
 
+    
+    juce::dsp::Gain<float> outputGain;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChuginatorAudioProcessor)
 };
