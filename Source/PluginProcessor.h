@@ -75,8 +75,12 @@ private:
     //GAIN1
     juce::dsp::Gain<float> preGain1;
     juce::dsp::WaveShaper<float> waveshaper1;
-    juce::dsp::DryWetMixer<float> mix1;
     
+    juce::dsp::Gain<float> preGain2;
+    juce::dsp::WaveShaper<float> waveshaper2;
+    
+    juce::dsp::DryWetMixer<float> mix1;
+    juce::dsp::DryWetMixer<float> mix2;
     
     juce::dsp::Gain<float> outputGain;
     //==============================================================================
