@@ -179,7 +179,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     inputGain.process(juce::dsp::ProcessContextReplacing<float>(inputGainBlock));
     
     updatePreEQ();
-    preEQ.process(inputGainBlock);
+    preEQ.process(juce::dsp::ProcessContextReplacing<float>(inputGainBlock));
 }
 
 //==============================================================================
