@@ -106,8 +106,12 @@ void ChuginatorAudioProcessor::changeProgramName (int index, const juce::String&
 //==============================================================================
 void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    spec.sampleRate = sampleRate;
+    spec.maximumBlockSize = samplesPerBlock;
+    spec.numChannels = getTotalNumOutputChannels();
+    
+    inputGain.prepare(spec);
+    inputGain.setGainDecibels(*treeState.getRawParameterValue("INPUTGAIN"));
 }
 
 void ChuginatorAudioProcessor::releaseResources()
@@ -157,18 +161,10 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
-    }
+    //INPUTGAIN
+    inputGain.setGainDecibels(*treeState.getRawParameterValue("INPUTGAIN"));
+    juce::dsp::AudioBlock<float> inputGainBlock (buffer);
+    inputGain.process(juce::dsp::ProcessContextReplacing<float>(inputGainBlock));
 }
 
 //==============================================================================

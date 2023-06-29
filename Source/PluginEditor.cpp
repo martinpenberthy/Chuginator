@@ -32,7 +32,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelInputGain.setText("InputGain(dB)", juce::dontSendNotification);
     
     
-    
+    makeSliderAttachments();
 }
 
 ChuginatorAudioProcessorEditor::~ChuginatorAudioProcessorEditor()

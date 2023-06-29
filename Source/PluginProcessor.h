@@ -63,6 +63,10 @@ public:
 
 
 private:
+    juce::dsp::ProcessSpec spec;
+
+    juce::dsp::Gain<float> inputGain;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChuginatorAudioProcessor)
 };
