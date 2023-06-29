@@ -47,7 +47,7 @@ void ChuginatorAudioProcessor::updatePreEQ()
 {
     float preEQFreq = *treeState.getRawParameterValue("PREEQ");
     
-    preEQ.state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(getSampleRate(), preEQFreq * 1000.0f, 0.2f, 0.5f);
+    *preEQ.state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(getSampleRate(), preEQFreq * 1000.0f, 0.2f, 0.5f);
 }
 
 //==============================================================================
