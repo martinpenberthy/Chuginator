@@ -71,7 +71,12 @@ private:
     using IIRFilter = juce::dsp::IIR::Filter<float>;
     using IIRCoefs = juce::dsp::IIR::Coefficients<float>;
     juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> preEQ;
-
+    
+    //GAIN1
+    juce::dsp::Gain<float> preGain1;
+    juce::dsp::WaveShaper<float> waveshaper1;
+    juce::dsp::DryWetMixer<float> mix1;
+    
     
     juce::dsp::Gain<float> outputGain;
     //==============================================================================

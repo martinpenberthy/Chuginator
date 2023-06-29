@@ -37,11 +37,20 @@ private:
     juce::Slider sliderPreEQ;//PreEQ slider
     juce::Label labelPreEQ; //PreEQ label
     
+    juce::Slider sliderPreGain1;
+    juce::Label labelPreGain1;
+    
     juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;
     
+    juce::Slider sliderMix1;
+    juce::Label labelMix1;
+    
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentInputGain;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreEQ;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain1;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentMix1;
+    
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentOutputGain;
 
 

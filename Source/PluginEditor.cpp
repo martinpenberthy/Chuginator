@@ -23,7 +23,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
     
-    
+    //INPUT
     addAndMakeVisible(sliderInputGain);
     addAndMakeVisible(labelInputGain);
     
@@ -31,6 +31,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     sliderInputGain.setLookAndFeel(&lookAndFeel);
     labelInputGain.setText("Input(dB)", juce::dontSendNotification);
     
+    //PREEQ
     addAndMakeVisible(sliderPreEQ);
     addAndMakeVisible(labelPreEQ);
     
@@ -38,13 +39,29 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     sliderPreEQ.setLookAndFeel(&lookAndFeel);
     labelPreEQ.setText("PreEQ", juce::dontSendNotification);
     
-    
+    //OUTPUT
     addAndMakeVisible(sliderOutputGain);
     addAndMakeVisible(labelOutputGain);
     
     setSliderProperties(&sliderOutputGain);
     sliderOutputGain.setLookAndFeel(&lookAndFeel);
     labelOutputGain.setText("Output(dB)", juce::dontSendNotification);
+    
+    //PREGAIN1
+    addAndMakeVisible(sliderPreGain1);
+    addAndMakeVisible(labelPreGain1);
+    
+    setSliderProperties(&sliderPreGain1);
+    sliderPreGain1.setLookAndFeel(&lookAndFeel);
+    labelPreGain1.setText("Gain1", juce::dontSendNotification);
+    
+    //MIX1
+    addAndMakeVisible(sliderMix1);
+    addAndMakeVisible(labelMix1);
+    
+    setSliderProperties(&sliderMix1);
+    sliderMix1.setLookAndFeel(&lookAndFeel);
+    labelMix1.setText("Mix1", juce::dontSendNotification);
     
     makeSliderAttachments();
 }
@@ -59,7 +76,13 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     
     sliderAttachmentPreEQ = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREEQ", sliderPreEQ);
     
+    sliderAttachmentPreGain1 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN1", sliderPreGain1);
+    
+    sliderAttachmentMix1 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX1", sliderMix1);
+    
     sliderAttachmentOutputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "OUTPUTGAIN", sliderOutputGain);
+    
+    
 }
 
 void ChuginatorAudioProcessorEditor::setSliderProperties(juce::Slider *sliderToSet)
@@ -88,6 +111,7 @@ void ChuginatorAudioProcessorEditor::resized()
     int topOffset = 30;
     int knobSize = 125;
     
+    //ROW1
     sliderInputGain.setBounds(leftOffset, topOffset, knobSize, knobSize);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
     
@@ -96,4 +120,13 @@ void ChuginatorAudioProcessorEditor::resized()
     
     sliderOutputGain.setBounds(getWidth() - (leftOffset + knobSize), topOffset, knobSize, knobSize);
     labelOutputGain.setBounds(sliderOutputGain.getX(), sliderOutputGain.getY() - 15, 76, 38);
+    
+    //ROW2
+    sliderPreGain1.setBounds(leftOffset, topOffset + knobSize, knobSize, knobSize);
+    labelPreGain1.setBounds(sliderPreGain1.getX(), sliderPreGain1.getY() - 15, 76, 38);
+    
+    sliderMix1.setBounds(sliderPreGain1.getX(), sliderPreGain1.getY() + knobSize, knobSize, knobSize);
+    labelMix1.setBounds(sliderMix1.getX(), sliderMix1.getY() - 15, 76, 38);
+    
+    
 }
