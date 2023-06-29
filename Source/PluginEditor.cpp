@@ -29,7 +29,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     setSliderProperties(&sliderInputGain);
     sliderInputGain.setLookAndFeel(&lookAndFeel);
-    labelInputGain.setText("InputGain(dB)", juce::dontSendNotification);
+    labelInputGain.setText("Input(dB)", juce::dontSendNotification);
     
     addAndMakeVisible(sliderPreEQ);
     addAndMakeVisible(labelPreEQ);
@@ -44,7 +44,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     setSliderProperties(&sliderOutputGain);
     sliderOutputGain.setLookAndFeel(&lookAndFeel);
-    labelOutputGain.setText("OutputGain(dB)", juce::dontSendNotification);
+    labelOutputGain.setText("Output(dB)", juce::dontSendNotification);
     
     makeSliderAttachments();
 }
@@ -84,16 +84,16 @@ void ChuginatorAudioProcessorEditor::resized()
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
     
-    int leftOffest = 60;
+    int leftOffset = 40;
     int topOffset = 30;
     int knobSize = 125;
     
-    sliderInputGain.setBounds(leftOffest, topOffset, knobSize, knobSize);
+    sliderInputGain.setBounds(leftOffset, topOffset, knobSize, knobSize);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
     
     sliderPreEQ.setBounds((getWidth() / 2) - 60, topOffset, knobSize, knobSize);
     labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - 15, 76, 38);
     
-    sliderOutputGain.setBounds(getWidth() - leftOffest, topOffset, knobSize, knobSize);
+    sliderOutputGain.setBounds(getWidth() - (leftOffset + knobSize), topOffset, knobSize, knobSize);
     labelOutputGain.setBounds(sliderOutputGain.getX(), sliderOutputGain.getY() - 15, 76, 38);
 }
