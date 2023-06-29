@@ -38,7 +38,16 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     //Input and Output parameters
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"INPUTGAIN", 1}, "InputGain", -96.0f, 48.0f, 0.0f));
 
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREEQ", 1}, "PreEQ", 1.0f, 10.0f, 5.0f));
+
     return {params.begin(), params.end()};
+}
+
+void ChuginatorAudioProcessor::updatePreEQ()
+{
+    float preEQFreq = *treeState.getRawParameterValue("PREEQ");
+    
+    preEQ.state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(getSampleRate(), preEQFreq * 1000.0f, 0.2f, 0.5f);
 }
 
 //==============================================================================
@@ -112,6 +121,9 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     inputGain.prepare(spec);
     inputGain.setGainDecibels(*treeState.getRawParameterValue("INPUTGAIN"));
+    
+    preEQ.prepare(spec);
+    updatePreEQ();
 }
 
 void ChuginatorAudioProcessor::releaseResources()
@@ -165,6 +177,9 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     inputGain.setGainDecibels(*treeState.getRawParameterValue("INPUTGAIN"));
     juce::dsp::AudioBlock<float> inputGainBlock (buffer);
     inputGain.process(juce::dsp::ProcessContextReplacing<float>(inputGainBlock));
+    
+    updatePreEQ();
+    preEQ.process(inputGainBlock);
 }
 
 //==============================================================================

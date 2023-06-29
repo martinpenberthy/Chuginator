@@ -57,7 +57,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-
+    void updatePreEQ();
     
     juce::AudioProcessorValueTreeState treeState;
 
@@ -66,6 +66,11 @@ private:
     juce::dsp::ProcessSpec spec;
 
     juce::dsp::Gain<float> inputGain;
+    
+    
+    using IIRFilter = juce::dsp::IIR::Filter<float>;
+    using IIRCoefs = juce::dsp::IIR::Coefficients<float>;
+    juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> preEQ;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChuginatorAudioProcessor)

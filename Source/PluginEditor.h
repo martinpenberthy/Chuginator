@@ -30,11 +30,15 @@ public:
 private:
     
     juce::LookAndFeel_V4 lookAndFeel;
+    
     juce::Slider sliderInputGain;
     juce::Label labelInputGain;
     
+    juce::Slider sliderPreEQ;//PreEQ slider
+    juce::Label labelPreEQ; //PreEQ label
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentInputGain;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreEQ;
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.

@@ -31,6 +31,15 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     sliderInputGain.setLookAndFeel(&lookAndFeel);
     labelInputGain.setText("InputGain(dB)", juce::dontSendNotification);
     
+    addAndMakeVisible(sliderPreEQ);
+    addAndMakeVisible(labelPreEQ);
+    
+    setSliderProperties(&sliderPreEQ);
+    sliderPreEQ.setLookAndFeel(&lookAndFeel);
+    labelPreEQ.setText("PreEQ", juce::dontSendNotification);
+    
+    
+    
     
     makeSliderAttachments();
 }
@@ -42,7 +51,7 @@ ChuginatorAudioProcessorEditor::~ChuginatorAudioProcessorEditor()
 void ChuginatorAudioProcessorEditor::makeSliderAttachments()
 {
     sliderAttachmentInputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "INPUTGAIN", sliderInputGain);
-
+    sliderAttachmentPreEQ = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREEQ", sliderPreEQ);
 }
 
 void ChuginatorAudioProcessorEditor::setSliderProperties(juce::Slider *sliderToSet)
@@ -72,5 +81,8 @@ void ChuginatorAudioProcessorEditor::resized()
     int knobSize = 125;
     
     sliderInputGain.setBounds(leftOffest, topOffset, knobSize, knobSize);
-    labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY(), 76, 38);
+    labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
+    
+    sliderPreEQ.setBounds(getWidth() / 2, topOffset, knobSize, knobSize);
+    labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - 15, 76, 38);
 }
