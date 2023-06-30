@@ -50,6 +50,11 @@ private:
     juce::Slider sliderMix2;
     juce::Label labelMix2;
     
+    juce::Slider sliderPreGain3;
+    juce::Label labelPreGain3;
+    
+    juce::Slider sliderMix3;
+    juce::Label labelMix3;
     
     juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;
@@ -62,6 +67,9 @@ private:
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain2;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentMix2;
+    
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain3;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentMix3;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentOutputGain;
 
