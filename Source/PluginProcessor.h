@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "Stage1.h"
 
 //==============================================================================
 /**
@@ -73,9 +74,10 @@ private:
     juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> preEQ;
     
     //GAIN1
-    juce::dsp::Gain<float> preGain1;
+/*juce::dsp::Gain<float> preGain1;
     juce::dsp::WaveShaper<float> waveshaper1;
-    juce::dsp::DryWetMixer<float> mix1;
+    juce::dsp::DryWetMixer<float> mix1;*/
+    Stage1 gainStage1;
     
     juce::dsp::Gain<float> preGain2;
     juce::dsp::WaveShaper<float> waveshaper2;

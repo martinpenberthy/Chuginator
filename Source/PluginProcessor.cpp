@@ -139,8 +139,9 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     updatePreEQ();
 
     /*=====================================================================*/
+    gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"), *treeState.getRawParameterValue("MIX1"));
     //PREGAIN1
-    preGain1.prepare(spec);
+    /*preGain1.prepare(spec);
     preGain1.setGainDecibels(*treeState.getRawParameterValue("PREGAIN1"));
     
     //MIX1
@@ -155,7 +156,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
         return x / (std::abs(x) + 1);
     };
     waveshaper1.prepare(spec);
-    
+    */
     
     /*=====================================================================*/
     //PREGAIN2
@@ -264,8 +265,11 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     preEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
     /*=====================================================================*/
-    //MIXPREP1
     juce::dsp::AudioBlock<float> drySampsBlock1 (buffer);
+    gainStage1.process(drySampsBlock1, processBlock,*treeState.getRawParameterValue("PREGAIN1"), *treeState.getRawParameterValue("MIX1"));
+    
+    //MIXPREP1
+    /*juce::dsp::AudioBlock<float> drySampsBlock1 (buffer);
     mix1.pushDrySamples(drySampsBlock1);
     mix1.setWetMixProportion(*treeState.getRawParameterValue("MIX1"));
 
@@ -277,7 +281,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
     //WAVESHAPER1
     waveshaper1.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
-    mix1.mixWetSamples(processBlock);
+    mix1.mixWetSamples(processBlock);*/
     
     
     /*=====================================================================*/
