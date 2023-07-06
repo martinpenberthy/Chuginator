@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "Stage1.h"
 #include "Stage2.h"
+#include "Stage3.h"
 
 //==============================================================================
 /**
@@ -87,9 +88,10 @@ private:
     Stage2 gainStage2;
     
     
-    juce::dsp::Gain<float> preGain3;
+    /*juce::dsp::Gain<float> preGain3;
     juce::dsp::WaveShaper<float> waveshaper3;
-    juce::dsp::DryWetMixer<float> mix3;
+    juce::dsp::DryWetMixer<float> mix3;*/
+    Stage3 gainStage3;
     
     juce::dsp::Gain<float> outputGain;
     //==============================================================================

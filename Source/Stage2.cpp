@@ -20,17 +20,17 @@ Stage2::~Stage2()
 
 void Stage2::prepare(juce::dsp::ProcessSpec spec, float preGain, float mix)
 {
-    //PREGAIN1
+    //PREGAIN2
     preGain2.prepare(spec);
     preGain2.setGainDecibels(preGain);
     
-    //MIX1
+    //MIX2
     mix2.setWetMixProportion(mix);
     mix2.setMixingRule(juce::dsp::DryWetMixingRule::linear);
     mix2.setWetLatency(1.0f);
     mix2.prepare(spec);
     
-    //WAVESHAPER1
+    //WAVESHAPER2
     waveshaper2.functionToUse = [](float x)
     {
         return x / (std::abs(x) + 1);
@@ -45,13 +45,13 @@ void Stage2::process(juce::dsp::AudioBlock<float> drySampsBlock, juce::dsp::Audi
     mix2.pushDrySamples(drySampsBlock);
     mix2.setWetMixProportion(mix);
 
-    //PREGAIN1
+    //PREGAIN2
     float newPreGain2 = preGain;
     if(preGain2.getGainDecibels() != newPreGain2)
         preGain2.setGainDecibels(newPreGain2);
     preGain2.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
-    //WAVESHAPER1
+    //WAVESHAPER2
     waveshaper2.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     mix2.mixWetSamples(processBlock);
 }
