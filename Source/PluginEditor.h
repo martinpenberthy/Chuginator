@@ -56,6 +56,19 @@ private:
     juce::Slider sliderMix3;
     juce::Label labelMix3;
     
+    
+    //Filters
+    juce::Slider sliderFilterHighGain;
+    juce::Label labelFilterHighGain;
+    
+    juce::Slider sliderFilterMidGain;
+    juce::Label labelFilterMidGain;
+    
+    juce::Slider sliderFilterLowGain;
+    juce::Label labelFilterLowGain;
+    
+    
+    
     juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;
     
@@ -70,6 +83,10 @@ private:
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain3;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentMix3;
+    
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentFilterHighGain;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentFilterMidGain;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentFilterLowGain;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentOutputGain;
 

@@ -12,6 +12,7 @@
 #include "Stage1.h"
 #include "Stage2.h"
 #include "Stage3.h"
+#include "EQStage.h"
 
 //==============================================================================
 /**
@@ -93,6 +94,7 @@ private:
     juce::dsp::DryWetMixer<float> mix3;*/
     Stage3 gainStage3;
     
+    EQStage EQStage;
     juce::dsp::Gain<float> outputGain;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChuginatorAudioProcessor)

@@ -5,6 +5,8 @@
               companyName="Black Martini">
   <MAINGROUP id="b48WrN" name="Chuginator">
     <GROUP id="{59562548-40C6-E0F5-04C4-C08F52A52683}" name="Source">
+      <FILE id="OjKCbA" name="EQStage.cpp" compile="1" resource="0" file="Source/EQStage.cpp"/>
+      <FILE id="lpfX4w" name="EQStage.h" compile="0" resource="0" file="Source/EQStage.h"/>
       <FILE id="EdgfEE" name="Stage3.cpp" compile="1" resource="0" file="Source/Stage3.cpp"/>
       <FILE id="LGxJkN" name="Stage3.h" compile="0" resource="0" file="Source/Stage3.h"/>
       <FILE id="ZhibO7" name="Stage2.cpp" compile="1" resource="0" file="Source/Stage2.cpp"/>
