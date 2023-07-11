@@ -71,14 +71,18 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     //PREGAIN2
     addAndMakeVisible(sliderPreGain2);
     addAndMakeVisible(labelPreGain2);
+    addAndMakeVisible(buttonGain2);
     
     setSliderProperties(&sliderPreGain2);
     sliderPreGain2.setLookAndFeel(&lookAndFeel);
     labelPreGain2.setText("Gain2", juce::dontSendNotification);
     
+    buttonGain2.setToggleable(true);
+    
     //MIX2
     addAndMakeVisible(sliderMix2);
     addAndMakeVisible(labelMix2);
+    
     
     setSliderProperties(&sliderMix2);
     sliderMix2.setLookAndFeel(&lookAndFeel);
@@ -87,10 +91,13 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     //PREGAIN3
     addAndMakeVisible(sliderPreGain3);
     addAndMakeVisible(labelPreGain3);
+    addAndMakeVisible(buttonGain3);
     
     setSliderProperties(&sliderPreGain3);
     sliderPreGain3.setLookAndFeel(&lookAndFeel);
     labelPreGain3.setText("Gain3", juce::dontSendNotification);
+    
+    buttonGain3.setToggleable(true);
     
     //MIX3
     addAndMakeVisible(sliderMix3);
@@ -146,10 +153,11 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     
     sliderAttachmentPreGain2 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN2", sliderPreGain2);
     sliderAttachmentMix2 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX2", sliderMix2);
-    
+    buttonAttachmentGain2OnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "GAIN2ONOFF", buttonGain2);
     
     sliderAttachmentPreGain3 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN3", sliderPreGain3);
     sliderAttachmentMix3 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX3", sliderMix3);
+    buttonAttachmentGain3OnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "GAIN3ONOFF", buttonGain3);
     
     //EQ
     sliderAttachmentFilterLowGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "LOW", sliderFilterLowGain);
@@ -204,7 +212,7 @@ void ChuginatorAudioProcessorEditor::resized()
     
 
     //Gain
-    sliderPreGain1.setBounds(leftOffset - 15, topOffset + knobSizeLarge + 30, knobSizeMedium, knobSizeMedium);
+    sliderPreGain1.setBounds(leftOffset - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
     labelPreGain1.setBounds(sliderPreGain1.getX() + labelXOffset, sliderPreGain1.getY() - 15, 76, 38);
     
     //Toggle
@@ -214,16 +222,23 @@ void ChuginatorAudioProcessorEditor::resized()
     sliderMix1.setBounds(sliderPreGain1.getX() + (knobSizeMedium / 2) + 15, sliderPreGain1.getY(), knobSizeMedium, knobSizeMedium);
     labelMix1.setBounds(sliderMix1.getX() + labelXOffset, sliderMix1.getY() - 15, 76, 38);
     
-    
+    //Gain
     sliderPreGain2.setBounds(sliderPreEQ.getX() - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
     labelPreGain2.setBounds(sliderPreGain2.getX() + labelXOffset, sliderPreGain2.getY() - 15, 76, 38);
     
+    //Toggle
+    buttonGain2.setBounds(sliderPreGain2.getX() + 15, sliderPreGain2.getY() - 25, 20, 20);
+    
+    //Mix
     sliderMix2.setBounds(sliderPreGain2.getX() + (knobSizeMedium / 2) + 15, sliderPreGain2.getY(), knobSizeMedium, knobSizeMedium);
     labelMix2.setBounds(sliderMix2.getX() + labelXOffset, sliderMix2.getY() - 15, 76, 38);
     
     
     sliderPreGain3.setBounds(sliderOutputGain.getX() - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
     labelPreGain3.setBounds(sliderPreGain3.getX() + labelXOffset, sliderPreGain3.getY() - 15, 76, 38);
+    
+    //Toggle
+    buttonGain3.setBounds(sliderPreGain3.getX() + 15, sliderPreGain3.getY() - 25, 20, 20);
     
     sliderMix3.setBounds(sliderPreGain3.getX() + (knobSizeMedium / 2) + 15, sliderPreGain3.getY(), knobSizeMedium, knobSizeMedium);
     labelMix3.setBounds(sliderMix3.getX() + labelXOffset, sliderMix3.getY() - 15, 76, 38);

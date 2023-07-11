@@ -46,10 +46,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN2", 1}, "Gain2", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX2", 1}, "Mix2", 0.0f, 1.0f, 0.5f));
+    params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"GAIN2ONOFF", 1}, "Gain2OnOff", false));
     
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN3", 1}, "Gain3", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX3", 1}, "Mix3", 0.0f, 1.0f, 0.5f));
-    
+    params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"GAIN3ONOFF", 1}, "Gain3OnOff", false));
     
     //EQs
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"LOW", 1}, "Low", 0.0f, 2.0f, 1.0f));
@@ -234,6 +235,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     if(*treeState.getRawParameterValue("GAIN1ONOFF"))
     {
         juce::dsp::AudioBlock<float> drySampsBlock1 (buffer);
+        
         gainStage1.process(drySampsBlock1, processBlock,
                            *treeState.getRawParameterValue("PREGAIN1"),
                            *treeState.getRawParameterValue("MIX1"));
@@ -241,19 +243,24 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
     /*=====================================================================*/
 
-    juce::dsp::AudioBlock<float> drySampsBlock2 (buffer);
-    
-    gainStage2.process(drySampsBlock2, processBlock,
-                       *treeState.getRawParameterValue("PREGAIN2"),
-                       *treeState.getRawParameterValue("MIX2"));
-    
+    if(*treeState.getRawParameterValue("GAIN2ONOFF"))
+    {
+        juce::dsp::AudioBlock<float> drySampsBlock2 (buffer);
+        
+        gainStage2.process(drySampsBlock2, processBlock,
+                           *treeState.getRawParameterValue("PREGAIN2"),
+                           *treeState.getRawParameterValue("MIX2"));
+    }
     /*=====================================================================*/
-    juce::dsp::AudioBlock<float> drySampsBlock3 (buffer);
     
-    gainStage3.process(drySampsBlock3, processBlock,
-                       *treeState.getRawParameterValue("PREGAIN3"),
-                       *treeState.getRawParameterValue("MIX3"));
-    
+    if(*treeState.getRawParameterValue("GAIN3ONOFF"))
+    {
+        juce::dsp::AudioBlock<float> drySampsBlock3 (buffer);
+        
+        gainStage3.process(drySampsBlock3, processBlock,
+                           *treeState.getRawParameterValue("PREGAIN3"),
+                           *treeState.getRawParameterValue("MIX3"));
+    }
     
     
     EQStage.process(*treeState.getRawParameterValue("LOW"),
