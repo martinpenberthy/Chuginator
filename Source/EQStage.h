@@ -17,9 +17,9 @@ class EQStage
         EQStage();
         ~EQStage();
         
-        void prepare(juce::dsp::ProcessSpec spec, float lowGain, double sampleRate);
-        void process(float lowGain, juce::dsp::AudioBlock<float> processBlock, double sampleRate);
-    float checkGain(float gain);
+        void prepare(juce::dsp::ProcessSpec spec, float lowGain, float midGain, double sampleRate);
+        void process(float lowGain, float midGain, juce::dsp::AudioBlock<float> processBlock, double sampleRate);
+        float checkGain(float gain);
     
     private:
         using IIRFilter = juce::dsp::IIR::Filter<float>;

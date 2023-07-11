@@ -104,6 +104,13 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     sliderFilterLowGain.setLookAndFeel(&lookAndFeel);
     labelFilterLowGain.setText("Low", juce::dontSendNotification);
     
+    addAndMakeVisible(sliderFilterMidGain);
+    addAndMakeVisible(labelFilterMidGain);
+    
+    setSliderProperties(&sliderFilterMidGain);
+    sliderFilterMidGain.setLookAndFeel(&lookAndFeel);
+    labelFilterMidGain.setText("Mid", juce::dontSendNotification);
+    
     makeSliderAttachments();
 }
 
@@ -130,6 +137,7 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     
     //EQ
     sliderAttachmentFilterLowGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "LOW", sliderFilterLowGain);
+    sliderAttachmentFilterMidGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MID", sliderFilterMidGain);
     
     
     sliderAttachmentOutputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "OUTPUTGAIN", sliderOutputGain);
@@ -196,5 +204,8 @@ void ChuginatorAudioProcessorEditor::resized()
     //ROW3
     sliderFilterLowGain.setBounds(sliderPreGain1.getX(), sliderMix1.getY() + knobSize, knobSize, knobSize);
     labelFilterLowGain.setBounds(sliderFilterLowGain.getX(), sliderFilterLowGain.getY() - 15, 76, 38);
+    
+    sliderFilterMidGain.setBounds(sliderPreGain2.getX(), sliderMix2.getY() + knobSize, knobSize, knobSize);
+    labelFilterMidGain.setBounds(sliderFilterMidGain.getX(), sliderFilterMidGain.getY() - 15, 76, 38);
     
 }
