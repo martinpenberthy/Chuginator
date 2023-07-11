@@ -64,8 +64,6 @@ public:
     void updatePreEQ();
     
     juce::AudioProcessorValueTreeState treeState;
-
-
 private:
     juce::dsp::ProcessSpec spec;
 
@@ -81,6 +79,7 @@ private:
     juce::dsp::WaveShaper<float> waveshaper1;
     juce::dsp::DryWetMixer<float> mix1;*/
     Stage1 gainStage1;
+
     
     /*juce::dsp::Gain<float> preGain2;
     juce::dsp::WaveShaper<float> waveshaper2;

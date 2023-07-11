@@ -26,6 +26,8 @@ public:
     void setSliderProperties(juce::Slider *sliderToSet);
     void makeSliderAttachments();
     
+    // updateToggleState (juce::Button* button)
+
     
 private:
     
@@ -37,24 +39,34 @@ private:
     juce::Slider sliderPreEQ;//PreEQ slider
     juce::Label labelPreEQ; //PreEQ label
     
+    //Gain1
     juce::Slider sliderPreGain1;
     juce::Label labelPreGain1;
     
     juce::Slider sliderMix1;
     juce::Label labelMix1;
     
+    juce::ToggleButton buttonGain1; 
     
+    //Gain2
     juce::Slider sliderPreGain2;
     juce::Label labelPreGain2;
     
     juce::Slider sliderMix2;
     juce::Label labelMix2;
     
+    juce::ToggleButton buttonGain2;
+
+    
+    //Gain3
     juce::Slider sliderPreGain3;
     juce::Label labelPreGain3;
     
     juce::Slider sliderMix3;
     juce::Label labelMix3;
+    
+    juce::ToggleButton buttonGain3;
+
     
     
     //Filters
@@ -77,6 +89,7 @@ private:
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain1;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentMix1;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentGain1OnOff;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain2;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentMix2;
