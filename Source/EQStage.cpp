@@ -22,17 +22,26 @@ EQStage::~EQStage()
     
 }
 
-
-void EQStage::prepare(float lowGain, double sampleRate)
+float EQStage::checkGain(float gain)
 {
-    lowEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 100.0f, 0.6f, lowGain);
+    if(gain == 0.00f)
+        return 0.01f;
+    else
+        return gain;
+}
+
+void EQStage::prepare(juce::dsp::ProcessSpec spec, float lowGain, double sampleRate)
+{
+    lowEQ.prepare(spec);
+    *lowEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 100.0f, 0.6f, checkGain(lowGain));
 }
 
 void EQStage::process(float lowGain, juce::dsp::AudioBlock<float> processBlock, double sampleRate)
 {
-    lowEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 100.0f, 0.6f, lowGain);
+    *lowEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 100.0f, 0.6f, checkGain(lowGain));
     lowEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
     
 }
+
 

@@ -203,7 +203,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     waveshaper3.prepare(spec);*/
     
     
-    EQStage.prepare(*treeState.getRawParameterValue("LOW"), sampleRate);
+    EQStage.prepare(spec, *treeState.getRawParameterValue("LOW"), sampleRate);
 
     //OUTPUTGAIN
     outputGain.prepare(spec);
