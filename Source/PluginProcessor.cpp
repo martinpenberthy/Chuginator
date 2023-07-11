@@ -53,6 +53,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     //EQs
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"LOW", 1}, "Low", 0.0f, 2.0f, 1.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MID", 1}, "Mid", 0.0f, 2.0f, 1.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"HIGH", 1}, "High", 0.0f, 2.0f, 1.0f));
+    
     
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"OUTPUTGAIN", 1}, "OutputGain", -96.0f, 48.0f, 0.0f));
 
@@ -203,7 +205,10 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     waveshaper3.prepare(spec);*/
     
     
-    EQStage.prepare(spec, *treeState.getRawParameterValue("LOW"), *treeState.getRawParameterValue("MID"),sampleRate);
+    EQStage.prepare(spec, *treeState.getRawParameterValue("LOW"),
+                          *treeState.getRawParameterValue("MID"),
+                          *treeState.getRawParameterValue("HIGH"),
+                          sampleRate);
 
     //OUTPUTGAIN
     outputGain.prepare(spec);
@@ -334,7 +339,10 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     mix3.mixWetSamples(processBlock);*/
     
     
-    EQStage.process(*treeState.getRawParameterValue("LOW"), *treeState.getRawParameterValue("MID"), processBlock, getSampleRate());
+    EQStage.process(*treeState.getRawParameterValue("LOW"),
+                    *treeState.getRawParameterValue("MID"),
+                    *treeState.getRawParameterValue("HIGH"),
+                    processBlock, getSampleRate());
     
     
     

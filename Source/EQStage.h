@@ -17,8 +17,8 @@ class EQStage
         EQStage();
         ~EQStage();
         
-        void prepare(juce::dsp::ProcessSpec spec, float lowGain, float midGain, double sampleRate);
-        void process(float lowGain, float midGain, juce::dsp::AudioBlock<float> processBlock, double sampleRate);
+        void prepare(juce::dsp::ProcessSpec spec, float lowGain, float midGain, float highGain, double sampleRate);
+        void process(float lowGain, float midGain, float highGain, juce::dsp::AudioBlock<float> processBlock, double sampleRate);
         float checkGain(float gain);
     
     private:
