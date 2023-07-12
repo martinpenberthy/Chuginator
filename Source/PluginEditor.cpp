@@ -139,6 +139,44 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     sliderFilterHighGain.setLookAndFeel(&lookAndFeel);
     labelFilterHighGain.setText("High", juce::dontSendNotification);
     
+    
+    //Noise Gate
+    //Threshold
+    addAndMakeVisible(sliderNoiseGateThresh);
+    addAndMakeVisible(labelNoiseGateThresh);
+    
+    setSliderProperties(&sliderNoiseGateThresh);
+    sliderNoiseGateThresh.setLookAndFeel(&lookAndFeel);
+    
+    sliderNoiseGateThresh.setTitle("Thresh");
+    labelNoiseGateThresh.setText("Thresh", juce::dontSendNotification);
+    
+    //Ratio
+    addAndMakeVisible(sliderNoiseGateRatio);
+    addAndMakeVisible(labelNoiseGateRatio);
+    
+    setSliderProperties(&sliderNoiseGateRatio);
+    sliderNoiseGateRatio.setLookAndFeel(&lookAndFeel);
+    labelNoiseGateRatio.setText("Ratio", juce::dontSendNotification);
+    
+    //Attack
+    addAndMakeVisible(sliderNoiseGateAttack);
+    addAndMakeVisible(labelNoiseGateAttack);
+    
+    setSliderProperties(&sliderNoiseGateAttack);
+    sliderNoiseGateAttack.setLookAndFeel(&lookAndFeel);
+    labelNoiseGateAttack.setText("Attack", juce::dontSendNotification);
+    
+    //Release
+    addAndMakeVisible(sliderNoiseGateRelease);
+    addAndMakeVisible(labelNoiseGateRelease);
+    
+    setSliderProperties(&sliderNoiseGateRelease);
+    sliderNoiseGateRelease.setLookAndFeel(&lookAndFeel);
+    labelNoiseGateRelease.setText("Release", juce::dontSendNotification);
+    
+    
+    
     makeSliderAttachments();
 }
 
@@ -207,13 +245,19 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     
     sliderAttachmentFilterHighGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "HIGH", sliderFilterHighGain);
     
+    //NOISE GATE
+    sliderAttachmentNoiseGateThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLD", sliderNoiseGateThresh);
+    sliderAttachmentNoiseGateRatio = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RATIO", sliderNoiseGateRatio);
+    sliderAttachmentNoiseGateAttack = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "ATTACK", sliderNoiseGateAttack);
+    sliderAttachmentNoiseGateRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASE", sliderNoiseGateRelease);
+    
+    
     
     sliderAttachmentOutputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "OUTPUTGAIN", sliderOutputGain);
 }
 
 void ChuginatorAudioProcessorEditor::setSliderProperties(juce::Slider *sliderToSet)
 {
-    
     sliderToSet->setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     sliderToSet->setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
     sliderToSet->setDoubleClickReturnValue(true, 0.0f);
@@ -238,7 +282,10 @@ void ChuginatorAudioProcessorEditor::resized()
     int labelXOffset = 25;
     int knobSizeLarge = 115;
     int knobSizeMedium = 100;
+    int knobSizeSmall = 70;
     
+    int row4XOffset =  getWidth() / 4;
+    int row4YOffset = getHeight() / 4;
     
     //ROW1
     sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
@@ -301,6 +348,10 @@ void ChuginatorAudioProcessorEditor::resized()
     
     
     //ROW4
-    loadButton.setBounds(getWidth() - 100, getHeight() - 100, 100, 25);
+    sliderNoiseGateThresh.setBounds(row4XOffset * 2, getHeight() - 100, knobSizeSmall, knobSizeSmall);
+    
+    
+    
+    loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 100, 25);
     
 }
