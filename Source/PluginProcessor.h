@@ -13,6 +13,7 @@
 #include "Stage2.h"
 #include "Stage3.h"
 #include "EQStage.h"
+#include "NoiseGateStage.h"
 
 //==============================================================================
 /**
@@ -99,6 +100,8 @@ private:
     Stage3 gainStage3;
     
     EQStage EQStage;
+    
+    NoiseGateStage noiseGateStage;
     juce::dsp::Gain<float> outputGain;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChuginatorAudioProcessor)

@@ -165,15 +165,18 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     updatePreEQ();
 
     /*=====================================================================*/
-    gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"), *treeState.getRawParameterValue("MIX1"));
+    gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"),
+                             *treeState.getRawParameterValue("MIX1"));
     //gain1OnOff = *treeState.getRawParameterValue("GAIN1ONOFF");
     
     /*=====================================================================*/
-    gainStage2.prepare(spec, *treeState.getRawParameterValue("PREGAIN2"), *treeState.getRawParameterValue("MIX2"));
+    gainStage2.prepare(spec, *treeState.getRawParameterValue("PREGAIN2"),
+                             *treeState.getRawParameterValue("MIX2"));
     
     
     /*=====================================================================*/
-    gainStage3.prepare(spec, *treeState.getRawParameterValue("PREGAIN3"), *treeState.getRawParameterValue("MIX3"));
+    gainStage3.prepare(spec, *treeState.getRawParameterValue("PREGAIN3"),
+                             *treeState.getRawParameterValue("MIX3"));
     
     
     EQStage.prepare(spec, *treeState.getRawParameterValue("LOW"),
@@ -181,6 +184,11 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
                           *treeState.getRawParameterValue("HIGH"),
                           sampleRate);
 
+    noiseGateStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLD"),
+                                 *treeState.getRawParameterValue("RATIO"),
+                                 *treeState.getRawParameterValue("ATTACK"),
+                                 *treeState.getRawParameterValue("RELEASE"));
+    
     //OUTPUTGAIN
     outputGain.prepare(spec);
     outputGain.setGainDecibels(*treeState.getRawParameterValue("OUTPUTGAIN"));
