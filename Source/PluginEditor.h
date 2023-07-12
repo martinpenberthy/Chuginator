@@ -25,13 +25,18 @@ public:
     void resized() override;
     void setSliderProperties(juce::Slider *sliderToSet);
     void makeSliderAttachments();
-    
+    void fileLoader();
     // updateToggleState (juce::Button* button)
 
     
 private:
     
     juce::LookAndFeel_V4 lookAndFeel;
+    
+    juce::TextButton loadButton;
+    juce::Label irName;
+    
+    std::unique_ptr<juce::FileChooser> fileChooser;
     
     juce::Slider sliderInputGain;
     juce::Label labelInputGain;

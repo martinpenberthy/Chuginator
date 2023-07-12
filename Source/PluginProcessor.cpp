@@ -23,7 +23,18 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
 #endif
 {
     treeState.state.addListener(this);
-
+    variableTree =
+    {
+        "Variables", {},
+        {
+            { "Group", {{"name", "IR Vars"}},
+                {
+                    {"Parameter", {{"id", "file1"}, {"value", "/"}}},
+                    {"Parameter", {{"id", "root"}, {"value", "/"}}}
+                }
+            }
+        }
+    };
 }
 
 ChuginatorAudioProcessor::~ChuginatorAudioProcessor()
@@ -167,6 +178,15 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     //OUTPUTGAIN
     outputGain.prepare(spec);
     outputGain.setGainDecibels(*treeState.getRawParameterValue("OUTPUTGAIN"));
+    
+    //Prepare convolution
+    irLoader.reset();
+    irLoader.prepare(spec);
+    
+    if(savedFile.existsAsFile())
+    {
+        irLoader.loadImpulseResponse(savedFile, juce::dsp::Convolution::Stereo::yes,juce::dsp::Convolution::Trim::yes, 0);
+    }
 }
 
 void ChuginatorAudioProcessor::releaseResources()
@@ -268,6 +288,11 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
                     *treeState.getRawParameterValue("HIGH"),
                     processBlock, getSampleRate());
     
+    //If there is an IR loaded, process it
+    if(irLoader.getCurrentIRSize() > 0)
+        irLoader.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
+    
+    
     /*=====================================================================*/
     //OUTPUTGAIN
     float newOutputGain = *treeState.getRawParameterValue("OUTPUTGAIN");
@@ -276,6 +301,8 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
     //juce::dsp::AudioBlock<float> outputGainBlock (buffer);
     outputGain.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
+    
+
 }
 
 //==============================================================================
@@ -292,15 +319,25 @@ juce::AudioProcessorEditor* ChuginatorAudioProcessor::createEditor()
 //==============================================================================
 void ChuginatorAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+    treeState.state.appendChild(variableTree, nullptr);
+    juce::MemoryOutputStream stream(destData, false);
+    treeState.state.writeToStream(stream);
 }
 
 void ChuginatorAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+    auto tree = juce::ValueTree::readFromData(data, size_t(sizeInBytes));
+    variableTree = tree.getChildWithName("Variables");
+
+    if(tree.isValid())
+    {
+        treeState.state = tree;
+        
+        savedFile = juce::File(variableTree.getProperty("file1"));
+        root = juce::File(variableTree.getProperty("root"));
+        
+        irLoader.loadImpulseResponse(savedFile, juce::dsp::Convolution::Stereo::yes, juce::dsp::Convolution::Trim::yes, 0);
+    }
 }
 
 //==============================================================================

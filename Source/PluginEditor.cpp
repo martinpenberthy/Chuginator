@@ -23,6 +23,16 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
     
+    addAndMakeVisible(loadButton);
+    loadButton.setButtonText("Load IR");
+    loadButton.onClick = [this]()
+    {
+        fileLoader();
+    };
+    irName.setText(audioProcessor.savedFile.getFileName(), juce::dontSendNotification);
+    addAndMakeVisible(irName);
+    
+    
     //INPUT
     addAndMakeVisible(sliderInputGain);
     addAndMakeVisible(labelInputGain);
@@ -141,6 +151,38 @@ ChuginatorAudioProcessorEditor::~ChuginatorAudioProcessorEditor()
     audioProcessor.gain1OnOff = button->getToggleState();
 }*/
 
+void ChuginatorAudioProcessorEditor::fileLoader()
+{
+    fileChooser = std::make_unique<juce::FileChooser>("Choose file", audioProcessor.root, "*");
+    
+    
+    const auto fileChooserFlags = juce::FileBrowserComponent::openMode |
+                                  juce::FileBrowserComponent::canSelectFiles |
+                                  juce::FileBrowserComponent::canSelectDirectories;
+    
+    fileChooser->launchAsync(fileChooserFlags, [this](const juce::FileChooser& chooser)
+    {
+        juce::File result (chooser.getResult());
+        
+        if(result.getFileExtension() == ".wav" | result.getFileExtension() == ".mp3")
+        {
+            audioProcessor.savedFile = result;
+            audioProcessor.root = result.getParentDirectory().getFullPathName();
+            
+            audioProcessor.variableTree.setProperty("file1", result.getFullPathName(), nullptr);
+            audioProcessor.variableTree.setProperty("root", result.getParentDirectory().getFullPathName(), nullptr);
+            
+            
+            audioProcessor.irLoader.reset();
+            audioProcessor.irLoader.loadImpulseResponse(audioProcessor.savedFile, juce::dsp::Convolution::Stereo::yes,
+                                                        juce::dsp::Convolution::Trim::yes, 0);
+            irName.setText(result.getFileName(), juce::dontSendNotification);
+            //irName.setText(audioProcessor.savedFile.getFileName(), juce::dontSendNotification);
+
+        }
+    });
+}
+
 void ChuginatorAudioProcessorEditor::makeSliderAttachments()
 {
     sliderAttachmentInputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "INPUTGAIN", sliderInputGain);
@@ -210,7 +252,7 @@ void ChuginatorAudioProcessorEditor::resized()
     
     //ROW2
     
-
+    //GAIN1
     //Gain
     sliderPreGain1.setBounds(leftOffset - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
     labelPreGain1.setBounds(sliderPreGain1.getX() + labelXOffset, sliderPreGain1.getY() - 15, 76, 38);
@@ -222,6 +264,7 @@ void ChuginatorAudioProcessorEditor::resized()
     sliderMix1.setBounds(sliderPreGain1.getX() + (knobSizeMedium / 2) + 15, sliderPreGain1.getY(), knobSizeMedium, knobSizeMedium);
     labelMix1.setBounds(sliderMix1.getX() + labelXOffset, sliderMix1.getY() - 15, 76, 38);
     
+    //GAIN2
     //Gain
     sliderPreGain2.setBounds(sliderPreEQ.getX() - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
     labelPreGain2.setBounds(sliderPreGain2.getX() + labelXOffset, sliderPreGain2.getY() - 15, 76, 38);
@@ -233,13 +276,15 @@ void ChuginatorAudioProcessorEditor::resized()
     sliderMix2.setBounds(sliderPreGain2.getX() + (knobSizeMedium / 2) + 15, sliderPreGain2.getY(), knobSizeMedium, knobSizeMedium);
     labelMix2.setBounds(sliderMix2.getX() + labelXOffset, sliderMix2.getY() - 15, 76, 38);
     
-    
+    //GAIN3
+    //Gain
     sliderPreGain3.setBounds(sliderOutputGain.getX() - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
     labelPreGain3.setBounds(sliderPreGain3.getX() + labelXOffset, sliderPreGain3.getY() - 15, 76, 38);
     
     //Toggle
     buttonGain3.setBounds(sliderPreGain3.getX() + 15, sliderPreGain3.getY() - 25, 20, 20);
     
+    //Mix
     sliderMix3.setBounds(sliderPreGain3.getX() + (knobSizeMedium / 2) + 15, sliderPreGain3.getY(), knobSizeMedium, knobSizeMedium);
     labelMix3.setBounds(sliderMix3.getX() + labelXOffset, sliderMix3.getY() - 15, 76, 38);
     

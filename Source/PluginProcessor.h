@@ -64,6 +64,11 @@ public:
     void updatePreEQ();
     
     juce::AudioProcessorValueTreeState treeState;
+    
+    juce::File root, savedFile;
+    juce::dsp::Convolution irLoader;
+    juce::ValueTree variableTree;
+    
 private:
     juce::dsp::ProcessSpec spec;
 
