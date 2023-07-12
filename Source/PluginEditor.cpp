@@ -299,4 +299,8 @@ void ChuginatorAudioProcessorEditor::resized()
     sliderFilterHighGain.setBounds(sliderOutputGain.getX(), sliderMix3.getY() + (knobSizeLarge - 15), knobSizeLarge, knobSizeLarge);
     labelFilterHighGain.setBounds(sliderFilterHighGain.getX(), sliderFilterHighGain.getY() - 15, 76, 38);
     
+    
+    //ROW4
+    loadButton.setBounds(getWidth() - 100, getHeight() - 100, 100, 25);
+    
 }
