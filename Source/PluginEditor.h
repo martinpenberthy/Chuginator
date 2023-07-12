@@ -23,7 +23,9 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
-    void setSliderProperties(juce::Slider *sliderToSet);
+    void setSliderPropertiesRotary(juce::Slider *sliderToSet);
+    void setSliderPropertiesVertical(juce::Slider *sliderToSet);
+
     void makeSliderAttachments();
     void fileLoader();
     // updateToggleState (juce::Button* button)

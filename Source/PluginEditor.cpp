@@ -37,7 +37,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderInputGain);
     addAndMakeVisible(labelInputGain);
     
-    setSliderProperties(&sliderInputGain);
+    setSliderPropertiesRotary(&sliderInputGain);
     sliderInputGain.setLookAndFeel(&lookAndFeel);
     labelInputGain.setText("Input(dB)", juce::dontSendNotification);
     
@@ -45,7 +45,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderPreEQ);
     addAndMakeVisible(labelPreEQ);
     
-    setSliderProperties(&sliderPreEQ);
+    setSliderPropertiesRotary(&sliderPreEQ);
     sliderPreEQ.setLookAndFeel(&lookAndFeel);
     labelPreEQ.setText("PreEQ", juce::dontSendNotification);
     
@@ -53,7 +53,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderOutputGain);
     addAndMakeVisible(labelOutputGain);
     
-    setSliderProperties(&sliderOutputGain);
+    setSliderPropertiesRotary(&sliderOutputGain);
     sliderOutputGain.setLookAndFeel(&lookAndFeel);
     labelOutputGain.setText("Output(dB)", juce::dontSendNotification);
     
@@ -62,7 +62,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(labelPreGain1);
     addAndMakeVisible(buttonGain1);
     
-    setSliderProperties(&sliderPreGain1);
+    setSliderPropertiesRotary(&sliderPreGain1);
     sliderPreGain1.setLookAndFeel(&lookAndFeel);
     labelPreGain1.setText("Gain1", juce::dontSendNotification);
     
@@ -73,7 +73,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderMix1);
     addAndMakeVisible(labelMix1);
     
-    setSliderProperties(&sliderMix1);
+    setSliderPropertiesRotary(&sliderMix1);
     sliderMix1.setLookAndFeel(&lookAndFeel);
     labelMix1.setText("Mix1", juce::dontSendNotification);
     
@@ -83,7 +83,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(labelPreGain2);
     addAndMakeVisible(buttonGain2);
     
-    setSliderProperties(&sliderPreGain2);
+    setSliderPropertiesRotary(&sliderPreGain2);
     sliderPreGain2.setLookAndFeel(&lookAndFeel);
     labelPreGain2.setText("Gain2", juce::dontSendNotification);
     
@@ -94,7 +94,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(labelMix2);
     
     
-    setSliderProperties(&sliderMix2);
+    setSliderPropertiesRotary(&sliderMix2);
     sliderMix2.setLookAndFeel(&lookAndFeel);
     labelMix2.setText("Mix2", juce::dontSendNotification);
     
@@ -103,7 +103,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(labelPreGain3);
     addAndMakeVisible(buttonGain3);
     
-    setSliderProperties(&sliderPreGain3);
+    setSliderPropertiesRotary(&sliderPreGain3);
     sliderPreGain3.setLookAndFeel(&lookAndFeel);
     labelPreGain3.setText("Gain3", juce::dontSendNotification);
     
@@ -113,7 +113,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderMix3);
     addAndMakeVisible(labelMix3);
     
-    setSliderProperties(&sliderMix3);
+    setSliderPropertiesRotary(&sliderMix3);
     sliderMix3.setLookAndFeel(&lookAndFeel);
     labelMix3.setText("Mix3", juce::dontSendNotification);
     
@@ -121,21 +121,21 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderFilterLowGain);
     addAndMakeVisible(labelFilterLowGain);
     
-    setSliderProperties(&sliderFilterLowGain);
+    setSliderPropertiesRotary(&sliderFilterLowGain);
     sliderFilterLowGain.setLookAndFeel(&lookAndFeel);
     labelFilterLowGain.setText("Low", juce::dontSendNotification);
     
     addAndMakeVisible(sliderFilterMidGain);
     addAndMakeVisible(labelFilterMidGain);
     
-    setSliderProperties(&sliderFilterMidGain);
+    setSliderPropertiesRotary(&sliderFilterMidGain);
     sliderFilterMidGain.setLookAndFeel(&lookAndFeel);
     labelFilterMidGain.setText("Mid", juce::dontSendNotification);
     
     addAndMakeVisible(sliderFilterHighGain);
     addAndMakeVisible(labelFilterHighGain);
     
-    setSliderProperties(&sliderFilterHighGain);
+    setSliderPropertiesRotary(&sliderFilterHighGain);
     sliderFilterHighGain.setLookAndFeel(&lookAndFeel);
     labelFilterHighGain.setText("High", juce::dontSendNotification);
     
@@ -145,16 +145,15 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderNoiseGateThresh);
     addAndMakeVisible(labelNoiseGateThresh);
     
-    setSliderProperties(&sliderNoiseGateThresh);
+    setSliderPropertiesVertical(&sliderNoiseGateThresh);
     sliderNoiseGateThresh.setLookAndFeel(&lookAndFeel);
-    sliderNoiseGateThresh.setTitle("Thresh");
     labelNoiseGateThresh.setText("Thresh", juce::dontSendNotification);
     
     //Ratio
     addAndMakeVisible(sliderNoiseGateRatio);
     addAndMakeVisible(labelNoiseGateRatio);
     
-    setSliderProperties(&sliderNoiseGateRatio);
+    setSliderPropertiesVertical(&sliderNoiseGateRatio);
     sliderNoiseGateRatio.setLookAndFeel(&lookAndFeel);
     sliderNoiseGateRatio.setTitle("Ratio");
     labelNoiseGateRatio.setText("Ratio", juce::dontSendNotification);
@@ -163,7 +162,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderNoiseGateAttack);
     addAndMakeVisible(labelNoiseGateAttack);
     
-    setSliderProperties(&sliderNoiseGateAttack);
+    setSliderPropertiesVertical(&sliderNoiseGateAttack);
     sliderNoiseGateAttack.setLookAndFeel(&lookAndFeel);
     sliderNoiseGateAttack.setTitle("Attack");
     labelNoiseGateAttack.setText("Attack", juce::dontSendNotification);
@@ -172,7 +171,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderNoiseGateRelease);
     addAndMakeVisible(labelNoiseGateRelease);
     
-    setSliderProperties(&sliderNoiseGateRelease);
+    setSliderPropertiesVertical(&sliderNoiseGateRelease);
     sliderNoiseGateRelease.setLookAndFeel(&lookAndFeel);
     sliderNoiseGateRelease.setTitle("Release");
     labelNoiseGateRelease.setText("Release", juce::dontSendNotification);
@@ -258,18 +257,20 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentOutputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "OUTPUTGAIN", sliderOutputGain);
 }
 
-void ChuginatorAudioProcessorEditor::setSliderProperties(juce::Slider *sliderToSet)
+void ChuginatorAudioProcessorEditor::setSliderPropertiesRotary(juce::Slider *sliderToSet)
 {
-    juce::String sliderTitle = sliderToSet->getTitle();
-    
-    if(sliderTitle == "Thresh" || sliderTitle == "Ratio" || sliderTitle == "Attack" || sliderTitle == "Release")
-        sliderToSet->setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
-    else
-    {
-        sliderToSet->setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
-        sliderToSet->setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
-        sliderToSet->setDoubleClickReturnValue(true, 0.0f);
-    }
+
+    sliderToSet->setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
+    sliderToSet->setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
+    sliderToSet->setDoubleClickReturnValue(true, 0.0f);
+}
+
+void ChuginatorAudioProcessorEditor::setSliderPropertiesVertical(juce::Slider *sliderToSet)
+{
+
+    sliderToSet->setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
+    sliderToSet->setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
+    sliderToSet->setDoubleClickReturnValue(true, 0.0f);
 }
 
 
