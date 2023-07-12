@@ -48,5 +48,20 @@ void NoiseGateStage::process(juce::dsp::AudioBlock<float> processBlock, float th
         noiseGate.setRatio(ratio);
         currentRatio = ratio;
     }
+    
+    if(attack != currentAttack)
+    {
+        noiseGate.setAttack(attack);
+        currentAttack = attack;
+    }
+    
+    if(release != currentRelease)
+    {
+        noiseGate.setRelease(release);
+        currentRelease = release;   
+    }
+    
+    noiseGate.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
+    
 }
 

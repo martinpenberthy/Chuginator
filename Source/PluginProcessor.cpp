@@ -178,12 +178,12 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     gainStage3.prepare(spec, *treeState.getRawParameterValue("PREGAIN3"),
                              *treeState.getRawParameterValue("MIX3"));
     
-    
+    //EQ
     EQStage.prepare(spec, *treeState.getRawParameterValue("LOW"),
                           *treeState.getRawParameterValue("MID"),
                           *treeState.getRawParameterValue("HIGH"),
                           sampleRate);
-
+    //Noise Gate
     noiseGateStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLD"),
                                  *treeState.getRawParameterValue("RATIO"),
                                  *treeState.getRawParameterValue("ATTACK"),
@@ -258,6 +258,14 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
     juce::dsp::AudioBlock<float> processBlock (buffer);
     inputGain.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
+    
+    //NOISEGATE
+    noiseGateStage.process(processBlock,
+                           *treeState.getRawParameterValue("THRESHOLD"),
+                           *treeState.getRawParameterValue("RATIO"),
+                           *treeState.getRawParameterValue("ATTACK"),
+                           *treeState.getRawParameterValue("RELEASE"));
+    
     
     /*=====================================================================*/
     //PREEQ
