@@ -34,6 +34,7 @@ public:
 private:
     
     juce::LookAndFeel_V4 lookAndFeel;
+    juce::Image backgroundImage;
     
     juce::TextButton loadButton;
     juce::Label irName;

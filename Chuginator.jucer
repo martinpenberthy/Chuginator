@@ -5,6 +5,14 @@
               companyName="Black Martini">
   <MAINGROUP id="b48WrN" name="Chuginator">
     <GROUP id="{59562548-40C6-E0F5-04C4-C08F52A52683}" name="Source">
+      <GROUP id="{9D5167FE-ADD9-448E-1958-6234079719A5}" name="Assets">
+        <FILE id="zYX5Ne" name="AmpBackground1.png" compile="0" resource="1"
+              file="../../../Downloads/AmpBackground1.png"/>
+      </GROUP>
+      <FILE id="eqWcOr" name="NoiseGateStage.cpp" compile="1" resource="0"
+            file="Source/NoiseGateStage.cpp"/>
+      <FILE id="dqUVTj" name="NoiseGateStage.h" compile="0" resource="0"
+            file="Source/NoiseGateStage.h"/>
       <FILE id="OjKCbA" name="EQStage.cpp" compile="1" resource="0" file="Source/EQStage.cpp"/>
       <FILE id="lpfX4w" name="EQStage.h" compile="0" resource="0" file="Source/EQStage.h"/>
       <FILE id="EdgfEE" name="Stage3.cpp" compile="1" resource="0" file="Source/Stage3.cpp"/>
@@ -21,10 +29,6 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="eByjtE" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
-    <FILE id="eqWcOr" name="NoiseGateStage.cpp" compile="1" resource="0"
-          file="Source/NoiseGateStage.cpp"/>
-    <FILE id="dqUVTj" name="NoiseGateStage.h" compile="0" resource="0"
-          file="Source/NoiseGateStage.h"/>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>

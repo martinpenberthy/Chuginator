@@ -280,6 +280,8 @@ void ChuginatorAudioProcessorEditor::paint (juce::Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
+    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::AmpBackground1_png, BinaryData::AmpBackground1_pngSize);
+    g.drawImageWithin(backgroundImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
 }
 
 void ChuginatorAudioProcessorEditor::resized()
