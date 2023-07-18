@@ -56,3 +56,9 @@ void Stage1::process(juce::dsp::AudioBlock<float> drySampsBlock, juce::dsp::Audi
     waveshaper1.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     mix1.mixWetSamples(processBlock);
 }
+
+
+
+void Stage1::setWaveshapeFunc(std::string func)
+{
+}

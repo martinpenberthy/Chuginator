@@ -167,7 +167,9 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     preEQ.prepare(spec);
     updatePreEQ();
 
+    
     /*=====================================================================*/
+    gainStage1.distTypeListCopy = distTypeList;
     gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"),
                              *treeState.getRawParameterValue("MIX1"));
     //gain1OnOff = *treeState.getRawParameterValue("GAIN1ONOFF");
@@ -336,7 +338,17 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
  */
 void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string func)
 {
-    auto &waveshaper1 = processorChain.get<waveshaperIndex1>();
+    if(gainStageNum == 1)
+    {
+        gainStage1.setWaveshapeFunc(func);
+        waveshapeFunctionCurrent1 = func;
+    }
+    
+    
+    
+    
+    
+    /*auto &waveshaper1 = processorChain.get<waveshaperIndex1>();
     
     if(func == "Tanh")
     {
@@ -396,7 +408,7 @@ void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string fu
             //x * (std::abs(x) + param) / (x * x + (param - 1.0f) * std::abs(x) + 1.0f) * 0.7f;
         };
         waveshapeFunctionCurrent = "Amp1";
-    }
+    }*/
     return;
 }
 
