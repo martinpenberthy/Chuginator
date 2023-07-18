@@ -32,7 +32,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     irName.setText(audioProcessor.savedFile.getFileName(), juce::dontSendNotification);
     addAndMakeVisible(irName);
 
-    distTypeList = {
+    audioProcessor.distTypeList = {
         "Amp1",
         "Amp2",
         "Amp3",
@@ -82,7 +82,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelWaveshapeType1.setColour(juce::Label::textColourId, juce::Colours::white);
     labelWaveshapeType1.setText("Dist Type", juce::dontSendNotification);
     
-    waveshapeType1.addItemList(distTypeList, 1);
+    waveshapeType1.addItemList(audioProcessor.distTypeList, 1);
     waveshapeType1.onChange = [this]{
                 modeMenuChanged(1);
     };
@@ -298,31 +298,39 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
 {
     if(gainStageNum == 1)
     {
-        /*switch (waveshapeType1.getSelectedId())
+        /*
+         "Amp1",
+         "Amp2",
+         "Amp3",
+         "Tanh",
+         "Atan",
+         "HalfRect"
+         */
+        switch (waveshapeType1.getSelectedId())
         {
             case 1:
-                audioProcessor.waveshapeFunction = distTypeList[0];
+                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(0).toStdString();
                 break;
             case 2:
-                audioProcessor.waveshapeFunction = "Amp2";
+                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(1).toStdString();
                 break;
             case 3:
-                audioProcessor.waveshapeFunction = "x/abs(x)+1";
+                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(2).toStdString();
                 break;
             case 4:
-                audioProcessor.waveshapeFunction = "Atan";
+                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(3).toStdString();
                 break;
             case 5:
-                audioProcessor.waveshapeFunction = "HalfRect";
+                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(4).toStdString();
                 break;
             case 6:
-                audioProcessor.waveshapeFunction = "Amp1";
+                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(5).toStdString();
                 break;
                 
             default:
-                audioProcessor.waveshapeFunction = "Tanh";
+                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(0).toStdString();
                 break;
-        }*/
+        }
     }
 }
 

@@ -54,6 +54,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN1", 1}, "Gain1", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX1", 1}, "Mix1", 0.0f, 1.0f, 0.5f));
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"GAIN1ONOFF", 1}, "Gain1OnOff", false));
+    params.push_back(std::make_unique<juce::AudioParameterChoice>(juce::ParameterID {"TYPE1", 1}, "Type1",
+                                                                                    distTypeList,
+                                                                                    1));
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN2", 1}, "Gain2", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX2", 1}, "Mix2", 0.0f, 1.0f, 0.5f));
@@ -325,6 +328,76 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     outputGain.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
 
+}
+
+/*
+    This function takes a string corresponding to the waveshaping function
+    to be used. It then sets the functionToUse lambda in the waveshaper.
+ */
+void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string func)
+{
+    auto &waveshaper1 = processorChain.get<waveshaperIndex1>();
+    
+    if(func == "Tanh")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            return std::tanh (x);
+        };
+        waveshapeFunctionCurrent = "Tanh";
+    }
+    else if(func == "x/abs(x)+1")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            return x / (std::abs(x) + 1);
+        };
+        waveshapeFunctionCurrent = "x/abs(x)+1";
+    }
+    else if(func == "Amp2")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            //float param = 0.9f;
+            return (x * (std::abs(x) + 0.9f)) * 1.5f / (x * x + (0.3f) * (0.1f / std::abs(x)) + 1.0f) * 0.6f;
+
+            //return (x * (std::abs(x) + param) / (x * x + (param - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
+            //return ((x / (std::abs(x) + param) * 1.5f ) / (x * x + (0.0f - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
+            //return std::tan(x / 1.0f);
+        };
+        waveshapeFunctionCurrent = "Amp2";
+    }
+    else if(func == "Atan")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            return std::atan(x);
+        };
+        waveshapeFunctionCurrent = "Atan";
+    }
+    else if(func == "HalfRect")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            if(x < 0.0f)
+                return 0.0f;
+            else
+                return x;
+        };
+        waveshapeFunctionCurrent = "HalfRect";
+    }
+    else if(func == "Amp1")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            float param = 0.9f;
+            //return (x * (std::abs(x) + param) / (x * x + (param - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
+            return ((x / (std::abs(x) + param) * 1.5f ) / (x * x + (0.0f - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
+            //x * (std::abs(x) + param) / (x * x + (param - 1.0f) * std::abs(x) + 1.0f) * 0.7f;
+        };
+        waveshapeFunctionCurrent = "Amp1";
+    }
+    return;
 }
 
 //==============================================================================

@@ -63,6 +63,7 @@ public:
     
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     void updatePreEQ();
+    void setFunctionToUse(int gainStageNum, std::string func);
     
     juce::AudioProcessorValueTreeState treeState;
     
@@ -70,8 +71,10 @@ public:
     juce::dsp::Convolution irLoader;
     juce::ValueTree variableTree;
     
-    std::string waveshapeFunction;
-    std::string waveshapeFunctionCurrent;
+    juce::StringArray distTypeList;
+    
+    std::string waveshapeFunction1;
+    std::string waveshapeFunctionCurrent1;
     
 private:
     juce::dsp::ProcessSpec spec;

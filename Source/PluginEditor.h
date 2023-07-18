@@ -33,7 +33,7 @@ public:
     
 private:
     
-    juce::StringArray distTypeList;
+
     
     juce::LookAndFeel_V4 lookAndFeel;
     juce::Image backgroundImage;
