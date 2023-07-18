@@ -29,9 +29,11 @@ public:
     void makeSliderAttachments();
     void fileLoader();
     // updateToggleState (juce::Button* button)
-
+    void modeMenuChanged(int gainStageNum);
     
 private:
+    
+    juce::StringArray distTypeList;
     
     juce::LookAndFeel_V4 lookAndFeel;
     juce::Image backgroundImage;
@@ -54,7 +56,10 @@ private:
     juce::Slider sliderMix1;
     juce::Label labelMix1;
     
-    juce::ToggleButton buttonGain1; 
+    juce::ToggleButton buttonGain1;
+    
+    juce::Label labelWaveshapeType1;//Label for menu
+    juce::ComboBox waveshapeType1; //Menu selecting waveshaping function
     
     //Gain2
     juce::Slider sliderPreGain2;
@@ -110,6 +115,7 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain1;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentMix1;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentGain1OnOff;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> comboAttachmentWaveshapeType1;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain2;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentMix2;
@@ -128,6 +134,8 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateAttack;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateRelease;
 
+    
+    
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentOutputGain;
 

@@ -70,6 +70,9 @@ public:
     juce::dsp::Convolution irLoader;
     juce::ValueTree variableTree;
     
+    std::string waveshapeFunction;
+    std::string waveshapeFunctionCurrent;
+    
 private:
     juce::dsp::ProcessSpec spec;
 

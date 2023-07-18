@@ -31,7 +31,15 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     };
     irName.setText(audioProcessor.savedFile.getFileName(), juce::dontSendNotification);
     addAndMakeVisible(irName);
-    
+
+    distTypeList = {
+        "Amp1",
+        "Amp2",
+        "Amp3",
+        "Tanh",
+        "Atan",
+        "HalfRect"
+    };
     
     //INPUT
     addAndMakeVisible(sliderInputGain);
@@ -61,6 +69,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderPreGain1);
     addAndMakeVisible(labelPreGain1);
     addAndMakeVisible(buttonGain1);
+    addAndMakeVisible(waveshapeType1);
     
     setSliderPropertiesRotary(&sliderPreGain1);
     sliderPreGain1.setLookAndFeel(&lookAndFeel);
@@ -68,6 +77,16 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     buttonGain1.setToggleable(true);
     //buttonGain1.onClick = [this] { updateToggleState (&maleButton); };
+    
+    labelWaveshapeType1.attachToComponent(&waveshapeType1, false);
+    labelWaveshapeType1.setColour(juce::Label::textColourId, juce::Colours::white);
+    labelWaveshapeType1.setText("Dist Type", juce::dontSendNotification);
+    
+    waveshapeType1.addItemList(distTypeList, 1);
+    waveshapeType1.onChange = [this]{
+                modeMenuChanged(1);
+    };
+    
     
     //MIX1
     addAndMakeVisible(sliderMix1);
@@ -231,6 +250,8 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentPreGain1 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN1", sliderPreGain1);
     sliderAttachmentMix1 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX1", sliderMix1);
     buttonAttachmentGain1OnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "GAIN1ONOFF", buttonGain1);
+    comboAttachmentWaveshapeType1 = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, "TYPE1", waveshapeType1);
+    
     
     sliderAttachmentPreGain2 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN2", sliderPreGain2);
     sliderAttachmentMix2 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX2", sliderMix2);
@@ -273,6 +294,37 @@ void ChuginatorAudioProcessorEditor::setSliderPropertiesVertical(juce::Slider *s
     sliderToSet->setDoubleClickReturnValue(true, 0.0f);
 }
 
+void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
+{
+    if(gainStageNum == 1)
+    {
+        /*switch (waveshapeType1.getSelectedId())
+        {
+            case 1:
+                audioProcessor.waveshapeFunction = distTypeList[0];
+                break;
+            case 2:
+                audioProcessor.waveshapeFunction = "Amp2";
+                break;
+            case 3:
+                audioProcessor.waveshapeFunction = "x/abs(x)+1";
+                break;
+            case 4:
+                audioProcessor.waveshapeFunction = "Atan";
+                break;
+            case 5:
+                audioProcessor.waveshapeFunction = "HalfRect";
+                break;
+            case 6:
+                audioProcessor.waveshapeFunction = "Amp1";
+                break;
+                
+            default:
+                audioProcessor.waveshapeFunction = "Tanh";
+                break;
+        }*/
+    }
+}
 
 //==============================================================================
 void ChuginatorAudioProcessorEditor::paint (juce::Graphics& g)
@@ -318,7 +370,7 @@ void ChuginatorAudioProcessorEditor::resized()
     
     //Toggle
     buttonGain1.setBounds(sliderPreGain1.getX() + 15, sliderPreGain1.getY() - 25, 20, 20);
-    
+    waveshapeType1.setBounds(buttonGain1.getX() + 15, buttonGain1.getY(), 100, 25);
     //Mix
     sliderMix1.setBounds(sliderPreGain1.getX() + (knobSizeMedium / 2) + 15, sliderPreGain1.getY(), knobSizeMedium, knobSizeMedium);
     labelMix1.setBounds(sliderMix1.getX() + labelXOffset, sliderMix1.getY() - 15, 76, 38);
@@ -361,16 +413,16 @@ void ChuginatorAudioProcessorEditor::resized()
     
     //ROW4
     //Noise Gate
-    sliderNoiseGateThresh.setBounds(leftOffset, getHeight() - 110, 50, 120);
+    sliderNoiseGateThresh.setBounds(leftOffset - 10, getHeight() - 110, 50, 120);
     labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, 76, 38);
     
-    sliderNoiseGateRatio.setBounds(sliderNoiseGateThresh.getX() + 50, sliderNoiseGateThresh.getY(), 50, 120);
+    sliderNoiseGateRatio.setBounds(sliderNoiseGateThresh.getX() + 40, sliderNoiseGateThresh.getY(), 50, 120);
     labelNoiseGateRatio.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() - 20, 76, 38);
     
-    sliderNoiseGateAttack.setBounds(sliderNoiseGateRatio.getX() + 50, sliderNoiseGateRatio.getY(), 50, 120);
+    sliderNoiseGateAttack.setBounds(sliderNoiseGateRatio.getX() + 40, sliderNoiseGateRatio.getY(), 50, 120);
     labelNoiseGateAttack.setBounds(sliderNoiseGateAttack.getX(), sliderNoiseGateAttack.getY() - 20, 76, 38);
     
-    sliderNoiseGateRelease.setBounds(sliderNoiseGateAttack.getX() + 50, sliderNoiseGateAttack.getY(), 50, 120);
+    sliderNoiseGateRelease.setBounds(sliderNoiseGateAttack.getX() + 40, sliderNoiseGateAttack.getY(), 50, 120);
     labelNoiseGateRelease.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() - 20, 76, 38);
     
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
