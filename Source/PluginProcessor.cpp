@@ -173,9 +173,12 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"),
                              *treeState.getRawParameterValue("MIX1"));
     
-   /* auto waveshapeInitFunction = treeState.getRawParameterValue("TYPE1");
+    auto waveshapeInitFunction = treeState.getRawParameterValue("TYPE1");
     int funcIndex = (int) *waveshapeInitFunction - 1;
-    gainStage1.setWaveshapeFunc(distTypeList.getReference(funcIndex).toStdString());*/
+    juce::String juceString = distTypeList[funcIndex];
+    std::string stdString = juceString.toStdString();
+    //gainStage1.setWaveshapeFunc(stdString);
+    setFunctionToUse(1, stdString);
     
     //gain1OnOff = *treeState.getRawParameterValue("GAIN1ONOFF");
     
@@ -344,7 +347,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     This function takes a string corresponding to the waveshaping function
     to be used. It then sets the functionToUse lambda in the waveshaper.
  */
-/*void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string func)
+void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string func)
 {
     if(gainStageNum == 1)
     {
@@ -417,8 +420,8 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         };
         waveshapeFunctionCurrent = "Amp1";
     }*/
-    //return;
-//}
+    return;
+}
 
 //==============================================================================
 bool ChuginatorAudioProcessor::hasEditor() const

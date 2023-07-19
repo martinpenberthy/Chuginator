@@ -308,22 +308,32 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
                 stdString = funcJUCEString.toStdString();
                 audioProcessor.waveshapeFunction1 = stdString;
                 break;
-            /*case 2:
-                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(1).toStdString();
+            case 2:
+                funcJUCEString = audioProcessor.distTypeList[1];
+                stdString = funcJUCEString.toStdString();
+                audioProcessor.waveshapeFunction1 = stdString;
                 break;
             case 3:
-                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(2).toStdString();
+                funcJUCEString = audioProcessor.distTypeList[2];
+                stdString = funcJUCEString.toStdString();
+                audioProcessor.waveshapeFunction1 = stdString;
                 break;
             case 4:
-                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(3).toStdString();
+                funcJUCEString = audioProcessor.distTypeList[3];
+                stdString = funcJUCEString.toStdString();
+                audioProcessor.waveshapeFunction1 = stdString;
                 break;
             case 5:
-                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(4).toStdString();
+                funcJUCEString = audioProcessor.distTypeList[4];
+                stdString = funcJUCEString.toStdString();
+                audioProcessor.waveshapeFunction1 = stdString;
                 break;
             case 6:
-                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(5).toStdString();
+                funcJUCEString = audioProcessor.distTypeList[5];
+                stdString = funcJUCEString.toStdString();
+                audioProcessor.waveshapeFunction1 = stdString;
                 break;
-                */
+                
             default:
                 //audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(0).toStdString();
                 funcJUCEString = audioProcessor.distTypeList[0];
@@ -378,7 +388,7 @@ void ChuginatorAudioProcessorEditor::resized()
     
     //Toggle
     buttonGain1.setBounds(sliderPreGain1.getX() + 15, sliderPreGain1.getY() - 25, 20, 20);
-    waveshapeType1.setBounds(buttonGain1.getX() + 15, buttonGain1.getY(), 100, 25);
+    waveshapeType1.setBounds(buttonGain1.getX() + 20, buttonGain1.getY(), 80, 20);
     labelWaveshapeType1.setBounds(waveshapeType1.getX(), waveshapeType1.getY() - 25, 50, 25);
     
     //Mix
