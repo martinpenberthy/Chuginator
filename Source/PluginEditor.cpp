@@ -298,20 +298,17 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
 {
     if(gainStageNum == 1)
     {
-        /*
-         "Amp1",
-         "Amp2",
-         "Amp3",
-         "Tanh",
-         "Atan",
-         "HalfRect"
-         */
+        juce::String funcJUCEString;
+        std::string stdString;
+        //Set the string in the audio processor with the function to use
         switch (waveshapeType1.getSelectedId())
         {
             case 1:
-                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(0).toStdString();
+                funcJUCEString = audioProcessor.distTypeList[0];
+                stdString = funcJUCEString.toStdString();
+                audioProcessor.waveshapeFunction1 = stdString;
                 break;
-            case 2:
+            /*case 2:
                 audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(1).toStdString();
                 break;
             case 3:
@@ -326,9 +323,12 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
             case 6:
                 audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(5).toStdString();
                 break;
-                
+                */
             default:
-                audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(0).toStdString();
+                //audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(0).toStdString();
+                funcJUCEString = audioProcessor.distTypeList[0];
+                stdString = funcJUCEString.toStdString();
+                audioProcessor.waveshapeFunction1 = stdString;
                 break;
         }
     }
@@ -340,8 +340,8 @@ void ChuginatorAudioProcessorEditor::paint (juce::Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
-    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::AmpBackground1_png, BinaryData::AmpBackground1_pngSize);
-    g.drawImageWithin(backgroundImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
+    //backgroundImage = juce::ImageCache::getFromMemory(BinaryData::AmpBackground1_png, BinaryData::AmpBackground1_pngSize);
+    //g.drawImageWithin(backgroundImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
 }
 
 void ChuginatorAudioProcessorEditor::resized()
@@ -379,6 +379,8 @@ void ChuginatorAudioProcessorEditor::resized()
     //Toggle
     buttonGain1.setBounds(sliderPreGain1.getX() + 15, sliderPreGain1.getY() - 25, 20, 20);
     waveshapeType1.setBounds(buttonGain1.getX() + 15, buttonGain1.getY(), 100, 25);
+    labelWaveshapeType1.setBounds(waveshapeType1.getX(), waveshapeType1.getY() - 25, 50, 25);
+    
     //Mix
     sliderMix1.setBounds(sliderPreGain1.getX() + (knobSizeMedium / 2) + 15, sliderPreGain1.getY(), knobSizeMedium, knobSizeMedium);
     labelMix1.setBounds(sliderMix1.getX() + labelXOffset, sliderMix1.getY() - 15, 76, 38);

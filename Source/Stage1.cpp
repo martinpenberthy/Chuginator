@@ -61,4 +61,54 @@ void Stage1::process(juce::dsp::AudioBlock<float> drySampsBlock, juce::dsp::Audi
 
 void Stage1::setWaveshapeFunc(std::string func)
 {
+    if(func == "Amp1")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            float param = 0.9f;
+            return ((x / (std::abs(x) + param) * 1.5f ) / (x * x + (0.0f - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
+        };
+        
+    }
+    else if(func == "Amp2")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            return (x * (std::abs(x) + 0.9f)) * 1.5f / (x * x + (0.3f) * (0.1f / std::abs(x)) + 1.0f) * 0.6f;
+        };
+    }
+    else if(func == "Amp3")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            return x / (std::abs(x) + 1);
+        };
+    }
+    else if(func == "Tanh")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            return std::tanh (x);
+        };
+    }
+
+    else if(func == "Atan")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            return std::atan(x);
+        };
+    }
+    else if(func == "HalfRect")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            if(x < 0.0f)
+                return 0.0f;
+            else
+                return x;
+        };
+    }
+
 }
+
