@@ -35,6 +35,8 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
             }
         }
     };
+    
+
 }
 
 ChuginatorAudioProcessor::~ChuginatorAudioProcessor()
@@ -289,8 +291,8 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     /*=====================================================================*/
     if(*treeState.getRawParameterValue("GAIN1ONOFF"))
     {
-        /*if(waveshapeFunction1 != waveshapeFunctionCurrent1)
-            setFunctionToUse(1, waveshapeFunction1);*/
+        if(waveshapeFunction1 != waveshapeFunctionCurrent1)
+            setFunctionToUse(1, waveshapeFunction1);
 
         juce::dsp::AudioBlock<float> drySampsBlock1 (buffer);
         

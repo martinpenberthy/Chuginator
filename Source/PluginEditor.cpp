@@ -32,14 +32,14 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     irName.setText(audioProcessor.savedFile.getFileName(), juce::dontSendNotification);
     addAndMakeVisible(irName);
 
-    audioProcessor.distTypeList = {
+    /*audioProcessor.distTypeList = {
         "Amp1",
         "Amp2",
         "Amp3",
         "Tanh",
         "Atan",
         "HalfRect"
-    };
+    };*/
     
     //INPUT
     addAndMakeVisible(sliderInputGain);
@@ -82,7 +82,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelWaveshapeType1.setColour(juce::Label::textColourId, juce::Colours::white);
     labelWaveshapeType1.setText("Dist Type", juce::dontSendNotification);
     
-    waveshapeType1.addItemList(audioProcessor.distTypeList, 1);
+    waveshapeType1.addItemList(audioProcessor.distTypeList, 0);
     waveshapeType1.onChange = [this]{
                 modeMenuChanged(1);
     };
@@ -388,8 +388,8 @@ void ChuginatorAudioProcessorEditor::resized()
     
     //Toggle
     buttonGain1.setBounds(sliderPreGain1.getX() + 15, sliderPreGain1.getY() - 25, 20, 20);
-    waveshapeType1.setBounds(buttonGain1.getX() + 20, buttonGain1.getY(), 80, 20);
-    labelWaveshapeType1.setBounds(waveshapeType1.getX(), waveshapeType1.getY() - 25, 50, 25);
+    waveshapeType1.setBounds(buttonGain1.getX() + 25, buttonGain1.getY(), 80, 20);
+    //labelWaveshapeType1.setBounds(waveshapeType1.getX(), waveshapeType1.getY() - 25, 50, 25);
     
     //Mix
     sliderMix1.setBounds(sliderPreGain1.getX() + (knobSizeMedium / 2) + 15, sliderPreGain1.getY(), knobSizeMedium, knobSizeMedium);

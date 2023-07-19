@@ -71,7 +71,14 @@ public:
     juce::dsp::Convolution irLoader;
     juce::ValueTree variableTree;
     
-    juce::StringArray distTypeList;
+    juce::StringArray distTypeList = {
+        "Amp1",
+        "Amp2",
+        "Amp3",
+        "Tanh",
+        "Atan",
+        "HalfRect"
+    };
     
     std::string waveshapeFunction1;
     std::string waveshapeFunctionCurrent1;
