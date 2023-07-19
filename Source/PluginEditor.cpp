@@ -82,7 +82,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelWaveshapeType1.setColour(juce::Label::textColourId, juce::Colours::white);
     labelWaveshapeType1.setText("Dist Type", juce::dontSendNotification);
     
-    waveshapeType1.addItemList(audioProcessor.distTypeList, 0);
+    waveshapeType1.addItemList(audioProcessor.distTypeList, 1);
     waveshapeType1.onChange = [this]{
                 modeMenuChanged(1);
     };
@@ -303,32 +303,32 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
         //Set the string in the audio processor with the function to use
         switch (waveshapeType1.getSelectedId())
         {
-            case 1:
+            case 1://Amp1
                 funcJUCEString = audioProcessor.distTypeList[0];
                 stdString = funcJUCEString.toStdString();
                 audioProcessor.waveshapeFunction1 = stdString;
                 break;
-            case 2:
+            case 2://Amp2
                 funcJUCEString = audioProcessor.distTypeList[1];
                 stdString = funcJUCEString.toStdString();
                 audioProcessor.waveshapeFunction1 = stdString;
                 break;
-            case 3:
+            case 3://Amp3
                 funcJUCEString = audioProcessor.distTypeList[2];
                 stdString = funcJUCEString.toStdString();
                 audioProcessor.waveshapeFunction1 = stdString;
                 break;
-            case 4:
+            case 4://Tanh
                 funcJUCEString = audioProcessor.distTypeList[3];
                 stdString = funcJUCEString.toStdString();
                 audioProcessor.waveshapeFunction1 = stdString;
                 break;
-            case 5:
+            case 5://Atan
                 funcJUCEString = audioProcessor.distTypeList[4];
                 stdString = funcJUCEString.toStdString();
                 audioProcessor.waveshapeFunction1 = stdString;
                 break;
-            case 6:
+            case 6://HalfRect
                 funcJUCEString = audioProcessor.distTypeList[5];
                 stdString = funcJUCEString.toStdString();
                 audioProcessor.waveshapeFunction1 = stdString;
