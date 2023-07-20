@@ -196,8 +196,8 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
                              *treeState.getRawParameterValue("MIX1"));
     
     std::string gainStage1Func = getWaveshapeFuncParam(1);
-
-    
+    setFunctionToUse(1, gainStage1Func);
+    waveshapeFunction1 = gainStage1Func;
     
     
     /*int funcIndex = (int) *waveshapeInitFunction - 1;
@@ -389,7 +389,7 @@ std::string ChuginatorAudioProcessor::getWaveshapeFuncParam(int gainStageNum)
 {
     if(gainStageNum == 1)
     {
-    auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
+        auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
     
         switch((int) * waveshapeInitFunction1)
         {
@@ -399,32 +399,31 @@ std::string ChuginatorAudioProcessor::getWaveshapeFuncParam(int gainStageNum)
                 return "Amp1";
                 break;
             case 2:
-                setFunctionToUse(1, "Amp2");
-                waveshapeFunction1 = "Amp2";
+                //setFunctionToUse(1, "Amp2");
+                //waveshapeFunction1 = "Amp2";
+                return "Amp2";
                 break;
             case 3:
-                setFunctionToUse(1, "Amp3");
-                waveshapeFunction1 = "Amp3";
+                return "Amp3";
                 break;
             case 4:
-                setFunctionToUse(1, "Tanh");
-                waveshapeFunction1 = "Tanh";
+                return "Tanh";
                 break;
                 
             case 5:
-                setFunctionToUse(1, "Atan");
-                waveshapeFunction1 = "Atan";
+                return "Atan";
                 break;
             case 6:
-                setFunctionToUse(1, "HalfRect");
-                waveshapeFunction1 = "HalfRect";
+                return "HalfRect";
                 break;
             
             default:
-                setFunctionToUse(1, "Amp1");
-                waveshapeFunction1 = "Amp1";
+                return "Amp1";
                 break;
         }
+    }else
+    {
+        return "Amp1";
     }
 }
 
