@@ -79,6 +79,9 @@ public:
     std::string waveshapeFunction2;
     std::string waveshapeFunctionCurrent2;
     
+    std::string waveshapeFunction3;
+    std::string waveshapeFunctionCurrent3;
+    
 private:
     juce::dsp::ProcessSpec spec;
 
@@ -88,6 +91,8 @@ private:
     using IIRFilter = juce::dsp::IIR::Filter<float>;
     using IIRCoefs = juce::dsp::IIR::Coefficients<float>;
     juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> preEQ;
+    
+    juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> internalLowEQ;
     
     //GAIN1
 /*juce::dsp::Gain<float> preGain1;

@@ -142,6 +142,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderPreGain3);
     addAndMakeVisible(labelPreGain3);
     addAndMakeVisible(buttonGain3);
+    addAndMakeVisible(waveshapeType3);
     
     setSliderPropertiesRotary(&sliderPreGain3);
     sliderPreGain3.setLookAndFeel(&lookAndFeel);
@@ -149,7 +150,20 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     buttonGain3.setToggleable(true);
     
+    labelWaveshapeType3.attachToComponent(&waveshapeType3, false);
+    labelWaveshapeType3.setColour(juce::Label::textColourId, juce::Colours::white);
+    labelWaveshapeType3.setText("Dist Type", juce::dontSendNotification);
+        
+    waveshapeType3.addItem("Amp1", 1);
+    waveshapeType3.addItem("Amp2", 2);
+    waveshapeType3.addItem("Amp3", 3);
+    waveshapeType3.addItem("Tanh", 4);
+    waveshapeType3.addItem("Atan", 5);
+    waveshapeType3.addItem("HalfRect", 6);
     
+    waveshapeType3.onChange = [this]{
+                modeMenuChanged(3);
+    };
     
     
     
@@ -288,6 +302,8 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentPreGain3 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN3", sliderPreGain3);
     sliderAttachmentMix3 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX3", sliderMix3);
     buttonAttachmentGain3OnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "GAIN3ONOFF", buttonGain3);
+    comboAttachmentWaveshapeType3 = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, "TYPE3", waveshapeType3);
+
     
     //EQ
     sliderAttachmentFilterLowGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "LOW", sliderFilterLowGain);
@@ -394,6 +410,40 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
                 break;
         }
     }
+    else if(gainStageNum == 3)
+    {
+        //Set the string in the audio processor with the function to use
+        switch (waveshapeType3.getSelectedId())
+        {
+            case 1://Amp1
+                audioProcessor.waveshapeFunction3 = "Amp1";
+                break;
+                
+            case 2://Amp2
+                audioProcessor.waveshapeFunction3 = "Amp2";
+                break;
+                
+            case 3://Amp3
+                audioProcessor.waveshapeFunction3 = "Amp3";
+                break;
+                
+            case 4://Tanh
+                audioProcessor.waveshapeFunction3 = "Tanh";
+                break;
+                
+            case 5://Atan
+                audioProcessor.waveshapeFunction3 = "Atan";
+                break;
+                
+            case 6://HalfRect
+                audioProcessor.waveshapeFunction3 = "HalfRect";
+                break;
+                
+            default:
+                audioProcessor.waveshapeFunction3 = "Amp1";
+                break;
+        }
+    }
     
     
     
@@ -476,7 +526,8 @@ void ChuginatorAudioProcessorEditor::resized()
     
     //Toggle
     buttonGain3.setBounds(sliderPreGain3.getX() + 15, sliderPreGain3.getY() - 25, 20, 20);
-    
+    waveshapeType3.setBounds(buttonGain3.getX() + 25, buttonGain3.getY(), menuWidth, menuHeight);
+
     //Mix
     sliderMix3.setBounds(sliderPreGain3.getX() + (knobSizeMedium / 2) + 15, sliderPreGain3.getY(), knobSizeMedium, knobSizeMedium);
     labelMix3.setBounds(sliderMix3.getX() + labelXOffset, sliderMix3.getY() - 15, 76, 38);

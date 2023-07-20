@@ -87,6 +87,16 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN3", 1}, "Gain3", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX3", 1}, "Mix3", 0.0f, 1.0f, 0.5f));
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"GAIN3ONOFF", 1}, "Gain3OnOff", false));
+    params.push_back(std::make_unique<juce::AudioParameterChoice>(juce::ParameterID {"TYPE3", 1}, "Type3",
+                                                                  juce::StringArray{
+                                                                                    "Amp1",
+                                                                                    "Amp2",
+                                                                                    "Amp3",
+                                                                                    "Tanh",
+                                                                                    "Atan",
+                                                                                    "HalfRect"
+                                                                                },
+                                                                                    1));
     
     //EQs
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"LOW", 1}, "Low", 0.0f, 2.0f, 1.0f));
@@ -198,15 +208,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     std::string gainStage1Func = getWaveshapeFuncParam(1);
     setFunctionToUse(1, gainStage1Func);
     waveshapeFunction1 = gainStage1Func;
-    
-    
-    /*int funcIndex = (int) *waveshapeInitFunction - 1;
-    juce::String juceString = distTypeList[funcIndex];
-    std::string stdString = juceString.toStdString();*/
-    //gainStage1.setWaveshapeFunc(stdString);
-    //setFunctionToUse(1, stdString);
-    
-    //gain1OnOff = *treeState.getRawParameterValue("GAIN1ONOFF");
+
     
     /*=====================================================================*/
     gainStage2.prepare(spec, *treeState.getRawParameterValue("PREGAIN2"),
@@ -220,6 +222,11 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     gainStage3.prepare(spec, *treeState.getRawParameterValue("PREGAIN3"),
                              *treeState.getRawParameterValue("MIX3"));
     
+    std::string gainStage3Func = getWaveshapeFuncParam(3);
+    setFunctionToUse(3, gainStage3Func);
+    waveshapeFunction3 = gainStage3Func;
+    
+    /*=====================================================================*/
     //EQ
     EQStage.prepare(spec, *treeState.getRawParameterValue("LOW"),
                           *treeState.getRawParameterValue("MID"),
@@ -347,6 +354,10 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
     if(*treeState.getRawParameterValue("GAIN3ONOFF"))
     {
+        //Update waveshape function if needed
+        if(waveshapeFunction3 != waveshapeFunctionCurrent3)
+            setFunctionToUse(3, waveshapeFunction3);
+        
         juce::dsp::AudioBlock<float> drySampsBlock3 (buffer);
         
         gainStage3.process(drySampsBlock3, processBlock,
@@ -393,6 +404,11 @@ void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string fu
         gainStage2.setWaveshapeFunc(func);
         waveshapeFunctionCurrent2 = func;
     }
+    else if(gainStageNum == 3)
+    {
+        gainStage3.setWaveshapeFunc(func);
+        waveshapeFunctionCurrent3 = func;
+    }
     return;
 }
 
@@ -435,6 +451,37 @@ std::string ChuginatorAudioProcessor::getWaveshapeFuncParam(int gainStageNum)
         auto waveshapeInitFunction2 = treeState.getRawParameterValue("TYPE2");
     
         switch((int) * waveshapeInitFunction2)
+        {
+            case 1:
+                return "Amp1";
+                break;
+            case 2:
+                return "Amp2";
+                break;
+            case 3:
+                return "Amp3";
+                break;
+            case 4:
+                return "Tanh";
+                break;
+                
+            case 5:
+                return "Atan";
+                break;
+            case 6:
+                return "HalfRect";
+                break;
+            
+            default:
+                return "Amp1";
+                break;
+        }
+    }
+    else if(gainStageNum == 3)
+    {
+        auto waveshapeInitFunction3 = treeState.getRawParameterValue("TYPE3");
+    
+        switch((int) * waveshapeInitFunction3)
         {
             case 1:
                 return "Amp1";

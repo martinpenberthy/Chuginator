@@ -82,7 +82,8 @@ private:
     
     juce::ToggleButton buttonGain3;
 
-    
+    juce::Label labelWaveshapeType3;//Label for menu
+    juce::ComboBox waveshapeType3; //Menu selecting waveshaping function
     
     //Filters
     juce::Slider sliderFilterHighGain;
@@ -127,6 +128,8 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreGain3;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentMix3;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentGain3OnOff;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> comboAttachmentWaveshapeType3;
+
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentFilterHighGain;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentFilterMidGain;
