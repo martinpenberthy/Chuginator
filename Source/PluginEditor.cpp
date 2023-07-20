@@ -82,7 +82,15 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelWaveshapeType1.setColour(juce::Label::textColourId, juce::Colours::white);
     labelWaveshapeType1.setText("Dist Type", juce::dontSendNotification);
     
-    waveshapeType1.addItemList(audioProcessor.distTypeList, 1);
+    //waveshapeType1.addItemList(audioProcessor.distTypeList, 1);
+    
+    waveshapeType1.addItem("Amp1", 1);
+    waveshapeType1.addItem("Amp2", 2);
+    waveshapeType1.addItem("Amp3", 3);
+    waveshapeType1.addItem("Tanh", 4);
+    waveshapeType1.addItem("Atan", 5);
+    waveshapeType1.addItem("HalfRect", 6);
+    
     waveshapeType1.onChange = [this]{
                 modeMenuChanged(1);
     };
@@ -304,41 +312,56 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
         switch (waveshapeType1.getSelectedId())
         {
             case 1://Amp1
-                funcJUCEString = audioProcessor.distTypeList[0];
+                /*funcJUCEString = audioProcessor.distTypeList[0];
                 stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;
+                audioProcessor.waveshapeFunction1 = stdString;*/
+                audioProcessor.waveshapeFunction1 = "Amp1";
                 break;
+                
             case 2://Amp2
-                funcJUCEString = audioProcessor.distTypeList[1];
+                /*funcJUCEString = audioProcessor.distTypeList[1];
                 stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;
+                audioProcessor.waveshapeFunction1 = stdString;*/
+                audioProcessor.waveshapeFunction1 = "Amp2";
                 break;
+                
             case 3://Amp3
-                funcJUCEString = audioProcessor.distTypeList[2];
+                /*funcJUCEString = audioProcessor.distTypeList[2];
                 stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;
+                audioProcessor.waveshapeFunction1 = stdString;*/
+                audioProcessor.waveshapeFunction1 = "Amp3";
                 break;
+                
             case 4://Tanh
-                funcJUCEString = audioProcessor.distTypeList[3];
+                /*funcJUCEString = audioProcessor.distTypeList[3];
                 stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;
+                audioProcessor.waveshapeFunction1 = stdString;*/
+                audioProcessor.waveshapeFunction1 = "Tanh";
                 break;
+                
             case 5://Atan
+                /*
                 funcJUCEString = audioProcessor.distTypeList[4];
                 stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;
+                audioProcessor.waveshapeFunction1 = stdString;*/
+                audioProcessor.waveshapeFunction1 = "Atan";
+
                 break;
+                
             case 6://HalfRect
-                funcJUCEString = audioProcessor.distTypeList[5];
+                /*funcJUCEString = audioProcessor.distTypeList[5];
                 stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;
+                audioProcessor.waveshapeFunction1 = stdString;*/
+                audioProcessor.waveshapeFunction1 = "HalfRect";
                 break;
                 
             default:
                 //audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(0).toStdString();
-                funcJUCEString = audioProcessor.distTypeList[0];
+                /*funcJUCEString = audioProcessor.distTypeList[0];
                 stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;
+                audioProcessor.waveshapeFunction1 = stdString;*/
+                audioProcessor.waveshapeFunction1 = "Amp1";
+
                 break;
         }
     }

@@ -56,8 +56,16 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN1", 1}, "Gain1", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX1", 1}, "Mix1", 0.0f, 1.0f, 0.5f));
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"GAIN1ONOFF", 1}, "Gain1OnOff", false));
+    
     params.push_back(std::make_unique<juce::AudioParameterChoice>(juce::ParameterID {"TYPE1", 1}, "Type1",
-                                                                                    distTypeList,
+                                                                  juce::StringArray{
+                                                                                    "Amp1",
+                                                                                    "Amp2",
+                                                                                    "Amp3",
+                                                                                    "Tanh",
+                                                                                    "Atan",
+                                                                                    "HalfRect"
+                                                                                },
                                                                                     1));
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN2", 1}, "Gain2", 0.0f, 48.0f, 0.0f));
@@ -171,16 +179,53 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
 
     
     /*=====================================================================*/
-    gainStage1.distTypeListCopy = distTypeList;
+    //gainStage1.distTypeListCopy = distTypeList;
     gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"),
                              *treeState.getRawParameterValue("MIX1"));
     
-    auto waveshapeInitFunction = treeState.getRawParameterValue("TYPE1");
-    int funcIndex = (int) *waveshapeInitFunction - 1;
+    auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
+    
+    switch((int) * waveshapeInitFunction1)
+    {
+        case 1:
+            setFunctionToUse(1, "Amp1");
+            waveshapeFunction1 = "Amp1";
+            break;
+        case 2:
+            setFunctionToUse(1, "Amp2");
+            waveshapeFunction1 = "Amp2";
+            break;
+        case 3:
+            setFunctionToUse(1, "Amp3");
+            waveshapeFunction1 = "Amp3";
+            break;
+        case 4:
+            setFunctionToUse(1, "Tanh");
+            waveshapeFunction1 = "Tanh";
+            break;
+            
+        case 5:
+            setFunctionToUse(1, "Atan");
+            waveshapeFunction1 = "Atan";
+            break;
+        case 6:
+            setFunctionToUse(1, "HalfRect");
+            waveshapeFunction1 = "HalfRect";
+            break;
+        
+        default:
+            setFunctionToUse(1, "Amp1");
+            waveshapeFunction1 = "Amp1";
+            break;
+    }
+    
+    
+    
+    /*int funcIndex = (int) *waveshapeInitFunction - 1;
     juce::String juceString = distTypeList[funcIndex];
-    std::string stdString = juceString.toStdString();
+    std::string stdString = juceString.toStdString();*/
     //gainStage1.setWaveshapeFunc(stdString);
-    setFunctionToUse(1, stdString);
+    //setFunctionToUse(1, stdString);
     
     //gain1OnOff = *treeState.getRawParameterValue("GAIN1ONOFF");
     

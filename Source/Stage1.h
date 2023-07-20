@@ -22,7 +22,7 @@ class Stage1
         void setWaveshapeFunc(std::string func);
     
     
-        juce::StringArray distTypeListCopy;
+        //juce::StringArray distTypeListCopy;
     
     private:
         juce::dsp::Gain<float> preGain1;
