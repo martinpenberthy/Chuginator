@@ -31,10 +31,10 @@ void Stage2::prepare(juce::dsp::ProcessSpec spec, float preGain, float mix)
     mix2.prepare(spec);
     
     //WAVESHAPER2
-    waveshaper2.functionToUse = [](float x)
+    /*waveshaper2.functionToUse = [](float x)
     {
         return x / (std::abs(x) + 1);
-    };
+    };*/
     waveshaper2.prepare(spec);
 }
 

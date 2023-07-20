@@ -106,6 +106,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(sliderPreGain2);
     addAndMakeVisible(labelPreGain2);
     addAndMakeVisible(buttonGain2);
+    addAndMakeVisible(waveshapeType2);
     
     setSliderPropertiesRotary(&sliderPreGain2);
     sliderPreGain2.setLookAndFeel(&lookAndFeel);
@@ -125,7 +126,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     waveshapeType2.addItem("HalfRect", 6);
     
     waveshapeType2.onChange = [this]{
-                modeMenuChanged(1);
+                modeMenuChanged(2);
     };
     
     //MIX2
@@ -147,6 +148,10 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelPreGain3.setText("Gain3", juce::dontSendNotification);
     
     buttonGain3.setToggleable(true);
+    
+    
+    
+    
     
     //MIX3
     addAndMakeVisible(sliderMix3);
