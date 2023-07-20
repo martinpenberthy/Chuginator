@@ -18,7 +18,9 @@ class Stage2
         ~Stage2();
         
         void prepare(juce::dsp::ProcessSpec spec, float preGain, float mix);
-    void process(juce::dsp::AudioBlock<float> drySampsBlock, juce::dsp::AudioBlock<float> processBlock, float preGain, float mix);
+        void process(juce::dsp::AudioBlock<float> drySampsBlock, juce::dsp::AudioBlock<float> processBlock, float preGain, float mix);
+        void setWaveshapeFunc(std::string func);
+
     
     private:
         juce::dsp::Gain<float> preGain2;

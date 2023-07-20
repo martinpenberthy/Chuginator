@@ -88,10 +88,10 @@ void Stage1::setWaveshapeFunc(std::string func)
     {
         waveshaper1.functionToUse = [](float x)
         {
-            return std::tanh (x);
+            //return (std::tanh (x * x) / std::tanh(x)) * 0.8f;
+            return std::tanh(x);
         };
     }
-
     else if(func == "Atan")
     {
         waveshaper1.functionToUse = [](float x)
@@ -106,7 +106,7 @@ void Stage1::setWaveshapeFunc(std::string func)
             if(x < 0.0f)
                 return 0.0f;
             else
-                return x;
+                return x * 0.5f;
         };
     }
 

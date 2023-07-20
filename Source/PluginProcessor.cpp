@@ -71,6 +71,18 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN2", 1}, "Gain2", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX2", 1}, "Mix2", 0.0f, 1.0f, 0.5f));
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"GAIN2ONOFF", 1}, "Gain2OnOff", false));
+    params.push_back(std::make_unique<juce::AudioParameterChoice>(juce::ParameterID {"TYPE2", 1}, "Type2",
+                                                                  juce::StringArray{
+                                                                                    "Amp1",
+                                                                                    "Amp2",
+                                                                                    "Amp3",
+                                                                                    "Tanh",
+                                                                                    "Atan",
+                                                                                    "HalfRect"
+                                                                                },
+                                                                                    1));
+    
+    
     
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN3", 1}, "Gain3", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX3", 1}, "Mix3", 0.0f, 1.0f, 0.5f));
@@ -183,41 +195,8 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"),
                              *treeState.getRawParameterValue("MIX1"));
     
-    auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
-    
-    switch((int) * waveshapeInitFunction1)
-    {
-        case 1:
-            setFunctionToUse(1, "Amp1");
-            waveshapeFunction1 = "Amp1";
-            break;
-        case 2:
-            setFunctionToUse(1, "Amp2");
-            waveshapeFunction1 = "Amp2";
-            break;
-        case 3:
-            setFunctionToUse(1, "Amp3");
-            waveshapeFunction1 = "Amp3";
-            break;
-        case 4:
-            setFunctionToUse(1, "Tanh");
-            waveshapeFunction1 = "Tanh";
-            break;
-            
-        case 5:
-            setFunctionToUse(1, "Atan");
-            waveshapeFunction1 = "Atan";
-            break;
-        case 6:
-            setFunctionToUse(1, "HalfRect");
-            waveshapeFunction1 = "HalfRect";
-            break;
-        
-        default:
-            setFunctionToUse(1, "Amp1");
-            waveshapeFunction1 = "Amp1";
-            break;
-    }
+    std::string gainStage1Func = getWaveshapeFuncParam(1);
+
     
     
     
@@ -402,72 +381,51 @@ void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string fu
         waveshapeFunctionCurrent1 = func;
     }
     
-    
-    
-    
-    
-    /*auto &waveshaper1 = processorChain.get<waveshaperIndex1>();
-    
-    if(func == "Tanh")
-    {
-        waveshaper1.functionToUse = [](float x)
-        {
-            return std::tanh (x);
-        };
-        waveshapeFunctionCurrent = "Tanh";
-    }
-    else if(func == "x/abs(x)+1")
-    {
-        waveshaper1.functionToUse = [](float x)
-        {
-            return x / (std::abs(x) + 1);
-        };
-        waveshapeFunctionCurrent = "x/abs(x)+1";
-    }
-    else if(func == "Amp2")
-    {
-        waveshaper1.functionToUse = [](float x)
-        {
-            //float param = 0.9f;
-            return (x * (std::abs(x) + 0.9f)) * 1.5f / (x * x + (0.3f) * (0.1f / std::abs(x)) + 1.0f) * 0.6f;
-
-            //return (x * (std::abs(x) + param) / (x * x + (param - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
-            //return ((x / (std::abs(x) + param) * 1.5f ) / (x * x + (0.0f - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
-            //return std::tan(x / 1.0f);
-        };
-        waveshapeFunctionCurrent = "Amp2";
-    }
-    else if(func == "Atan")
-    {
-        waveshaper1.functionToUse = [](float x)
-        {
-            return std::atan(x);
-        };
-        waveshapeFunctionCurrent = "Atan";
-    }
-    else if(func == "HalfRect")
-    {
-        waveshaper1.functionToUse = [](float x)
-        {
-            if(x < 0.0f)
-                return 0.0f;
-            else
-                return x;
-        };
-        waveshapeFunctionCurrent = "HalfRect";
-    }
-    else if(func == "Amp1")
-    {
-        waveshaper1.functionToUse = [](float x)
-        {
-            float param = 0.9f;
-            //return (x * (std::abs(x) + param) / (x * x + (param - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
-            return ((x / (std::abs(x) + param) * 1.5f ) / (x * x + (0.0f - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
-            //x * (std::abs(x) + param) / (x * x + (param - 1.0f) * std::abs(x) + 1.0f) * 0.7f;
-        };
-        waveshapeFunctionCurrent = "Amp1";
-    }*/
     return;
+}
+
+
+std::string ChuginatorAudioProcessor::getWaveshapeFuncParam(int gainStageNum)
+{
+    if(gainStageNum == 1)
+    {
+    auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
+    
+        switch((int) * waveshapeInitFunction1)
+        {
+            case 1:
+                //setFunctionToUse(1, "Amp1");
+                //waveshapeFunction1 = "Amp1";
+                return "Amp1";
+                break;
+            case 2:
+                setFunctionToUse(1, "Amp2");
+                waveshapeFunction1 = "Amp2";
+                break;
+            case 3:
+                setFunctionToUse(1, "Amp3");
+                waveshapeFunction1 = "Amp3";
+                break;
+            case 4:
+                setFunctionToUse(1, "Tanh");
+                waveshapeFunction1 = "Tanh";
+                break;
+                
+            case 5:
+                setFunctionToUse(1, "Atan");
+                waveshapeFunction1 = "Atan";
+                break;
+            case 6:
+                setFunctionToUse(1, "HalfRect");
+                waveshapeFunction1 = "HalfRect";
+                break;
+            
+            default:
+                setFunctionToUse(1, "Amp1");
+                waveshapeFunction1 = "Amp1";
+                break;
+        }
+    }
 }
 
 //==============================================================================

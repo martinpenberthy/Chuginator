@@ -76,14 +76,11 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelPreGain1.setText("Gain1", juce::dontSendNotification);
     
     buttonGain1.setToggleable(true);
-    //buttonGain1.onClick = [this] { updateToggleState (&maleButton); };
     
     labelWaveshapeType1.attachToComponent(&waveshapeType1, false);
     labelWaveshapeType1.setColour(juce::Label::textColourId, juce::Colours::white);
     labelWaveshapeType1.setText("Dist Type", juce::dontSendNotification);
-    
-    //waveshapeType1.addItemList(audioProcessor.distTypeList, 1);
-    
+        
     waveshapeType1.addItem("Amp1", 1);
     waveshapeType1.addItem("Amp2", 2);
     waveshapeType1.addItem("Amp3", 3);
@@ -115,6 +112,21 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelPreGain2.setText("Gain2", juce::dontSendNotification);
     
     buttonGain2.setToggleable(true);
+    
+    labelWaveshapeType2.attachToComponent(&waveshapeType1, false);
+    labelWaveshapeType2.setColour(juce::Label::textColourId, juce::Colours::white);
+    labelWaveshapeType2.setText("Dist Type", juce::dontSendNotification);
+        
+    waveshapeType2.addItem("Amp1", 1);
+    waveshapeType2.addItem("Amp2", 2);
+    waveshapeType2.addItem("Amp3", 3);
+    waveshapeType2.addItem("Tanh", 4);
+    waveshapeType2.addItem("Atan", 5);
+    waveshapeType2.addItem("HalfRect", 6);
+    
+    waveshapeType2.onChange = [this]{
+                modeMenuChanged(1);
+    };
     
     //MIX2
     addAndMakeVisible(sliderMix2);
@@ -264,6 +276,9 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentPreGain2 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN2", sliderPreGain2);
     sliderAttachmentMix2 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX2", sliderMix2);
     buttonAttachmentGain2OnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "GAIN2ONOFF", buttonGain2);
+    comboAttachmentWaveshapeType2 = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, "TYPE2", waveshapeType2);
+
+    
     
     sliderAttachmentPreGain3 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN3", sliderPreGain3);
     sliderAttachmentMix3 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX3", sliderMix3);
@@ -306,65 +321,77 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
 {
     if(gainStageNum == 1)
     {
-        juce::String funcJUCEString;
-        std::string stdString;
         //Set the string in the audio processor with the function to use
         switch (waveshapeType1.getSelectedId())
         {
             case 1://Amp1
-                /*funcJUCEString = audioProcessor.distTypeList[0];
-                stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;*/
                 audioProcessor.waveshapeFunction1 = "Amp1";
                 break;
                 
             case 2://Amp2
-                /*funcJUCEString = audioProcessor.distTypeList[1];
-                stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;*/
                 audioProcessor.waveshapeFunction1 = "Amp2";
                 break;
                 
             case 3://Amp3
-                /*funcJUCEString = audioProcessor.distTypeList[2];
-                stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;*/
                 audioProcessor.waveshapeFunction1 = "Amp3";
                 break;
                 
             case 4://Tanh
-                /*funcJUCEString = audioProcessor.distTypeList[3];
-                stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;*/
                 audioProcessor.waveshapeFunction1 = "Tanh";
                 break;
                 
             case 5://Atan
-                /*
-                funcJUCEString = audioProcessor.distTypeList[4];
-                stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;*/
                 audioProcessor.waveshapeFunction1 = "Atan";
 
                 break;
                 
             case 6://HalfRect
-                /*funcJUCEString = audioProcessor.distTypeList[5];
-                stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;*/
                 audioProcessor.waveshapeFunction1 = "HalfRect";
                 break;
                 
             default:
-                //audioProcessor.waveshapeFunction1 = audioProcessor.distTypeList.getReference(0).toStdString();
-                /*funcJUCEString = audioProcessor.distTypeList[0];
-                stdString = funcJUCEString.toStdString();
-                audioProcessor.waveshapeFunction1 = stdString;*/
                 audioProcessor.waveshapeFunction1 = "Amp1";
-
                 break;
         }
     }
+    else if(gainStageNum == 2)
+    {
+        //Set the string in the audio processor with the function to use
+        switch (waveshapeType2.getSelectedId())
+        {
+            case 1://Amp1
+                audioProcessor.waveshapeFunction2 = "Amp1";
+                break;
+                
+            case 2://Amp2
+                audioProcessor.waveshapeFunction2 = "Amp2";
+                break;
+                
+            case 3://Amp3
+                audioProcessor.waveshapeFunction2 = "Amp3";
+                break;
+                
+            case 4://Tanh
+                audioProcessor.waveshapeFunction2 = "Tanh";
+                break;
+                
+            case 5://Atan
+                audioProcessor.waveshapeFunction2 = "Atan";
+
+                break;
+                
+            case 6://HalfRect
+                audioProcessor.waveshapeFunction2 = "HalfRect";
+                break;
+                
+            default:
+                audioProcessor.waveshapeFunction2 = "Amp1";
+                break;
+        }
+    }
+    
+    
+    
 }
 
 //==============================================================================
@@ -388,6 +415,8 @@ void ChuginatorAudioProcessorEditor::resized()
     int knobSizeLarge = 115;
     int knobSizeMedium = 100;
     int knobSizeSmall = 70;
+    int menuWidth = 80;
+    int menuHeight = 20;
     
     int row4XOffset =  getWidth() / 4;
     int row4YOffset = getHeight() / 4;
@@ -403,7 +432,7 @@ void ChuginatorAudioProcessorEditor::resized()
     labelOutputGain.setBounds(sliderOutputGain.getX(), sliderOutputGain.getY() - 15, 76, 38);
     
     //ROW2
-    
+    /*=====================================================================*/
     //GAIN1
     //Gain
     sliderPreGain1.setBounds(leftOffset - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
@@ -411,13 +440,15 @@ void ChuginatorAudioProcessorEditor::resized()
     
     //Toggle
     buttonGain1.setBounds(sliderPreGain1.getX() + 15, sliderPreGain1.getY() - 25, 20, 20);
-    waveshapeType1.setBounds(buttonGain1.getX() + 25, buttonGain1.getY(), 80, 20);
+    waveshapeType1.setBounds(buttonGain1.getX() + 25, buttonGain1.getY(), menuWidth, menuHeight);
     //labelWaveshapeType1.setBounds(waveshapeType1.getX(), waveshapeType1.getY() - 25, 50, 25);
     
     //Mix
     sliderMix1.setBounds(sliderPreGain1.getX() + (knobSizeMedium / 2) + 15, sliderPreGain1.getY(), knobSizeMedium, knobSizeMedium);
     labelMix1.setBounds(sliderMix1.getX() + labelXOffset, sliderMix1.getY() - 15, 76, 38);
     
+    
+    /*=====================================================================*/
     //GAIN2
     //Gain
     sliderPreGain2.setBounds(sliderPreEQ.getX() - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
@@ -425,11 +456,14 @@ void ChuginatorAudioProcessorEditor::resized()
     
     //Toggle
     buttonGain2.setBounds(sliderPreGain2.getX() + 15, sliderPreGain2.getY() - 25, 20, 20);
+    waveshapeType2.setBounds(buttonGain2.getX() + 25, buttonGain2.getY(), menuWidth, menuHeight);
     
     //Mix
     sliderMix2.setBounds(sliderPreGain2.getX() + (knobSizeMedium / 2) + 15, sliderPreGain2.getY(), knobSizeMedium, knobSizeMedium);
     labelMix2.setBounds(sliderMix2.getX() + labelXOffset, sliderMix2.getY() - 15, 76, 38);
     
+    
+    /*=====================================================================*/
     //GAIN3
     //Gain
     sliderPreGain3.setBounds(sliderOutputGain.getX() - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
@@ -442,7 +476,7 @@ void ChuginatorAudioProcessorEditor::resized()
     sliderMix3.setBounds(sliderPreGain3.getX() + (knobSizeMedium / 2) + 15, sliderPreGain3.getY(), knobSizeMedium, knobSizeMedium);
     labelMix3.setBounds(sliderMix3.getX() + labelXOffset, sliderMix3.getY() - 15, 76, 38);
     
-    
+    /*=====================================================================*/
     //ROW3
     sliderFilterLowGain.setBounds(sliderInputGain.getX(), sliderMix1.getY() + (knobSizeLarge - 15), knobSizeLarge, knobSizeLarge);
     labelFilterLowGain.setBounds(sliderFilterLowGain.getX(), sliderFilterLowGain.getY() - 15, 76, 38);
@@ -453,7 +487,7 @@ void ChuginatorAudioProcessorEditor::resized()
     sliderFilterHighGain.setBounds(sliderOutputGain.getX(), sliderMix3.getY() + (knobSizeLarge - 15), knobSizeLarge, knobSizeLarge);
     labelFilterHighGain.setBounds(sliderFilterHighGain.getX(), sliderFilterHighGain.getY() - 15, 76, 38);
     
-    
+    /*=====================================================================*/
     //ROW4
     //Noise Gate
     sliderNoiseGateThresh.setBounds(leftOffset - 10, getHeight() - 110, 50, 120);
