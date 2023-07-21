@@ -213,7 +213,6 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     setSliderPropertiesVertical(&sliderNoiseGateRatio);
     sliderNoiseGateRatio.setLookAndFeel(&lookAndFeel);
-    sliderNoiseGateRatio.setTitle("Ratio");
     labelNoiseGateRatio.setText("Ratio", juce::dontSendNotification);
     
     //Attack
@@ -222,7 +221,6 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     setSliderPropertiesVertical(&sliderNoiseGateAttack);
     sliderNoiseGateAttack.setLookAndFeel(&lookAndFeel);
-    sliderNoiseGateAttack.setTitle("Attack");
     labelNoiseGateAttack.setText("Attack", juce::dontSendNotification);
     
     //Release
@@ -231,7 +229,6 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     setSliderPropertiesVertical(&sliderNoiseGateRelease);
     sliderNoiseGateRelease.setLookAndFeel(&lookAndFeel);
-    sliderNoiseGateRelease.setTitle("Release");
     labelNoiseGateRelease.setText("Release", juce::dontSendNotification);
     
     
@@ -336,6 +333,7 @@ void ChuginatorAudioProcessorEditor::setSliderPropertiesVertical(juce::Slider *s
     sliderToSet->setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     sliderToSet->setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
     sliderToSet->setDoubleClickReturnValue(true, 0.0f);
+    //sliderToSet->setNumDecimalPlacesToDisplay(4);
 }
 
 void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
@@ -559,5 +557,6 @@ void ChuginatorAudioProcessorEditor::resized()
     labelNoiseGateRelease.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() - 20, 76, 38);
     
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
+    irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 40, 25);
     
 }
