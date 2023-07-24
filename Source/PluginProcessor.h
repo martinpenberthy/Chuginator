@@ -65,6 +65,7 @@ public:
     void updatePreEQ();
     void setFunctionToUse(int gainStageNum, std::string func);
     std::string getWaveshapeFuncParam(int gainStageNum);
+    std::string getParamIntToString(int numOfDistType);
     
     juce::AudioProcessorValueTreeState treeState;
     

@@ -30,6 +30,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
         fileLoader();
     };
     irName.setText(audioProcessor.savedFile.getFileName(), juce::dontSendNotification);
+    
     addAndMakeVisible(irName);
 
     /*audioProcessor.distTypeList = {
@@ -557,6 +558,6 @@ void ChuginatorAudioProcessorEditor::resized()
     labelNoiseGateRelease.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() - 20, 76, 38);
     
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
-    irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 40, 25);
+    irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 60, 25);
     
 }

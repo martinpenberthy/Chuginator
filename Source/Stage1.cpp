@@ -65,7 +65,7 @@ void Stage1::setWaveshapeFunc(std::string func)
     {
         waveshaper1.functionToUse = [](float x)
         {
-            float param = 0.9f;
+            float param = 0.5f;
             return ((x / (std::abs(x) + param) * 1.5f ) / (x * x + (0.0f - 1.0f) * std::abs(x) + 1.0f)) * 0.7f;
         };
         
