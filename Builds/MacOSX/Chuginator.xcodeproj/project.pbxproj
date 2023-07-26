@@ -28,6 +28,7 @@
 		11C8FC9179DEDE14E4D4F806 /* include_juce_audio_basics.mm */ = {isa = PBXBuildFile; fileRef = 463EEC5B4B25BF4D809ED305; };
 		1825C3574904F780ECEA2C26 /* QuartzCore.framework */ = {isa = PBXBuildFile; fileRef = 3D5861692CC511218BDF4546; };
 		1867FFEC8259FC83EA0B034E /* RecentFilesMenuTemplate.nib */ = {isa = PBXBuildFile; fileRef = B049AE75798B9DC3A7D1D16B; };
+		1A85E99EFB66C782B7E478E2 /* EQInternal.cpp */ = {isa = PBXBuildFile; fileRef = CAD639AF4645FAA8942100BC; };
 		1B80D28248372E840DEAD38B /* VST3 */ = {isa = PBXBuildFile; fileRef = 55639808300DA87D31F1BAAC; };
 		22377D7E5C5A89CD6ADBE315 /* include_juce_audio_formats.mm */ = {isa = PBXBuildFile; fileRef = 93C54FCEC98D3CAB1D71DA8A; };
 		231CC8188CEBFE5584F1EF81 /* include_juce_events.mm */ = {isa = PBXBuildFile; fileRef = 8BDD1EB5C6D6B5F6785A98C9; };
@@ -93,6 +94,7 @@
 		463EEC5B4B25BF4D809ED305 /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		47077552D34694090A0A5108 /* NoiseGateStage.cpp */ /* NoiseGateStage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NoiseGateStage.cpp; path = ../../Source/NoiseGateStage.cpp; sourceTree = SOURCE_ROOT; };
 		49405428DB7A1CA7980894A7 /* juce_gui_extra */ /* juce_gui_extra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_extra; path = /Applications/JUCE/modules/juce_gui_extra; sourceTree = "<absolute>"; };
+		4C87ACA8BA981CAB955A189B /* EQInternal.h */ /* EQInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EQInternal.h; path = ../../Source/EQInternal.h; sourceTree = SOURCE_ROOT; };
 		4DF4A13D248C3ACDE35C2597 /* Standalone Plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chuginator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55639808300DA87D31F1BAAC /* VST3 */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Chuginator.vst3; sourceTree = BUILT_PRODUCTS_DIR; };
 		593D7E3FD0173C8FA2A52B1A /* Shared Code */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libChuginator.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +134,7 @@
 		B72EEED4AA303932BAD52F7B /* include_juce_audio_plugin_client_AU_2.mm */ /* include_juce_audio_plugin_client_AU_2.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_AU_2.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_AU_2.mm; sourceTree = SOURCE_ROOT; };
 		C1DC06341DC35363CC1C3238 /* include_juce_gui_basics.mm */ /* include_juce_gui_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_basics.mm; path = ../../JuceLibraryCode/include_juce_gui_basics.mm; sourceTree = SOURCE_ROOT; };
 		C7E7DE080F7FB5B8BE9ED7A4 /* juce_audio_formats */ /* juce_audio_formats */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_formats; path = /Applications/JUCE/modules/juce_audio_formats; sourceTree = "<absolute>"; };
+		CAD639AF4645FAA8942100BC /* EQInternal.cpp */ /* EQInternal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = EQInternal.cpp; path = ../../Source/EQInternal.cpp; sourceTree = SOURCE_ROOT; };
 		CC43D242FF589E15A3573FE9 /* Foundation.framework */ /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D225396F55A3163083A3CD93 /* include_juce_graphics.mm */ /* include_juce_graphics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_graphics.mm; path = ../../JuceLibraryCode/include_juce_graphics.mm; sourceTree = SOURCE_ROOT; };
 		D8B713763D913BE0170DABA0 /* AmpBackground1.png */ /* AmpBackground1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AmpBackground1.png; path = ../../../../../Downloads/AmpBackground1.png; sourceTree = SOURCE_ROOT; };
@@ -254,6 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				A6F5C35BB0DD5E89DB8CFCA5,
+				CAD639AF4645FAA8942100BC,
+				4C87ACA8BA981CAB955A189B,
 				47077552D34694090A0A5108,
 				07C731A0D58061A8F1BBCB83,
 				B24A948F0616AD98AEFF97EE,
@@ -621,6 +626,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A85E99EFB66C782B7E478E2,
 				2DC78630DB4F1E03C99A5C38,
 				5EC72B573106C2B27CDB3CF6,
 				E1687379F147DA4E453CE2AE,

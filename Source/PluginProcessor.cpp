@@ -202,6 +202,8 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     internalLowEQ.prepare(spec);
     *internalLowEQ.state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, 400.0f, 0.4f, 0.1f);
     
+    internalEQ.prepare(spec, sampleRate);
+    
     /*=====================================================================*/
     //gainStage1.distTypeListCopy = distTypeList;
     gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"),
@@ -313,7 +315,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     //INTERNALLOWEQ
     internalLowEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
 
-    
+    internalEQ.process(processBlock, getSampleRate());
     //NOISEGATE
     noiseGateStage.process(processBlock,
                            *treeState.getRawParameterValue("THRESHOLD"),

@@ -13,6 +13,7 @@
 #include "Stage2.h"
 #include "Stage3.h"
 #include "EQStage.h"
+#include "EQInternal.h"
 #include "NoiseGateStage.h"
 
 //==============================================================================
@@ -95,6 +96,7 @@ private:
     
     juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> internalLowEQ;
     
+    EQInternal internalEQ;
     //GAIN1
 /*juce::dsp::Gain<float> preGain1;
     juce::dsp::WaveShaper<float> waveshaper1;

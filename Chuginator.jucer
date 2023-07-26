@@ -9,6 +9,8 @@
         <FILE id="zYX5Ne" name="AmpBackground1.png" compile="0" resource="1"
               file="../../../Downloads/AmpBackground1.png"/>
       </GROUP>
+      <FILE id="vloSHh" name="EQInternal.cpp" compile="1" resource="0" file="Source/EQInternal.cpp"/>
+      <FILE id="HRZ21q" name="EQInternal.h" compile="0" resource="0" file="Source/EQInternal.h"/>
       <FILE id="eqWcOr" name="NoiseGateStage.cpp" compile="1" resource="0"
             file="Source/NoiseGateStage.cpp"/>
       <FILE id="dqUVTj" name="NoiseGateStage.h" compile="0" resource="0"
