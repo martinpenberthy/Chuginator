@@ -455,71 +455,17 @@ std::string ChuginatorAudioProcessor::getWaveshapeFuncParam(int gainStageNum)
     if(gainStageNum == 1)
     {
         auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
-    
         return getParamIntToString((int) * waveshapeInitFunction1);
     }
     else if(gainStageNum == 2)
     {
         auto waveshapeInitFunction2 = treeState.getRawParameterValue("TYPE2");
         return getParamIntToString((int) * waveshapeInitFunction2);
-        /*switch((int) * waveshapeInitFunction2)
-        {
-            case 1:
-                return "Amp1";
-                break;
-            case 2:
-                return "Amp2";
-                break;
-            case 3:
-                return "Amp3";
-                break;
-            case 4:
-                return "Tanh";
-                break;
-                
-            case 5:
-                return "Atan";
-                break;
-            case 6:
-                return "HalfRect";
-                break;
-            
-            default:
-                return "Amp1";
-                break;
-        }*/
     }
     else if(gainStageNum == 3)
     {
         auto waveshapeInitFunction3 = treeState.getRawParameterValue("TYPE3");
-        
         return getParamIntToString((int) * waveshapeInitFunction3);
-        /*switch((int) * waveshapeInitFunction3)
-        {
-            case 1:
-                return "Amp1";
-                break;
-            case 2:
-                return "Amp2";
-                break;
-            case 3:
-                return "Amp3";
-                break;
-            case 4:
-                return "Tanh";
-                break;
-                
-            case 5:
-                return "Atan";
-                break;
-            case 6:
-                return "HalfRect";
-                break;
-            
-            default:
-                return "Amp1";
-                break;
-        }*/
     }
     else
     {

@@ -207,6 +207,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesVertical(&sliderNoiseGateThresh);
     sliderNoiseGateThresh.setLookAndFeel(&lookAndFeel);
     labelNoiseGateThresh.setText("Thresh", juce::dontSendNotification);
+
     
     //Ratio
     addAndMakeVisible(sliderNoiseGateRatio);
@@ -222,7 +223,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     setSliderPropertiesVertical(&sliderNoiseGateAttack);
     sliderNoiseGateAttack.setLookAndFeel(&lookAndFeel);
-    labelNoiseGateAttack.setText("Attack", juce::dontSendNotification);
+    labelNoiseGateAttack.setText("A", juce::dontSendNotification);
     
     //Release
     addAndMakeVisible(sliderNoiseGateRelease);
@@ -230,7 +231,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     setSliderPropertiesVertical(&sliderNoiseGateRelease);
     sliderNoiseGateRelease.setLookAndFeel(&lookAndFeel);
-    labelNoiseGateRelease.setText("Release", juce::dontSendNotification);
+    labelNoiseGateRelease.setText("R", juce::dontSendNotification);
     
     
     
@@ -470,7 +471,10 @@ void ChuginatorAudioProcessorEditor::resized()
     int knobSizeMedium = 100;
     int knobSizeSmall = 70;
     int menuWidth = 80;
-    int menuHeight = 20;
+    int menuHeight = 15;
+    
+    int smallLabelWidth = 40;
+    int smallLabelHeight = 20;
     
     int row4XOffset =  getWidth() / 4;
     int row4YOffset = getHeight() / 4;
@@ -546,16 +550,16 @@ void ChuginatorAudioProcessorEditor::resized()
     //ROW4
     //Noise Gate
     sliderNoiseGateThresh.setBounds(leftOffset - 10, getHeight() - 110, 50, 120);
-    labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, 76, 38);
+    labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
     
     sliderNoiseGateRatio.setBounds(sliderNoiseGateThresh.getX() + 40, sliderNoiseGateThresh.getY(), 50, 120);
-    labelNoiseGateRatio.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() - 20, 76, 38);
+    labelNoiseGateRatio.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() - 20, smallLabelWidth, smallLabelHeight);
     
     sliderNoiseGateAttack.setBounds(sliderNoiseGateRatio.getX() + 40, sliderNoiseGateRatio.getY(), 50, 120);
-    labelNoiseGateAttack.setBounds(sliderNoiseGateAttack.getX(), sliderNoiseGateAttack.getY() - 20, 76, 38);
+    labelNoiseGateAttack.setBounds(sliderNoiseGateAttack.getX(), sliderNoiseGateAttack.getY() - 20, smallLabelWidth, smallLabelHeight);
     
     sliderNoiseGateRelease.setBounds(sliderNoiseGateAttack.getX() + 40, sliderNoiseGateAttack.getY(), 50, 120);
-    labelNoiseGateRelease.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() - 20, 76, 38);
+    labelNoiseGateRelease.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() - 20, smallLabelWidth, smallLabelHeight);
     
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
     irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 60, 25);
