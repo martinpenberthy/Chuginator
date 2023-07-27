@@ -108,6 +108,7 @@ private:
     juce::Slider sliderNoiseGateRelease;
     juce::Label labelNoiseGateRelease;
     
+    juce::ToggleButton buttonEQTest;
     
     juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;
@@ -140,7 +141,7 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateAttack;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateRelease;
 
-    
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentEQTestOnOff;
     
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentOutputGain;

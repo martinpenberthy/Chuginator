@@ -17,6 +17,10 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     // editor's size to whatever you need it to be.
     setSize (500, 520);
     
+    addAndMakeVisible(buttonEQTest);
+    buttonEQTest.setToggleable(true);
+    
+    
     lookAndFeel.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
     lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
     lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.25f));
@@ -317,7 +321,8 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentNoiseGateRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASE", sliderNoiseGateRelease);
     
     
-    
+    buttonAttachmentEQTestOnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "EQTESTONOFF", buttonEQTest);
+
     sliderAttachmentOutputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "OUTPUTGAIN", sliderOutputGain);
 }
 
@@ -563,5 +568,8 @@ void ChuginatorAudioProcessorEditor::resized()
     
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
     irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 60, 25);
+    
+    
+    buttonEQTest.setBounds(getWidth() / 2, getHeight() - 50, 30, 30);
     
 }

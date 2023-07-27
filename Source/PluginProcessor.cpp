@@ -110,6 +110,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASE", 1}, "Release", 1, 700, 20));
     
     
+    params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"EQTESTONOFF", 1}, "EQTestOnOff", false));
+    
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"OUTPUTGAIN", 1}, "OutputGain", -96.0f, 48.0f, 0.0f));
 
     return {params.begin(), params.end()};
@@ -315,7 +317,9 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     //INTERNALLOWEQ
     internalLowEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
 
-    internalEQ.process(processBlock, getSampleRate());
+    if(*treeState.getRawParameterValue("EQTESTONOFF"))
+        internalEQ.process(processBlock, getSampleRate());
+    
     //NOISEGATE
     noiseGateStage.process(processBlock,
                            *treeState.getRawParameterValue("THRESHOLD"),
