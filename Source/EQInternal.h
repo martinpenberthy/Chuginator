@@ -29,4 +29,6 @@ private:
     
     juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> highBoostEQ;
     
+    juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> internalLowEQ;
+    
 };

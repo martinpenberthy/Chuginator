@@ -94,8 +94,6 @@ private:
     using IIRCoefs = juce::dsp::IIR::Coefficients<float>;
     juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> preEQ;
     
-    juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> internalLowEQ;
-    
     EQInternal internalEQ;
     //GAIN1
 /*juce::dsp::Gain<float> preGain1;

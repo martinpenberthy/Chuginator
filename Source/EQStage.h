@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+
 class EQStage
 {
     public:
@@ -26,6 +27,4 @@ class EQStage
         using IIRCoefs = juce::dsp::IIR::Coefficients<float>;
         
         juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> lowEQ, midEQ, highEQ;
-
-    
 };
