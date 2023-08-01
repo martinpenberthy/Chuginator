@@ -55,10 +55,12 @@ private:
     //Gain1
     juce::Slider sliderPreGain1;
     juce::Label labelPreGain1;
+    juce::Label labelPreGain1Val;
     
     juce::Slider sliderMix1;
     juce::Label labelMix1;
-    
+    juce::Label labelMix1Val;
+
     juce::ToggleButton buttonGain1;
     
     juce::Label labelWaveshapeType1;//Label for menu
@@ -67,10 +69,13 @@ private:
     //Gain2
     juce::Slider sliderPreGain2;
     juce::Label labelPreGain2;
+    juce::Label labelPreGain2Val;
+
     
     juce::Slider sliderMix2;
     juce::Label labelMix2;
-    
+    juce::Label labelMix2Val;
+
     juce::ToggleButton buttonGain2;
 
     juce::Label labelWaveshapeType2;//Label for menu
@@ -79,9 +84,11 @@ private:
     //Gain3
     juce::Slider sliderPreGain3;
     juce::Label labelPreGain3;
+    juce::Label labelPreGain3Val;
     
     juce::Slider sliderMix3;
     juce::Label labelMix3;
+    juce::Label labelMix3Val;
     
     juce::ToggleButton buttonGain3;
 
@@ -91,30 +98,42 @@ private:
     //Filters
     juce::Slider sliderFilterHighGain;
     juce::Label labelFilterHighGain;
+    juce::Label labelFilterHighGainVal;
     
     juce::Slider sliderFilterMidGain;
     juce::Label labelFilterMidGain;
+    juce::Label labelFilterMidGainVal;
+
     
     juce::Slider sliderFilterLowGain;
     juce::Label labelFilterLowGain;
+    juce::Label labelFilterLowGainVal;
+
     
     //Noise Gate
     juce::Slider sliderNoiseGateThresh;
     juce::Label labelNoiseGateThresh;
+    juce::Label labelNoiseGateThreshVal;
     
     juce::Slider sliderNoiseGateRatio;
     juce::Label labelNoiseGateRatio;
-    
+    juce::Label labelNoiseGateRatioVal;
+
     juce::Slider sliderNoiseGateAttack;
     juce::Label labelNoiseGateAttack;
+    juce::Label labelNoiseGateAttackVal;
     
     juce::Slider sliderNoiseGateRelease;
     juce::Label labelNoiseGateRelease;
+    juce::Label labelNoiseGateReleaseVal;
+
     
     juce::ToggleButton buttonEQTest;
     
     juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;
+    juce::Label labelOutputGainVal;
+
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentInputGain;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentPreEQ;
