@@ -53,10 +53,14 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     setSliderPropertiesRotary(&sliderInputGain);
     sliderInputGain.setLookAndFeel(&lookAndFeel);
+    
     sliderInputGain.onValueChange = [this]()
     {
         labelInputGainVal.setText(juce::String(sliderInputGain.getValue()), juce::dontSendNotification);
     };
+    
+    labelInputGainVal.setText(juce::String(sliderInputGain.getValue()), juce::dontSendNotification);
+    
     labelInputGain.setText("Input(dB)", juce::dontSendNotification);
     
     
@@ -337,7 +341,7 @@ void ChuginatorAudioProcessorEditor::setSliderPropertiesRotary(juce::Slider *sli
 {
 
     sliderToSet->setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
-    sliderToSet->setTextBoxStyle(juce::Slider::TextBoxBelow, false, 0, 0);
+    sliderToSet->setTextBoxStyle(juce::Slider::NoTextBox, false, 76, 38);
     sliderToSet->setDoubleClickReturnValue(true, 0.0f);
 }
 
@@ -480,9 +484,8 @@ void ChuginatorAudioProcessorEditor::resized()
     int topOffset = 30;
     int labelXOffset = 25;
     
-    int knobSizeLarge = 115 - 38;
-    int knobSizeMedium = 100;
-    int knobSizeSmall = 70;
+    int knobSizeLarge = 85;
+    int knobSizeMedium = 60;
     
     int menuWidth = 80;
     int menuHeight = 15;
@@ -496,9 +499,9 @@ void ChuginatorAudioProcessorEditor::resized()
     //ROW1
     sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
-    labelInputGainVal.setBounds(sliderInputGain.getX(), sliderInputGain.getY() + 15, 76, 38);
+    labelInputGainVal.setBounds(sliderInputGain.getX() + 30, sliderInputGain.getY() + 45, 76, 38);
     
-    sliderPreEQ.setBounds((getWidth() / 2) - 60, topOffset, knobSizeLarge, knobSizeLarge);
+    sliderPreEQ.setBounds((getWidth() / 2) - 40, topOffset, knobSizeLarge, knobSizeLarge);
     labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - 15, 76, 38);
     
     sliderOutputGain.setBounds(getWidth() - (leftOffset + knobSizeLarge), topOffset, knobSizeLarge, knobSizeLarge);
@@ -508,7 +511,7 @@ void ChuginatorAudioProcessorEditor::resized()
     /*=====================================================================*/
     //GAIN1
     //Gain
-    sliderPreGain1.setBounds(leftOffset - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
+    sliderPreGain1.setBounds(leftOffset - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
     labelPreGain1.setBounds(sliderPreGain1.getX() + labelXOffset, sliderPreGain1.getY() - 15, 76, 38);
     
     //Toggle
@@ -517,14 +520,14 @@ void ChuginatorAudioProcessorEditor::resized()
     //labelWaveshapeType1.setBounds(waveshapeType1.getX(), waveshapeType1.getY() - 25, 50, 25);
     
     //Mix
-    sliderMix1.setBounds(sliderPreGain1.getX() + (knobSizeMedium / 2) + 15, sliderPreGain1.getY(), knobSizeMedium, knobSizeMedium);
+    sliderMix1.setBounds(sliderPreGain1.getX() + (knobSizeMedium / 2) + 25, sliderPreGain1.getY(), knobSizeMedium, knobSizeMedium);
     labelMix1.setBounds(sliderMix1.getX() + labelXOffset, sliderMix1.getY() - 15, 76, 38);
     
     
     /*=====================================================================*/
     //GAIN2
     //Gain
-    sliderPreGain2.setBounds(sliderPreEQ.getX() - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
+    sliderPreGain2.setBounds(sliderPreEQ.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
     labelPreGain2.setBounds(sliderPreGain2.getX() + labelXOffset, sliderPreGain2.getY() - 15, 76, 38);
     
     //Toggle
@@ -532,14 +535,14 @@ void ChuginatorAudioProcessorEditor::resized()
     waveshapeType2.setBounds(buttonGain2.getX() + 25, buttonGain2.getY(), menuWidth, menuHeight);
     
     //Mix
-    sliderMix2.setBounds(sliderPreGain2.getX() + (knobSizeMedium / 2) + 15, sliderPreGain2.getY(), knobSizeMedium, knobSizeMedium);
+    sliderMix2.setBounds(sliderPreGain2.getX() + (knobSizeMedium / 2) + 25, sliderPreGain2.getY(), knobSizeMedium, knobSizeMedium);
     labelMix2.setBounds(sliderMix2.getX() + labelXOffset, sliderMix2.getY() - 15, 76, 38);
     
     
     /*=====================================================================*/
     //GAIN3
     //Gain
-    sliderPreGain3.setBounds(sliderOutputGain.getX() - 15, topOffset + knobSizeLarge + 40, knobSizeMedium, knobSizeMedium);
+    sliderPreGain3.setBounds(sliderOutputGain.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
     labelPreGain3.setBounds(sliderPreGain3.getX() + labelXOffset, sliderPreGain3.getY() - 15, 76, 38);
     
     //Toggle
@@ -547,7 +550,7 @@ void ChuginatorAudioProcessorEditor::resized()
     waveshapeType3.setBounds(buttonGain3.getX() + 25, buttonGain3.getY(), menuWidth, menuHeight);
 
     //Mix
-    sliderMix3.setBounds(sliderPreGain3.getX() + (knobSizeMedium / 2) + 15, sliderPreGain3.getY(), knobSizeMedium, knobSizeMedium);
+    sliderMix3.setBounds(sliderPreGain3.getX() + (knobSizeMedium / 2) + 25, sliderPreGain3.getY(), knobSizeMedium, knobSizeMedium);
     labelMix3.setBounds(sliderMix3.getX() + labelXOffset, sliderMix3.getY() - 15, 76, 38);
     
     /*=====================================================================*/

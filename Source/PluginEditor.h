@@ -50,6 +50,7 @@ private:
     
     juce::Slider sliderPreEQ;//PreEQ slider
     juce::Label labelPreEQ; //PreEQ label
+    juce::Label labelPreEQVal;
     
     //Gain1
     juce::Slider sliderPreGain1;
