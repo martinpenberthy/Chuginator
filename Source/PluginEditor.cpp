@@ -49,10 +49,16 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     //INPUT
     addAndMakeVisible(sliderInputGain);
     addAndMakeVisible(labelInputGain);
+    addAndMakeVisible(labelInputGainVal);
     
     setSliderPropertiesRotary(&sliderInputGain);
     sliderInputGain.setLookAndFeel(&lookAndFeel);
+    sliderInputGain.onValueChange = [this]()
+    {
+        labelInputGainVal.setText(juce::String(sliderInputGain.getValue()), juce::dontSendNotification);
+    };
     labelInputGain.setText("Input(dB)", juce::dontSendNotification);
+    
     
     //PREEQ
     addAndMakeVisible(sliderPreEQ);
@@ -246,10 +252,11 @@ ChuginatorAudioProcessorEditor::~ChuginatorAudioProcessorEditor()
 {
 }
 
-/*void ChuginatorAudioProcessorEditor::updateToggleState (juce::Button* button)
+void ChuginatorAudioProcessorEditor::sliderValueChanged(juce::Slider *slider, juce::Label *label)
 {
-    audioProcessor.gain1OnOff = button->getToggleState();
-}*/
+
+}
+
 
 void ChuginatorAudioProcessorEditor::fileLoader()
 {
@@ -330,7 +337,7 @@ void ChuginatorAudioProcessorEditor::setSliderPropertiesRotary(juce::Slider *sli
 {
 
     sliderToSet->setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
-    sliderToSet->setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 38);
+    sliderToSet->setTextBoxStyle(juce::Slider::TextBoxBelow, false, 0, 0);
     sliderToSet->setDoubleClickReturnValue(true, 0.0f);
 }
 
@@ -472,9 +479,11 @@ void ChuginatorAudioProcessorEditor::resized()
     int leftOffset = 40;
     int topOffset = 30;
     int labelXOffset = 25;
-    int knobSizeLarge = 115;
+    
+    int knobSizeLarge = 115 - 38;
     int knobSizeMedium = 100;
     int knobSizeSmall = 70;
+    
     int menuWidth = 80;
     int menuHeight = 15;
     
@@ -487,6 +496,7 @@ void ChuginatorAudioProcessorEditor::resized()
     //ROW1
     sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
+    labelInputGainVal.setBounds(sliderInputGain.getX(), sliderInputGain.getY() + 15, 76, 38);
     
     sliderPreEQ.setBounds((getWidth() / 2) - 60, topOffset, knobSizeLarge, knobSizeLarge);
     labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - 15, 76, 38);

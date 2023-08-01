@@ -195,6 +195,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     //INPUTGAIN
     inputGain.prepare(spec);
+    
     inputGain.setGainDecibels(*treeState.getRawParameterValue("INPUTGAIN"));
     
     //PREEQ

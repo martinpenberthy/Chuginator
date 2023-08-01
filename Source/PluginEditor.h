@@ -30,6 +30,7 @@ public:
     void fileLoader();
     // updateToggleState (juce::Button* button)
     void modeMenuChanged(int gainStageNum);
+    void sliderValueChanged(juce::Slider *slider, juce::Label *label);
     
 private:
     
@@ -45,6 +46,7 @@ private:
     
     juce::Slider sliderInputGain;
     juce::Label labelInputGain;
+    juce::Label labelInputGainVal;
     
     juce::Slider sliderPreEQ;//PreEQ slider
     juce::Label labelPreEQ; //PreEQ label
