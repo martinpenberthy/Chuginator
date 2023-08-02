@@ -5,10 +5,7 @@
               companyName="Black Martini">
   <MAINGROUP id="b48WrN" name="Chuginator">
     <GROUP id="{59562548-40C6-E0F5-04C4-C08F52A52683}" name="Source">
-      <GROUP id="{9D5167FE-ADD9-448E-1958-6234079719A5}" name="Assets">
-        <FILE id="zYX5Ne" name="AmpBackground1.png" compile="0" resource="1"
-              file="../../../Downloads/AmpBackground1.png"/>
-      </GROUP>
+      <GROUP id="{9D5167FE-ADD9-448E-1958-6234079719A5}" name="Assets"/>
       <FILE id="vloSHh" name="EQInternal.cpp" compile="1" resource="0" file="Source/EQInternal.cpp"/>
       <FILE id="HRZ21q" name="EQInternal.h" compile="0" resource="0" file="Source/EQInternal.h"/>
       <FILE id="eqWcOr" name="NoiseGateStage.cpp" compile="1" resource="0"
