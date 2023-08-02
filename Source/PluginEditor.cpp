@@ -328,7 +328,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     setSliderPropertiesVertical(&sliderNoiseGateRatio);
     sliderNoiseGateRatio.setLookAndFeel(&lookAndFeel);
-    labelNoiseGateRatio.setText("Ratio", juce::dontSendNotification);
+    labelNoiseGateRatio.setText("Rat", juce::dontSendNotification);
     
     sliderNoiseGateRatio.onValueChange = [this]()
     {
@@ -711,7 +711,7 @@ void ChuginatorAudioProcessorEditor::resized()
     
     sliderNoiseGateRatio.setBounds(sliderNoiseGateThresh.getX() + 30, sliderNoiseGateThresh.getY(), 50, 90);
     labelNoiseGateRatio.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelNoiseGateRatio.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() + 55, 40, 38);
+    labelNoiseGateRatioVal.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() + 55, 40, 38);
 
     
     sliderNoiseGateAttack.setBounds(sliderNoiseGateRatio.getX() + 30, sliderNoiseGateRatio.getY(), 50, 90);

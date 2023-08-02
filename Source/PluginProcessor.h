@@ -15,6 +15,7 @@
 #include "EQStage.h"
 #include "EQInternal.h"
 #include "NoiseGateStage.h"
+#include "Compressor.h"
 
 //==============================================================================
 /**
@@ -117,6 +118,9 @@ private:
     EQStage EQStage;
     
     NoiseGateStage noiseGateStage;
+    
+    
+    
     juce::dsp::Gain<float> outputGain;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChuginatorAudioProcessor)
