@@ -370,6 +370,75 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     labelNoiseGateReleaseVal.setText(juce::String(sliderNoiseGateRelease.getValue()), juce::dontSendNotification);
     
+    
+    
+    //COMPRESSOR
+    addAndMakeVisible(sliderCompressorThresh);
+    addAndMakeVisible(labelCompressorThresh);
+    addAndMakeVisible(labelCompressorThreshVal);
+    
+    setSliderPropertiesVertical(&sliderCompressorThresh);
+    sliderCompressorThresh.setLookAndFeel(&lookAndFeel);
+    labelCompressorThresh.setText("Thr", juce::dontSendNotification);
+
+    sliderCompressorThresh.onValueChange = [this]()
+    {
+        labelCompressorThreshVal.setText(juce::String(sliderCompressorThresh.getValue()), juce::dontSendNotification);
+    };
+    
+    labelCompressorThreshVal.setText(juce::String(sliderCompressorThresh.getValue()), juce::dontSendNotification);
+    
+    //Ratio
+    addAndMakeVisible(sliderCompressorRatio);
+    addAndMakeVisible(labelCompressorRatio);
+    addAndMakeVisible(labelCompressorRatioVal);
+    
+    setSliderPropertiesVertical(&sliderCompressorRatio);
+    sliderCompressorRatio.setLookAndFeel(&lookAndFeel);
+    labelCompressorRatio.setText("Rat", juce::dontSendNotification);
+    
+    sliderCompressorRatio.onValueChange = [this]()
+    {
+        labelCompressorRatioVal.setText(juce::String(sliderCompressorRatio.getValue()), juce::dontSendNotification);
+    };
+    
+    labelCompressorRatioVal.setText(juce::String(sliderCompressorRatio.getValue()), juce::dontSendNotification);
+    
+    
+    //Attack
+    addAndMakeVisible(sliderCompressorAttack);
+    addAndMakeVisible(labelCompressorAttack);
+    addAndMakeVisible(labelCompressorAttackVal);
+    
+    setSliderPropertiesVertical(&sliderCompressorAttack);
+    sliderCompressorAttack.setLookAndFeel(&lookAndFeel);
+    labelCompressorAttack.setText("A", juce::dontSendNotification);
+    
+    sliderCompressorAttack.onValueChange = [this]()
+    {
+        labelCompressorAttackVal.setText(juce::String(sliderCompressorAttack.getValue()), juce::dontSendNotification);
+    };
+    
+    labelCompressorAttackVal.setText(juce::String(sliderCompressorAttack.getValue()), juce::dontSendNotification);
+    
+    //Release
+    addAndMakeVisible(sliderCompressorRelease);
+    addAndMakeVisible(labelCompressorRelease);
+    addAndMakeVisible(labelCompressorReleaseVal);
+    
+    setSliderPropertiesVertical(&sliderCompressorRelease);
+    sliderCompressorRelease.setLookAndFeel(&lookAndFeel);
+    labelCompressorRelease.setText("R", juce::dontSendNotification);
+    
+    sliderCompressorRelease.onValueChange = [this]()
+    {
+        labelCompressorReleaseVal.setText(juce::String(sliderCompressorRelease.getValue()), juce::dontSendNotification);
+    };
+    
+    labelCompressorReleaseVal.setText(juce::String(sliderCompressorRelease.getValue()), juce::dontSendNotification);
+    
+    
+    
     makeSliderAttachments();
 }
 
@@ -447,10 +516,17 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentFilterHighGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "HIGH", sliderFilterHighGain);
     
     //NOISE GATE
-    sliderAttachmentNoiseGateThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLD", sliderNoiseGateThresh);
-    sliderAttachmentNoiseGateRatio = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RATIO", sliderNoiseGateRatio);
-    sliderAttachmentNoiseGateAttack = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "ATTACK", sliderNoiseGateAttack);
-    sliderAttachmentNoiseGateRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASE", sliderNoiseGateRelease);
+    sliderAttachmentNoiseGateThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLDNG", sliderNoiseGateThresh);
+    sliderAttachmentNoiseGateRatio = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RATIONG", sliderNoiseGateRatio);
+    sliderAttachmentNoiseGateAttack = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "ATTACKNG", sliderNoiseGateAttack);
+    sliderAttachmentNoiseGateRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASENG", sliderNoiseGateRelease);
+    
+    
+    //COMPRESSOR
+    sliderAttachmentCompressorThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLDC", sliderCompressorThresh);
+    sliderAttachmentCompressorRatio = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RATIOC", sliderCompressorRatio);
+    sliderAttachmentCompressorAttack = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "ATTACKC", sliderCompressorAttack);
+    sliderAttachmentCompressorRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASEC", sliderCompressorRelease);
     
     
     buttonAttachmentEQTestOnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "EQTESTONOFF", buttonEQTest);
@@ -723,6 +799,25 @@ void ChuginatorAudioProcessorEditor::resized()
     labelNoiseGateRelease.setBounds(sliderNoiseGateRelease.getX() + 10, sliderNoiseGateRelease.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateReleaseVal.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() + 55, 40, 38);
 
+    
+    //Compressor
+    sliderCompressorThresh.setBounds(leftOffset - 20, getHeight() - 110, 50, 90);
+    labelCompressorThresh.setBounds(sliderCompressorThresh.getX(), sliderCompressorThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
+    labelCompressorThreshVal.setBounds(sliderCompressorThresh.getX(), sliderCompressorThresh.getY() + 55, 40, 38);
+    
+    sliderCompressorRatio.setBounds(sliderCompressorThresh.getX() + 30, sliderCompressorThresh.getY(), 50, 90);
+    labelCompressorRatio.setBounds(sliderCompressorRatio.getX(), sliderCompressorRatio.getY() - 20, smallLabelWidth, smallLabelHeight);
+    labelCompressorRatioVal.setBounds(sliderCompressorRatio.getX(), sliderCompressorRatio.getY() + 55, 40, 38);
+
+    
+    sliderCompressorAttack.setBounds(sliderCompressorRatio.getX() + 30, sliderCompressorRatio.getY(), 50, 90);
+    labelCompressorAttack.setBounds(sliderCompressorAttack.getX() + 10, sliderCompressorAttack.getY() - 20, smallLabelWidth, smallLabelHeight);
+    labelCompressorAttackVal.setBounds(sliderCompressorAttack.getX(), sliderCompressorAttack.getY() + 55, 40, 38);
+
+    
+    sliderCompressorRelease.setBounds(sliderCompressorAttack.getX() + 30, sliderCompressorAttack.getY(), 50, 90);
+    labelCompressorRelease.setBounds(sliderCompressorRelease.getX() + 10, sliderCompressorRelease.getY() - 20, smallLabelWidth, smallLabelHeight);
+    labelCompressorReleaseVal.setBounds(sliderCompressorRelease.getX(), sliderCompressorRelease.getY() + 55, 40, 38);
     
     
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);

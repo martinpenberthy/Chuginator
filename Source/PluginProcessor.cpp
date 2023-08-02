@@ -104,11 +104,16 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"HIGH", 1}, "High", 0.0f, 2.0f, 1.0f));
     
     //Noise Gate
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLD", 1}, "Threshold", -96, 6, 1));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RATIO", 1}, "Ratio", 1, 10, 1));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"ATTACK", 1}, "Attack", 1, 300, 20));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASE", 1}, "Release", 1, 700, 20));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDNG", 1}, "Threshold", -96, 6, 1));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RATIONG", 1}, "Ratio", 1, 10, 1));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"ATTACKNG", 1}, "Attack", 1, 300, 20));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASENG", 1}, "Release", 1, 700, 20));
     
+    //Compressor
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDC", 1}, "Threshold", -96, 6, 1));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RATIOC", 1}, "Ratio", 1, 10, 1));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"ATTACKC", 1}, "Attack", 1, 300, 20));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASEC", 1}, "Release", 1, 700, 20));
     
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"EQTESTONOFF", 1}, "EQTestOnOff", false));
     
@@ -237,10 +242,10 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
                           *treeState.getRawParameterValue("HIGH"),
                           sampleRate);
     //Noise Gate
-    noiseGateStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLD"),
-                                 *treeState.getRawParameterValue("RATIO"),
-                                 *treeState.getRawParameterValue("ATTACK"),
-                                 *treeState.getRawParameterValue("RELEASE"));
+    noiseGateStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLDNG"),
+                                 *treeState.getRawParameterValue("RATIONG"),
+                                 *treeState.getRawParameterValue("ATTACKNG"),
+                                 *treeState.getRawParameterValue("RELEASENG"));
     
     //OUTPUTGAIN
     outputGain.prepare(spec);
@@ -318,10 +323,10 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
     //NOISEGATE
     noiseGateStage.process(processBlock,
-                           *treeState.getRawParameterValue("THRESHOLD"),
-                           *treeState.getRawParameterValue("RATIO"),
-                           *treeState.getRawParameterValue("ATTACK"),
-                           *treeState.getRawParameterValue("RELEASE"));
+                           *treeState.getRawParameterValue("THRESHOLDNG"),
+                           *treeState.getRawParameterValue("RATIONG"),
+                           *treeState.getRawParameterValue("ATTACKNG"),
+                           *treeState.getRawParameterValue("RELEASENG"));
     
     
     /*=====================================================================*/

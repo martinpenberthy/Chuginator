@@ -118,8 +118,7 @@ private:
     EQStage EQStage;
     
     NoiseGateStage noiseGateStage;
-    
-    
+    Compressor compressorStage;
     
     juce::dsp::Gain<float> outputGain;
     //==============================================================================

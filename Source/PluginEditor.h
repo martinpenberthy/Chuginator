@@ -127,6 +127,24 @@ private:
     juce::Label labelNoiseGateRelease;
     juce::Label labelNoiseGateReleaseVal;
 
+    //Compressor
+    juce::Slider sliderCompressorThresh;
+    juce::Label labelCompressorThresh;
+    juce::Label labelCompressorThreshVal;
+    
+    juce::Slider sliderCompressorRatio;
+    juce::Label labelCompressorRatio;
+    juce::Label labelCompressorRatioVal;
+
+    juce::Slider sliderCompressorAttack;
+    juce::Label labelCompressorAttack;
+    juce::Label labelCompressorAttackVal;
+    
+    juce::Slider sliderCompressorRelease;
+    juce::Label labelCompressorRelease;
+    juce::Label labelCompressorReleaseVal;
+    
+    
     
     juce::ToggleButton buttonEQTest;
     
@@ -163,6 +181,11 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateAttack;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateRelease;
 
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorThresh;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorRatio;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorAttack;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorRelease;
+    
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentEQTestOnOff;
     
     
