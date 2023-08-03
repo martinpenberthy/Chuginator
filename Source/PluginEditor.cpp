@@ -801,7 +801,7 @@ void ChuginatorAudioProcessorEditor::resized()
 
     
     //Compressor
-    sliderCompressorThresh.setBounds(leftOffset - 20, getHeight() - 110, 50, 90);
+    sliderCompressorThresh.setBounds(sliderNoiseGateRelease.getX() + 50, getHeight() - 110, 50, 90);
     labelCompressorThresh.setBounds(sliderCompressorThresh.getX(), sliderCompressorThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelCompressorThreshVal.setBounds(sliderCompressorThresh.getX(), sliderCompressorThresh.getY() + 55, 40, 38);
     
@@ -824,6 +824,6 @@ void ChuginatorAudioProcessorEditor::resized()
     irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 60, 25);
     
     
-    buttonEQTest.setBounds(getWidth() / 2, getHeight() - 50, 30, 30);
+    buttonEQTest.setBounds((getWidth() / 2) + 150, getHeight() - 50, 30, 30);
     
 }

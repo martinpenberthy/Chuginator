@@ -241,11 +241,20 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
                           *treeState.getRawParameterValue("MID"),
                           *treeState.getRawParameterValue("HIGH"),
                           sampleRate);
+    
+    /*=====================================================================*/
     //Noise Gate
     noiseGateStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLDNG"),
                                  *treeState.getRawParameterValue("RATIONG"),
                                  *treeState.getRawParameterValue("ATTACKNG"),
                                  *treeState.getRawParameterValue("RELEASENG"));
+    
+    /*=====================================================================*/
+    //Compressor
+    compressorStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLDC"),
+                                 *treeState.getRawParameterValue("RATIOC"),
+                                 *treeState.getRawParameterValue("ATTACKC"),
+                                 *treeState.getRawParameterValue("RELEASEC"));
     
     //OUTPUTGAIN
     outputGain.prepare(spec);
@@ -383,6 +392,17 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
                     *treeState.getRawParameterValue("MID"),
                     *treeState.getRawParameterValue("HIGH"),
                     processBlock, getSampleRate());
+    
+    
+    
+    /*=====================================================================*/
+    //Compressor
+    compressorStage.process(processBlock,
+                                 *treeState.getRawParameterValue("THRESHOLDC"),
+                                 *treeState.getRawParameterValue("RATIOC"),
+                                 *treeState.getRawParameterValue("ATTACKC"),
+                                 *treeState.getRawParameterValue("RELEASEC"));
+    
     
     //If there is an IR loaded, process it
     if(irLoader.getCurrentIRSize() > 0)

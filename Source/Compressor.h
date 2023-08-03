@@ -22,6 +22,7 @@ public:
 
 private:
     juce::dsp::Compressor<float> compressor;
+    
     float currentThresh;
     float currentRatio;
     float currentAttack;

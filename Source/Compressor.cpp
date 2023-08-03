@@ -54,7 +54,7 @@ void Compressor::process(juce::dsp::AudioBlock<float> processBlock, float thresh
         currentRelease = release;
     }
     
-    compressor.process(processBlock);
+    compressor.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
 }
 
