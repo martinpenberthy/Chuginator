@@ -110,10 +110,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASENG", 1}, "Release", 1, 700, 20));
     
     //Compressor
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDC", 1}, "Threshold", -96, 6, 1));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDC", 1}, "Threshold", -12, 6, 1));
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RATIOC", 1}, "Ratio", 1, 10, 1));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"ATTACKC", 1}, "Attack", 1, 300, 20));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASEC", 1}, "Release", 1, 700, 20));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"ATTACKC", 1}, "Attack", 1, 100, 20));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASEC", 1}, "Release", 1, 200, 20));
     
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"EQTESTONOFF", 1}, "EQTestOnOff", false));
     

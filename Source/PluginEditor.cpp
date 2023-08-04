@@ -783,41 +783,41 @@ void ChuginatorAudioProcessorEditor::resized()
     //Noise Gate
     sliderNoiseGateThresh.setBounds(leftOffset - 20, getHeight() - 110, 50, 90);
     labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() + 55, 40, 38);
+    labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() + 65, 40, 38);
     
     sliderNoiseGateRatio.setBounds(sliderNoiseGateThresh.getX() + 30, sliderNoiseGateThresh.getY(), 50, 90);
     labelNoiseGateRatio.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelNoiseGateRatioVal.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() + 55, 40, 38);
+    labelNoiseGateRatioVal.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() + 65, 40, 38);
 
     
     sliderNoiseGateAttack.setBounds(sliderNoiseGateRatio.getX() + 30, sliderNoiseGateRatio.getY(), 50, 90);
     labelNoiseGateAttack.setBounds(sliderNoiseGateAttack.getX() + 10, sliderNoiseGateAttack.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelNoiseGateAttackVal.setBounds(sliderNoiseGateAttack.getX(), sliderNoiseGateAttack.getY() + 55, 40, 38);
+    labelNoiseGateAttackVal.setBounds(sliderNoiseGateAttack.getX(), sliderNoiseGateAttack.getY() + 65, 40, 38);
 
     
     sliderNoiseGateRelease.setBounds(sliderNoiseGateAttack.getX() + 30, sliderNoiseGateAttack.getY(), 50, 90);
     labelNoiseGateRelease.setBounds(sliderNoiseGateRelease.getX() + 10, sliderNoiseGateRelease.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelNoiseGateReleaseVal.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() + 55, 40, 38);
+    labelNoiseGateReleaseVal.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() + 65, 40, 38);
 
     
     //Compressor
     sliderCompressorThresh.setBounds(sliderNoiseGateRelease.getX() + 50, getHeight() - 110, 50, 90);
     labelCompressorThresh.setBounds(sliderCompressorThresh.getX(), sliderCompressorThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelCompressorThreshVal.setBounds(sliderCompressorThresh.getX(), sliderCompressorThresh.getY() + 55, 40, 38);
+    labelCompressorThreshVal.setBounds(sliderCompressorThresh.getX(), sliderCompressorThresh.getY() + 65, 40, 38);
     
     sliderCompressorRatio.setBounds(sliderCompressorThresh.getX() + 30, sliderCompressorThresh.getY(), 50, 90);
     labelCompressorRatio.setBounds(sliderCompressorRatio.getX(), sliderCompressorRatio.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelCompressorRatioVal.setBounds(sliderCompressorRatio.getX(), sliderCompressorRatio.getY() + 55, 40, 38);
+    labelCompressorRatioVal.setBounds(sliderCompressorRatio.getX(), sliderCompressorRatio.getY() + 65, 40, 38);
 
     
     sliderCompressorAttack.setBounds(sliderCompressorRatio.getX() + 30, sliderCompressorRatio.getY(), 50, 90);
     labelCompressorAttack.setBounds(sliderCompressorAttack.getX() + 10, sliderCompressorAttack.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelCompressorAttackVal.setBounds(sliderCompressorAttack.getX(), sliderCompressorAttack.getY() + 55, 40, 38);
+    labelCompressorAttackVal.setBounds(sliderCompressorAttack.getX(), sliderCompressorAttack.getY() + 65, 40, 38);
 
     
     sliderCompressorRelease.setBounds(sliderCompressorAttack.getX() + 30, sliderCompressorAttack.getY(), 50, 90);
     labelCompressorRelease.setBounds(sliderCompressorRelease.getX() + 10, sliderCompressorRelease.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelCompressorReleaseVal.setBounds(sliderCompressorRelease.getX(), sliderCompressorRelease.getY() + 55, 40, 38);
+    labelCompressorReleaseVal.setBounds(sliderCompressorRelease.getX(), sliderCompressorRelease.getY() + 65, 40, 38);
     
     
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
