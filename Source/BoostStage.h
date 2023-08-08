@@ -28,7 +28,7 @@ private:
     using IIRFilter = juce::dsp::IIR::Filter<float>;
     using IIRCoefs = juce::dsp::IIR::Coefficients<float>;
     
-    juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> highBoostEQ;
+    juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> highBoostEQ, lowCutEQ;
     
     juce::dsp::DryWetMixer<float> internalBoostMix;
     

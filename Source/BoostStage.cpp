@@ -24,7 +24,10 @@ BoostStage::~BoostStage()
 void BoostStage::prepare(juce::dsp::ProcessSpec spec, double sampleRate)
 {
     highBoostEQ.prepare(spec);
-    *highBoostEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 2300.0f, 2.0f, 2.0f);
+    *highBoostEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 2300.0f, 1.0f, 2.0f);
+    
+    lowCutEQ.prepare(spec);
+    *lowCutEQ.state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, 500.0f, 2.0f, 0.5f);
     
     internalBoostMix.setWetMixProportion(0.9f);
     internalBoostMix.setMixingRule(juce::dsp::DryWetMixingRule::linear);
@@ -45,6 +48,7 @@ void BoostStage::process(juce::dsp::AudioBlock<float> processBlock, juce::dsp::A
 {
     internalBoostMix.pushDrySamples(dryBlock);
     
+    lowCutEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     highBoostEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     internalWaveshaper.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
