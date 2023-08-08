@@ -17,8 +17,8 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     // editor's size to whatever you need it to be.
     setSize (500, 520);
     
-    addAndMakeVisible(buttonEQTest);
-    buttonEQTest.setToggleable(true);
+    //addAndMakeVisible(buttonEQTest);
+    //buttonEQTest.setToggleable(true);
     
     
     lookAndFeel.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
@@ -373,7 +373,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     
     //COMPRESSOR
-    addAndMakeVisible(sliderCompressorThresh);
+    /*addAndMakeVisible(sliderCompressorThresh);
     addAndMakeVisible(labelCompressorThresh);
     addAndMakeVisible(labelCompressorThreshVal);
     
@@ -435,7 +435,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
         labelCompressorReleaseVal.setText(juce::String(sliderCompressorRelease.getValue()), juce::dontSendNotification);
     };
     
-    labelCompressorReleaseVal.setText(juce::String(sliderCompressorRelease.getValue()), juce::dontSendNotification);
+    labelCompressorReleaseVal.setText(juce::String(sliderCompressorRelease.getValue()), juce::dontSendNotification);*/
     
     
     
@@ -529,7 +529,7 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentCompressorRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASEC", sliderCompressorRelease);
     
     
-    buttonAttachmentEQTestOnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "EQTESTONOFF", buttonEQTest);
+    //buttonAttachmentEQTestOnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "EQTESTONOFF", buttonEQTest);
 
     sliderAttachmentOutputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "OUTPUTGAIN", sliderOutputGain);
 }
@@ -801,7 +801,7 @@ void ChuginatorAudioProcessorEditor::resized()
 
     
     //Compressor
-    sliderCompressorThresh.setBounds(sliderNoiseGateRelease.getX() + 50, getHeight() - 110, 50, 90);
+    /*sliderCompressorThresh.setBounds(sliderNoiseGateRelease.getX() + 50, getHeight() - 110, 50, 90);
     labelCompressorThresh.setBounds(sliderCompressorThresh.getX(), sliderCompressorThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelCompressorThreshVal.setBounds(sliderCompressorThresh.getX(), sliderCompressorThresh.getY() + 65, 40, 38);
     
@@ -819,11 +819,11 @@ void ChuginatorAudioProcessorEditor::resized()
     labelCompressorRelease.setBounds(sliderCompressorRelease.getX() + 10, sliderCompressorRelease.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelCompressorReleaseVal.setBounds(sliderCompressorRelease.getX(), sliderCompressorRelease.getY() + 65, 40, 38);
     
-    
+    */  
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
     irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 60, 25);
     
     
-    buttonEQTest.setBounds((getWidth() / 2) + 150, getHeight() - 50, 30, 30);
+    //buttonEQTest.setBounds((getWidth() / 2) + 150, getHeight() - 50, 30, 30);
     
 }

@@ -146,7 +146,7 @@ private:
     
     
     
-    juce::ToggleButton buttonEQTest;
+    //juce::ToggleButton buttonEQTest;
     
     juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;

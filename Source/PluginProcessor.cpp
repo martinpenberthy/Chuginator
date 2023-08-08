@@ -327,8 +327,9 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     inputGain.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
    
-    if(*treeState.getRawParameterValue("EQTESTONOFF"))
-        internalEQ.process(processBlock, getSampleRate());
+    /*if(*treeState.getRawParameterValue("EQTESTONOFF"))
+        internalEQ.process(processBlock, getSampleRate());*/
+    internalEQ.process(processBlock, getSampleRate());
     
     //NOISEGATE
     noiseGateStage.process(processBlock,
