@@ -30,6 +30,7 @@ private:
     
     juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> highBoostEQ, lowCutEQ;
     
+    juce::dsp::Gain<float> internalPreGain;
     juce::dsp::DryWetMixer<float> internalBoostMix;
     
     juce::dsp::WaveShaper<float> internalWaveshaper;
