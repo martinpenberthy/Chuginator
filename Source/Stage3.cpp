@@ -49,6 +49,7 @@ void Stage3::process(juce::dsp::AudioBlock<float> drySampsBlock, juce::dsp::Audi
     float newPreGain3 = preGain;
     if(preGain3.getGainDecibels() != newPreGain3)
         preGain3.setGainDecibels(newPreGain3);
+    
     preGain3.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
     //WAVESHAPER3

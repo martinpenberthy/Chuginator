@@ -24,9 +24,9 @@ BoostStage::~BoostStage()
 void BoostStage::prepare(juce::dsp::ProcessSpec spec, double sampleRate)
 {
     highBoostEQ.prepare(spec);
-    *highBoostEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 2300.0f, 2.0f, 3.0f);
+    *highBoostEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 2300.0f, 2.0f, 2.0f);
     
-    internalBoostMix.setWetMixProportion(0.5f);
+    internalBoostMix.setWetMixProportion(0.9f);
     internalBoostMix.setMixingRule(juce::dsp::DryWetMixingRule::linear);
     internalBoostMix.setWetLatency(1.0f);
     internalBoostMix.prepare(spec);

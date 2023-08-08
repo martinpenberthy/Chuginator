@@ -41,6 +41,7 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
 
 ChuginatorAudioProcessor::~ChuginatorAudioProcessor()
 {
+    treeState.state.removeListener(this);
 }
 
 
@@ -411,8 +412,8 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
                                  *treeState.getRawParameterValue("ATTACKC"),
                                  *treeState.getRawParameterValue("RELEASEC"));
     
-    /*if(*treeState.getRawParameterValue("BOOSTONOFF"))
-        boostStage.process(processBlock, juce::dsp::AudioBlock<float>(buffer), getSampleRate());*/
+    if(*treeState.getRawParameterValue("BOOSTONOFF"))
+        boostStage.process(processBlock, juce::dsp::AudioBlock<float>(buffer), getSampleRate());
     
     
     //If there is an IR loaded, process it
