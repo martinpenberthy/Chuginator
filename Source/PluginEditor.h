@@ -146,7 +146,7 @@ private:
     
     
     
-    //juce::ToggleButton buttonEQTest;
+    juce::ToggleButton buttonBoost;
     
     juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;
@@ -186,7 +186,7 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorAttack;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorRelease;
     
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentEQTestOnOff;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentBoost;
     
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentOutputGain;

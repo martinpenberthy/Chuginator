@@ -16,6 +16,7 @@
 #include "EQInternal.h"
 #include "NoiseGateStage.h"
 #include "Compressor.h"
+#include "BoostStage.h"
 
 //==============================================================================
 /**
@@ -119,6 +120,7 @@ private:
     
     NoiseGateStage noiseGateStage;
     Compressor compressorStage;
+    BoostStage boostStage;
     
     juce::dsp::Gain<float> outputGain;
     //==============================================================================

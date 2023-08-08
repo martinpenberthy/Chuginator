@@ -115,7 +115,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"ATTACKC", 1}, "Attack", 1, 100, 20));
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASEC", 1}, "Release", 1, 200, 20));
     
-    params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"EQTESTONOFF", 1}, "EQTestOnOff", false));
+    params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"BOOSTONOFF", 1}, "BoostOnOff", false));
     
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"OUTPUTGAIN", 1}, "OutputGain", -96.0f, 48.0f, 0.0f));
 
@@ -256,10 +256,17 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
                                  *treeState.getRawParameterValue("ATTACKC"),
                                  *treeState.getRawParameterValue("RELEASEC"));
     
+    
+    /*=====================================================================*/
+    //Boost
+    boostStage.prepare(spec, sampleRate);
+    
+    /*=====================================================================*/
     //OUTPUTGAIN
     outputGain.prepare(spec);
     outputGain.setGainDecibels(*treeState.getRawParameterValue("OUTPUTGAIN"));
     
+    /*=====================================================================*/
     //Prepare convolution
     irLoader.reset();
     irLoader.prepare(spec);
@@ -403,6 +410,9 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
                                  *treeState.getRawParameterValue("RATIOC"),
                                  *treeState.getRawParameterValue("ATTACKC"),
                                  *treeState.getRawParameterValue("RELEASEC"));
+    
+    /*if(*treeState.getRawParameterValue("BOOSTONOFF"))
+        boostStage.process(processBlock, juce::dsp::AudioBlock<float>(buffer), getSampleRate());*/
     
     
     //If there is an IR loaded, process it

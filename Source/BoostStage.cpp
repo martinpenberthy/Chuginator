@@ -41,11 +41,13 @@ void BoostStage::prepare(juce::dsp::ProcessSpec spec, double sampleRate)
         
 }
 
-void BoostStage::process( juce::dsp::AudioBlock<float> processBlock, juce::dsp::AudioBlock<float> dryBlock, double sampleRate)
+void BoostStage::process(juce::dsp::AudioBlock<float> processBlock, juce::dsp::AudioBlock<float> dryBlock, double sampleRate)
 {
     internalBoostMix.pushDrySamples(dryBlock);
     
     highBoostEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
+    internalWaveshaper.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
+    
     internalBoostMix.mixWetSamples(processBlock);
     
 }
