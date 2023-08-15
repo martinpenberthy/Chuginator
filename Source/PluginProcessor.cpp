@@ -65,7 +65,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
                                                                                     "Amp3",
                                                                                     "Tanh",
                                                                                     "Atan",
-                                                                                    "HalfRect"
+                                                                                    "HalfRect",
+                                                                                    "Screamer"
                                                                                 },
                                                                                     1));
 
@@ -79,7 +80,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
                                                                                     "Amp3",
                                                                                     "Tanh",
                                                                                     "Atan",
-                                                                                    "HalfRect"
+                                                                                    "HalfRect",
+                                                                                    "Screamer"
                                                                                 },
                                                                                     1));
     
@@ -95,7 +97,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
                                                                                     "Amp3",
                                                                                     "Tanh",
                                                                                     "Atan",
-                                                                                    "HalfRect"
+                                                                                    "HalfRect",
+                                                                                    "Screamer"
                                                                                 },
                                                                                     1));
     
@@ -480,6 +483,9 @@ std::string ChuginatorAudioProcessor::getParamIntToString(int numOfDistType)
             break;
         case 6:
             return "HalfRect";
+            break;
+        case 7:
+            return "Screamer";
             break;
         
         default:

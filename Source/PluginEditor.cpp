@@ -124,7 +124,8 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     waveshapeType1.addItem("Tanh", 4);
     waveshapeType1.addItem("Atan", 5);
     waveshapeType1.addItem("HalfRect", 6);
-    
+    waveshapeType1.addItem("Screamer", 7);
+
     waveshapeType1.onChange = [this]{
                 modeMenuChanged(1);
     };
@@ -180,6 +181,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     waveshapeType2.addItem("Tanh", 4);
     waveshapeType2.addItem("Atan", 5);
     waveshapeType2.addItem("HalfRect", 6);
+    waveshapeType2.addItem("Screamer", 7);
     
     waveshapeType2.onChange = [this]{
                 modeMenuChanged(2);
@@ -235,6 +237,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     waveshapeType3.addItem("Tanh", 4);
     waveshapeType3.addItem("Atan", 5);
     waveshapeType3.addItem("HalfRect", 6);
+    waveshapeType3.addItem("Screamer", 7);
     
     waveshapeType3.onChange = [this]{
                 modeMenuChanged(3);
@@ -588,7 +591,11 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
             case 6://HalfRect
                 audioProcessor.waveshapeFunction1 = "HalfRect";
                 break;
-                
+            
+            case 7:
+                audioProcessor.waveshapeFunction1 = "Screamer";
+                break;
+
             default:
                 audioProcessor.waveshapeFunction1 = "Amp1";
                 break;
@@ -624,6 +631,10 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
                 audioProcessor.waveshapeFunction2 = "HalfRect";
                 break;
                 
+            case 7:
+                audioProcessor.waveshapeFunction2 = "Screamer";
+                break;
+                
             default:
                 audioProcessor.waveshapeFunction2 = "Amp1";
                 break;
@@ -656,6 +667,10 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
                 
             case 6://HalfRect
                 audioProcessor.waveshapeFunction3 = "HalfRect";
+                break;
+                
+            case 7:
+                audioProcessor.waveshapeFunction3 = "Screamer";
                 break;
                 
             default:

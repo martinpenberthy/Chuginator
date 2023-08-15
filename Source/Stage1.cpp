@@ -108,6 +108,12 @@ void Stage1::setWaveshapeFunc(std::string func)
             else
                 return x * 0.5f;
         };
+    }else if (func == "Screamer")
+    {
+        waveshaper1.functionToUse = [](float x)
+        {
+            return (std::tanh(x * x) / std::tanh(x)) * 0.9f;
+        };
     }
 
 }
