@@ -406,11 +406,11 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
     /*=====================================================================*/
     //Compressor
-    compressorStage.process(processBlock,
+    /*compressorStage.process(processBlock,
                                  *treeState.getRawParameterValue("THRESHOLDC"),
                                  *treeState.getRawParameterValue("RATIOC"),
                                  *treeState.getRawParameterValue("ATTACKC"),
-                                 *treeState.getRawParameterValue("RELEASEC"));
+                                 *treeState.getRawParameterValue("RELEASEC"));*/
     
     if(*treeState.getRawParameterValue("BOOSTONOFF"))
         boostStage.process(processBlock, juce::dsp::AudioBlock<float>(buffer), getSampleRate());

@@ -48,10 +48,11 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     sliderInputGain.onValueChange = [this]()
     {
-        labelInputGainVal.setText(juce::String(sliderInputGain.getValue()), juce::dontSendNotification);
+        labelInputGainVal.setText(juce::String((int)sliderInputGain.getValue()), juce::dontSendNotification);
     };
     
-    labelInputGainVal.setText(juce::String(sliderInputGain.getValue()), juce::dontSendNotification);
+    labelInputGainVal.setText(juce::String((int)sliderInputGain.getValue()), juce::dontSendNotification);
+    labelInputGainVal.setJustificationType(juce::Justification::centred);
     
     //PREEQ
     addAndMakeVisible(sliderPreEQ);
@@ -64,10 +65,12 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     sliderPreEQ.onValueChange = [this]()
     {
-        labelPreEQVal.setText(juce::String(sliderPreEQ.getValue()), juce::dontSendNotification);
+        labelPreEQVal.setText(juce::String((int)sliderPreEQ.getValue()), juce::dontSendNotification);
     };
     
-    labelPreEQVal.setText(juce::String(sliderPreEQ.getValue()), juce::dontSendNotification);
+    labelPreEQVal.setText(juce::String((int)sliderPreEQ.getValue()), juce::dontSendNotification);
+    labelPreEQVal.setJustificationType(juce::Justification::centred);
+
     
     //OUTPUT
     addAndMakeVisible(sliderOutputGain);
@@ -80,11 +83,13 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     sliderOutputGain.onValueChange = [this]()
     {
-        labelOutputGainVal.setText(juce::String(sliderOutputGain.getValue()), juce::dontSendNotification);
+        labelOutputGainVal.setText(juce::String((int)sliderOutputGain.getValue()), juce::dontSendNotification);
     };
     
-    labelOutputGainVal.setText(juce::String(sliderOutputGain.getValue()), juce::dontSendNotification);
+    labelOutputGainVal.setText(juce::String((int)sliderOutputGain.getValue()), juce::dontSendNotification);
+    labelOutputGainVal.setJustificationType(juce::Justification::centred);
 
+    
     //PREGAIN1
     addAndMakeVisible(sliderPreGain1);
     addAndMakeVisible(labelPreGain1);
@@ -666,7 +671,7 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
 void ChuginatorAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    g.fillAll (juce::Colour::fromRGB(20, 20, 40));
 
     //backgroundImage = juce::ImageCache::getFromMemory(BinaryData::AmpBackground1_png, BinaryData::AmpBackground1_pngSize);
     //g.drawImageWithin(backgroundImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
@@ -696,16 +701,16 @@ void ChuginatorAudioProcessorEditor::resized()
     //ROW1
     sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
-    labelInputGainVal.setBounds(sliderInputGain.getX() + 30, sliderInputGain.getY() + 55, 76, 38);
+    labelInputGainVal.setBounds(sliderInputGain.getX() + 10, sliderInputGain.getY() + 60, 76, 38);
     
     sliderPreEQ.setBounds((getWidth() / 2) - 40, topOffset, knobSizeLarge, knobSizeLarge);
     labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - 15, 76, 38);
-    labelPreEQVal.setBounds(sliderPreEQ.getX() + 30, sliderPreEQ.getY() + 55, 76, 38);
+    labelPreEQVal.setBounds(sliderPreEQ.getX() + 10, sliderPreEQ.getY() + 60, 76, 38);
 
     
     sliderOutputGain.setBounds(getWidth() - (leftOffset + knobSizeLarge), topOffset, knobSizeLarge, knobSizeLarge);
     labelOutputGain.setBounds(sliderOutputGain.getX(), sliderOutputGain.getY() - 15, 76, 38);
-    labelOutputGainVal.setBounds(sliderOutputGain.getX() + 30, sliderOutputGain.getY() + 55, 76, 38);
+    labelOutputGainVal.setBounds(sliderOutputGain.getX() + 10, sliderOutputGain.getY() + 60, 76, 38);
 
     
     //ROW2
