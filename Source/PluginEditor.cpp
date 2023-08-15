@@ -274,7 +274,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     };
     
     labelFilterLowGainVal.setText(juce::String(sliderFilterLowGain.getValue()), juce::dontSendNotification);
-    
+    labelFilterLowGainVal.setJustificationType(juce::Justification::centred);
     
     //Mid
     addAndMakeVisible(sliderFilterMidGain);
@@ -291,7 +291,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     };
     
     labelFilterMidGainVal.setText(juce::String(sliderFilterMidGain.getValue()), juce::dontSendNotification);
-    
+    labelFilterMidGainVal.setJustificationType(juce::Justification::centred);
     
     //High
     addAndMakeVisible(sliderFilterHighGain);
@@ -308,6 +308,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     };
     
     labelFilterHighGainVal.setText(juce::String(sliderFilterHighGain.getValue()), juce::dontSendNotification);
+    labelFilterHighGainVal.setJustificationType(juce::Justification::centred);
     
     //Noise Gate
     //Threshold
@@ -701,16 +702,16 @@ void ChuginatorAudioProcessorEditor::resized()
     //ROW1
     sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
-    labelInputGainVal.setBounds(sliderInputGain.getX() + 5, sliderInputGain.getY() + 60, 76, 38);
+    labelInputGainVal.setBounds(sliderInputGain.getX() + 5, sliderInputGain.getY() + 70, 76, 38);
     
     sliderPreEQ.setBounds((getWidth() / 2) - 40, topOffset, knobSizeLarge, knobSizeLarge);
     labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - 15, 76, 38);
-    labelPreEQVal.setBounds(sliderPreEQ.getX() + 5, sliderPreEQ.getY() + 60, 76, 38);
+    labelPreEQVal.setBounds(sliderPreEQ.getX() + 5, sliderPreEQ.getY() + 70, 76, 38);
 
     
     sliderOutputGain.setBounds(getWidth() - (leftOffset + knobSizeLarge), topOffset, knobSizeLarge, knobSizeLarge);
     labelOutputGain.setBounds(sliderOutputGain.getX(), sliderOutputGain.getY() - 15, 76, 38);
-    labelOutputGainVal.setBounds(sliderOutputGain.getX() + 5, sliderOutputGain.getY() + 60, 76, 38);
+    labelOutputGainVal.setBounds(sliderOutputGain.getX() + 5, sliderOutputGain.getY() + 70, 76, 38);
 
     
     //ROW2
@@ -719,7 +720,7 @@ void ChuginatorAudioProcessorEditor::resized()
     //Gain
     sliderPreGain1.setBounds(leftOffset - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
     labelPreGain1.setBounds(sliderPreGain1.getX(), sliderPreGain1.getY() - 15, 76, 38);
-    labelPreGain1Val.setBounds(sliderPreGain1.getX() - 5, sliderPreGain1.getY() + 50, 76, 38);
+    labelPreGain1Val.setBounds(sliderPreGain1.getX() - 7, sliderPreGain1.getY() + 50, 76, 38);
     
     //Toggle
     buttonGain1.setBounds(sliderPreGain1.getX() + 15, sliderPreGain1.getY() - 25, 20, 20);
@@ -729,7 +730,7 @@ void ChuginatorAudioProcessorEditor::resized()
     //Mix
     sliderMix1.setBounds(sliderPreGain1.getX() + (knobSizeMedium / 2) + 25, sliderPreGain1.getY(), knobSizeMedium, knobSizeMedium);
     labelMix1.setBounds(sliderMix1.getX(), sliderMix1.getY() - 15, 76, 38);
-    labelMix1Val.setBounds(sliderMix1.getX() - 5, sliderMix1.getY() + 50, 76, 38);
+    labelMix1Val.setBounds(sliderMix1.getX() - 7, sliderMix1.getY() + 50, 76, 38);
 
     
     /*=====================================================================*/
@@ -737,7 +738,7 @@ void ChuginatorAudioProcessorEditor::resized()
     //Gain
     sliderPreGain2.setBounds(sliderPreEQ.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
     labelPreGain2.setBounds(sliderPreGain2.getX(), sliderPreGain2.getY() - 15, 76, 38);
-    labelPreGain2Val.setBounds(sliderPreGain2.getX() - 5, sliderPreGain2.getY() + 50, 76, 38);
+    labelPreGain2Val.setBounds(sliderPreGain2.getX() - 7, sliderPreGain2.getY() + 50, 76, 38);
 
     
     //Toggle
@@ -747,7 +748,7 @@ void ChuginatorAudioProcessorEditor::resized()
     //Mix
     sliderMix2.setBounds(sliderPreGain2.getX() + (knobSizeMedium / 2) + 25, sliderPreGain2.getY(), knobSizeMedium, knobSizeMedium);
     labelMix2.setBounds(sliderMix2.getX(), sliderMix2.getY() - 15, 76, 38);
-    labelMix2Val.setBounds(sliderMix2.getX() - 5, sliderMix2.getY() + 50, 76, 38);
+    labelMix2Val.setBounds(sliderMix2.getX() - 7, sliderMix2.getY() + 50, 76, 38);
 
     
     /*=====================================================================*/
@@ -755,7 +756,7 @@ void ChuginatorAudioProcessorEditor::resized()
     //Gain
     sliderPreGain3.setBounds(sliderOutputGain.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
     labelPreGain3.setBounds(sliderPreGain3.getX(), sliderPreGain3.getY() - 15, 76, 38);
-    labelPreGain3Val.setBounds(sliderPreGain3.getX() - 5, sliderPreGain3.getY() + 50, 76, 38);
+    labelPreGain3Val.setBounds(sliderPreGain3.getX() - 7, sliderPreGain3.getY() + 50, 76, 38);
 
     //Toggle
     buttonGain3.setBounds(sliderPreGain3.getX() + 15, sliderPreGain3.getY() - 25, 20, 20);
@@ -764,22 +765,22 @@ void ChuginatorAudioProcessorEditor::resized()
     //Mix
     sliderMix3.setBounds(sliderPreGain3.getX() + (knobSizeMedium / 2) + 25, sliderPreGain3.getY(), knobSizeMedium, knobSizeMedium);
     labelMix3.setBounds(sliderMix3.getX(), sliderMix3.getY() - 15, 76, 38);
-    labelMix3Val.setBounds(sliderMix3.getX() - 5, sliderMix3.getY() + 50, 76, 38);
+    labelMix3Val.setBounds(sliderMix3.getX() - 7, sliderMix3.getY() + 50, 76, 38);
 
     /*=====================================================================*/
     //ROW3
     sliderFilterLowGain.setBounds(sliderInputGain.getX(), sliderMix1.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterLowGain.setBounds(sliderFilterLowGain.getX(), sliderFilterLowGain.getY() - 15, 76, 38);
-    labelFilterLowGainVal.setBounds(sliderFilterLowGain.getX() + 30, sliderFilterLowGain.getY() + 55, 76, 38);
+    labelFilterLowGainVal.setBounds(sliderFilterLowGain.getX() + 5, sliderFilterLowGain.getY() + 70, 76, 38);
     
     sliderFilterMidGain.setBounds(sliderPreEQ.getX(), sliderMix2.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterMidGain.setBounds(sliderFilterMidGain.getX(), sliderFilterMidGain.getY() - 15, 76, 38);
-    labelFilterMidGainVal.setBounds(sliderFilterMidGain.getX() + 30, sliderFilterMidGain.getY() + 55, 76, 38);
+    labelFilterMidGainVal.setBounds(sliderFilterMidGain.getX() + 5, sliderFilterMidGain.getY() + 70, 76, 38);
     
     
     sliderFilterHighGain.setBounds(sliderOutputGain.getX(), sliderMix3.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterHighGain.setBounds(sliderFilterHighGain.getX(), sliderFilterHighGain.getY() - 15, 76, 38);
-    labelFilterHighGainVal.setBounds(sliderFilterHighGain.getX() + 30, sliderFilterHighGain.getY() + 55, 76, 38);
+    labelFilterHighGainVal.setBounds(sliderFilterHighGain.getX() + 5, sliderFilterHighGain.getY() + 70, 76, 38);
 
     
     
