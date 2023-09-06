@@ -120,6 +120,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASEC", 1}, "Release", 1, 200, 20));
     
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"BOOSTONOFF", 1}, "BoostOnOff", false));
+    params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"IRONOFF", 1}, "IROnOff", false));
     
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"OUTPUTGAIN", 1}, "OutputGain", -96.0f, 48.0f, 0.0f));
 
