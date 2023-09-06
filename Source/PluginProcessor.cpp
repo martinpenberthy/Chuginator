@@ -35,7 +35,7 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
             }
         }
     };
-    
+    //x prepareToPlay(getSampleRate(), getBlockSize());
 
 }
 
