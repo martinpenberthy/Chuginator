@@ -420,8 +420,9 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
     
     //If there is an IR loaded, process it
-    if(irLoader.getCurrentIRSize() > 0)
-        irLoader.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
+    if(*treeState.getRawParameterValue("IRONOFF"))
+        if(irLoader.getCurrentIRSize() > 0)
+            irLoader.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
     
     /*=====================================================================*/

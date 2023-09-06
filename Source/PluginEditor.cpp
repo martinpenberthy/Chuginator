@@ -20,6 +20,8 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(buttonBoost);
     buttonBoost.setToggleable(true);
     
+    addAndMakeVisible(buttonIROnOff);
+    buttonIROnOff.setToggleable(true);
     
     lookAndFeel.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
     lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
@@ -539,7 +541,8 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     
     
     buttonAttachmentBoost = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "BOOSTONOFF", buttonBoost);
-
+    buttonAttachmentIROnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "IRONOFF", buttonIROnOff);
+    
     sliderAttachmentOutputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "OUTPUTGAIN", sliderOutputGain);
 }
 
@@ -846,5 +849,5 @@ void ChuginatorAudioProcessorEditor::resized()
     
     
     buttonBoost.setBounds((getWidth() / 2) + 150, getHeight() - 50, 30, 30);
-    
+    buttonIROnOff.setBounds((getWidth() / 2) + 100, getHeight() - 50, 30, 30);
 }

@@ -145,7 +145,7 @@ private:
     juce::Label labelCompressorReleaseVal;
     
     juce::ToggleButton buttonBoost;
-    
+    juce::ToggleButton buttonIROnOff;
     juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;
     juce::Label labelOutputGainVal;
@@ -185,7 +185,7 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorRelease;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentBoost;
-    
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentIROnOff;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentOutputGain;
 
