@@ -1,4 +1,4 @@
-/*
+    /*
   ==============================================================================
 
     Stage3.cpp
@@ -9,6 +9,11 @@
 */
 
 #include "Stage3.h"
+
+Stage3::Stage3(std::string func)
+{
+    setWaveshapeFunc(func);
+}
 
 Stage3::Stage3()
 {

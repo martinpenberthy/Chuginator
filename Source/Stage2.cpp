@@ -10,6 +10,11 @@
 
 #include "Stage2.h"
 
+Stage2::Stage2(std::string func)
+{
+    setWaveshapeFunc(func);
+}
+
 Stage2::Stage2()
 {
 }

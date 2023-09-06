@@ -36,6 +36,10 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
         }
     };
     //x prepareToPlay(getSampleRate(), getBlockSize());
+    gainStage1 = Stage1(getWaveshapeFuncParam(1));
+    gainStage2 = Stage2(getWaveshapeFuncParam(2));
+    gainStage3 = Stage3(getWaveshapeFuncParam(3));
+
 
 }
 

@@ -15,6 +15,7 @@ class Stage3
 {
     public:
         Stage3();
+        Stage3(std::string func);
         ~Stage3();
         
         void prepare(juce::dsp::ProcessSpec spec, float preGain, float mix);

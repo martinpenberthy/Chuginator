@@ -14,6 +14,7 @@
 class Stage1
 {
     public:
+        Stage1(std::string func);
         Stage1();
         ~Stage1();
         
