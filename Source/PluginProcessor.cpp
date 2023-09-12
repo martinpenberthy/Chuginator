@@ -289,7 +289,28 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
         irLoader.loadImpulseResponse(savedFile, juce::dsp::Convolution::Stereo::yes,juce::dsp::Convolution::Trim::yes, 0);
     }
 }
-
+std::string ChuginatorAudioProcessor::getWaveshapeFuncParam(int gainStageNum)
+{
+    if(gainStageNum == 1)
+    {
+        auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
+        return getParamIntToString(((int) * waveshapeInitFunction1) + 1);
+    }
+    else if(gainStageNum == 2)
+    {
+        auto waveshapeInitFunction2 = treeState.getRawParameterValue("TYPE2");
+        return getParamIntToString(((int) * waveshapeInitFunction2) + 1);
+    }
+    else if(gainStageNum == 3)
+    {
+        auto waveshapeInitFunction3 = treeState.getRawParameterValue("TYPE3");
+        return getParamIntToString(((int) * waveshapeInitFunction3) + 1);
+    }
+    else
+    {
+        return "Amp1";
+    }
+}
 /*
     This function takes a string corresponding to the waveshaping function
     to be used. It then sets the functionToUse lambda in the waveshaper.
@@ -352,28 +373,7 @@ std::string ChuginatorAudioProcessor::getParamIntToString(int numOfDistType)
 }
 
 
-std::string ChuginatorAudioProcessor::getWaveshapeFuncParam(int gainStageNum)
-{
-    if(gainStageNum == 1)
-    {
-        auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
-        return getParamIntToString((int) * waveshapeInitFunction1);
-    }
-    else if(gainStageNum == 2)
-    {
-        auto waveshapeInitFunction2 = treeState.getRawParameterValue("TYPE2");
-        return getParamIntToString((int) * waveshapeInitFunction2);
-    }
-    else if(gainStageNum == 3)
-    {
-        auto waveshapeInitFunction3 = treeState.getRawParameterValue("TYPE3");
-        return getParamIntToString((int) * waveshapeInitFunction3);
-    }
-    else
-    {
-        return "Amp1";
-    }
-}
+
 
 void ChuginatorAudioProcessor::releaseResources()
 {
