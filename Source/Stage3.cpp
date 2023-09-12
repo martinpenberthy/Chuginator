@@ -25,11 +25,14 @@ Stage3::~Stage3()
 
 void Stage3::prepare(juce::dsp::ProcessSpec spec, float preGain, float mix)
 {
+
     //PREGAIN3
+    preGain3.reset();
     preGain3.prepare(spec);
     preGain3.setGainDecibels(preGain);
     
     //MIX3
+    mix3.reset();
     mix3.setWetMixProportion(mix);
     mix3.setMixingRule(juce::dsp::DryWetMixingRule::linear);
     mix3.setWetLatency(1.0f);
@@ -40,6 +43,8 @@ void Stage3::prepare(juce::dsp::ProcessSpec spec, float preGain, float mix)
     {
         return x / (std::abs(x) + 1);
     };*/
+    //waveshaper3.reset();
+    waveshaper3.reset();
     waveshaper3.prepare(spec);
 }
 

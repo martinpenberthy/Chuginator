@@ -36,9 +36,9 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
         }
     };
     //x prepareToPlay(getSampleRate(), getBlockSize());
-    gainStage1 = Stage1(getWaveshapeFuncParam(1));
+    /*gainStage1 = Stage1(getWaveshapeFuncParam(1));
     gainStage2 = Stage2(getWaveshapeFuncParam(2));
-    gainStage3 = Stage3(getWaveshapeFuncParam(3));
+    gainStage3 = Stage3(getWaveshapeFuncParam(3));*/
 
 
 }
@@ -216,6 +216,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     preEQ.prepare(spec);
     updatePreEQ();
     
+    //InternalEQ
     internalEQ.prepare(spec, sampleRate);
     
     /*=====================================================================*/
@@ -283,6 +284,87 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     if(savedFile.existsAsFile())
     {
         irLoader.loadImpulseResponse(savedFile, juce::dsp::Convolution::Stereo::yes,juce::dsp::Convolution::Trim::yes, 0);
+    }
+}
+
+/*
+    This function takes a string corresponding to the waveshaping function
+    to be used. It then sets the functionToUse lambda in the waveshaper.
+ */
+void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string func)
+{
+    if(gainStageNum == 1)
+    {
+        gainStage1.setWaveshapeFunc(func);
+        waveshapeFunctionCurrent1 = func;
+    }
+    else if(gainStageNum == 2)
+    {
+        gainStage2.setWaveshapeFunc(func);
+        waveshapeFunctionCurrent2 = func;
+    }
+    else if(gainStageNum == 3)
+    {
+        gainStage3.setWaveshapeFunc(func);
+        waveshapeFunctionCurrent3 = func;
+    }
+    return;
+}
+
+
+std::string ChuginatorAudioProcessor::getParamIntToString(int numOfDistType)
+{
+    switch(numOfDistType)
+    {
+        case 1:
+            return "Amp1";
+            break;
+        case 2:
+            return "Amp2";
+            break;
+        case 3:
+            return "Amp3";
+            break;
+        case 4:
+            return "Tanh";
+            break;
+        case 5:
+            return "Atan";
+            break;
+        case 6:
+            return "HalfRect";
+            break;
+        case 7:
+            return "Screamer";
+            break;
+        
+        default:
+            return "Amp1";
+            break;
+    }
+}
+
+
+std::string ChuginatorAudioProcessor::getWaveshapeFuncParam(int gainStageNum)
+{
+    if(gainStageNum == 1)
+    {
+        auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
+        return getParamIntToString((int) * waveshapeInitFunction1);
+    }
+    else if(gainStageNum == 2)
+    {
+        auto waveshapeInitFunction2 = treeState.getRawParameterValue("TYPE2");
+        return getParamIntToString((int) * waveshapeInitFunction2);
+    }
+    else if(gainStageNum == 3)
+    {
+        auto waveshapeInitFunction3 = treeState.getRawParameterValue("TYPE3");
+        return getParamIntToString((int) * waveshapeInitFunction3);
+    }
+    else
+    {
+        return "Amp1";
     }
 }
 
@@ -442,87 +524,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
 
 }
 
-/*
-    This function takes a string corresponding to the waveshaping function
-    to be used. It then sets the functionToUse lambda in the waveshaper.
- */
-void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string func)
-{
-    if(gainStageNum == 1)
-    {
-        gainStage1.setWaveshapeFunc(func);
-        waveshapeFunctionCurrent1 = func;
-    }
-    else if(gainStageNum == 2)
-    {
-        gainStage2.setWaveshapeFunc(func);
-        waveshapeFunctionCurrent2 = func;
-    }
-    else if(gainStageNum == 3)
-    {
-        gainStage3.setWaveshapeFunc(func);
-        waveshapeFunctionCurrent3 = func;
-    }
-    return;
-}
 
-
-std::string ChuginatorAudioProcessor::getParamIntToString(int numOfDistType)
-{
-    switch(numOfDistType)
-    {
-        case 1:
-            return "Amp1";
-            break;
-        case 2:
-            return "Amp2";
-            break;
-        case 3:
-            return "Amp3";
-            break;
-        case 4:
-            return "Tanh";
-            break;
-            
-        case 5:
-            return "Atan";
-            break;
-        case 6:
-            return "HalfRect";
-            break;
-        case 7:
-            return "Screamer";
-            break;
-        
-        default:
-            return "Amp1";
-            break;
-    }
-}
-
-
-std::string ChuginatorAudioProcessor::getWaveshapeFuncParam(int gainStageNum)
-{
-    if(gainStageNum == 1)
-    {
-        auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
-        return getParamIntToString((int) * waveshapeInitFunction1);
-    }
-    else if(gainStageNum == 2)
-    {
-        auto waveshapeInitFunction2 = treeState.getRawParameterValue("TYPE2");
-        return getParamIntToString((int) * waveshapeInitFunction2);
-    }
-    else if(gainStageNum == 3)
-    {
-        auto waveshapeInitFunction3 = treeState.getRawParameterValue("TYPE3");
-        return getParamIntToString((int) * waveshapeInitFunction3);
-    }
-    else
-    {
-        return "Amp1";
-    }
-}
 
 //==============================================================================
 bool ChuginatorAudioProcessor::hasEditor() const
