@@ -22,7 +22,6 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
                        ), treeState(*this, nullptr, juce::Identifier("PARAMETERS"), createParameterLayout())
 #endif
 {
-    treeState.state.addListener(this);
     variableTree =
     {
         "Variables", {},
@@ -40,7 +39,7 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
     gainStage2 = Stage2(getWaveshapeFuncParam(2));
     gainStage3 = Stage3(getWaveshapeFuncParam(3));*/
 
-
+    treeState.state.addListener(this);
 }
 
 ChuginatorAudioProcessor::~ChuginatorAudioProcessor()
@@ -208,11 +207,12 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     spec.numChannels = getTotalNumOutputChannels();
     
     //INPUTGAIN
+    inputGain.reset();
     inputGain.prepare(spec);
-    
     inputGain.setGainDecibels(*treeState.getRawParameterValue("INPUTGAIN"));
     
     //PREEQ
+    preEQ.reset();
     preEQ.prepare(spec);
     updatePreEQ();
     
@@ -227,7 +227,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     std::string gainStage1Func = getWaveshapeFuncParam(1);
     setFunctionToUse(1, gainStage1Func);
     waveshapeFunction1 = gainStage1Func;
-
+    //waveshapeFunction1 = "";
     
     /*=====================================================================*/
     gainStage2.prepare(spec, *treeState.getRawParameterValue("PREGAIN2"),
@@ -236,6 +236,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     std::string gainStage2Func = getWaveshapeFuncParam(2);
     setFunctionToUse(2, gainStage2Func);
     waveshapeFunction2 = gainStage2Func;
+    //waveshapeFunction2 = "";
     
     /*=====================================================================*/
     gainStage3.prepare(spec, *treeState.getRawParameterValue("PREGAIN3"),
@@ -244,6 +245,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     std::string gainStage3Func = getWaveshapeFuncParam(3);
     setFunctionToUse(3, gainStage3Func);
     waveshapeFunction3 = gainStage3Func;
+   // waveshapeFunction3 = "";
     
     /*=====================================================================*/
     //EQ
@@ -273,6 +275,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     /*=====================================================================*/
     //OUTPUTGAIN
+    outputGain.reset();
     outputGain.prepare(spec);
     outputGain.setGainDecibels(*treeState.getRawParameterValue("OUTPUTGAIN"));
     
@@ -297,16 +300,20 @@ void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string fu
     {
         gainStage1.setWaveshapeFunc(func);
         waveshapeFunctionCurrent1 = func;
+        //waveshapeFunctionCurrent1 = "";
     }
     else if(gainStageNum == 2)
     {
         gainStage2.setWaveshapeFunc(func);
         waveshapeFunctionCurrent2 = func;
+       //waveshapeFunctionCurrent2 = "";
     }
     else if(gainStageNum == 3)
     {
         gainStage3.setWaveshapeFunc(func);
         waveshapeFunctionCurrent3 = func;
+        //waveshapeFunctionCurrent3 = "";
+
     }
     return;
 }

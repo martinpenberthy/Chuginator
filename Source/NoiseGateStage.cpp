@@ -22,6 +22,7 @@ NoiseGateStage::~NoiseGateStage()
 
 void NoiseGateStage::prepare(juce::dsp::ProcessSpec spec, float thresh, float ratio, float attack, float release)
 {
+    noiseGate.reset();
     noiseGate.prepare(spec);
     
     noiseGate.setThreshold(thresh);
