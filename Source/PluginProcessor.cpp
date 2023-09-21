@@ -40,11 +40,14 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
     gainStage3 = Stage3(getWaveshapeFuncParam(3));*/
 
     treeState.state.addListener(this);
+    
+    debugFile.open("/Users/martinpenberthy/Desktop/debugFile.txt");
 }
 
 ChuginatorAudioProcessor::~ChuginatorAudioProcessor()
 {
     treeState.state.removeListener(this);
+    debugFile.close();
 }
 
 
@@ -215,6 +218,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     preEQ.reset();
     preEQ.prepare(spec);
     updatePreEQ();
+    
     
     //InternalEQ
     internalEQ.prepare(spec, sampleRate);
@@ -407,6 +411,22 @@ bool ChuginatorAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 }
 #endif
 
+
+void ChuginatorAudioProcessor::sanitizeBuffer(juce::AudioBuffer<float>& buffer)
+{
+    for(int i = 0; i < buffer.getNumChannels(); i++)
+        for(int j = 0; j < buffer.getNumSamples(); j++)
+        {
+            auto samp = buffer.getSample(i, j);
+            
+            if((samp < -1.0f || samp > 1.0f) || isnan(samp) || isinf(samp))
+            {
+                debugFile<< "Val Sanitized\n";
+                buffer.setSample(i, j, 0.0f);
+            }
+        }
+}
+
 void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
@@ -422,6 +442,8 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    
+    //sanitizeBuffer(buffer);
     /*=====================================================================*/
     //INPUTGAIN
     float newInputGain = *treeState.getRawParameterValue("INPUTGAIN");
@@ -431,11 +453,16 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     juce::dsp::AudioBlock<float> processBlock (buffer);
     inputGain.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
-   
+    
+    /*=====================================================================*/
+    //PREEQ
+    updatePreEQ();
+    preEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
+
     /*if(*treeState.getRawParameterValue("EQTESTONOFF"))
         internalEQ.process(processBlock, getSampleRate());*/
     internalEQ.process(processBlock, getSampleRate());
-    
+   
     //NOISEGATE
     noiseGateStage.process(processBlock,
                            *treeState.getRawParameterValue("THRESHOLDNG"),
@@ -444,11 +471,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
                            *treeState.getRawParameterValue("RELEASENG"));
     
     
-    /*=====================================================================*/
-    //PREEQ
-    updatePreEQ();
-    preEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
-    
+
     
     /*=====================================================================*/
     if(*treeState.getRawParameterValue("GAIN1ONOFF"))
@@ -462,6 +485,8 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         gainStage1.process(drySampsBlock1, processBlock,
                            *treeState.getRawParameterValue("PREGAIN1"),
                            *treeState.getRawParameterValue("MIX1"));
+        
+        sanitizeBuffer(buffer);
     }
     
     /*=====================================================================*/
@@ -477,6 +502,8 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         gainStage2.process(drySampsBlock2, processBlock,
                            *treeState.getRawParameterValue("PREGAIN2"),
                            *treeState.getRawParameterValue("MIX2"));
+        
+        sanitizeBuffer(buffer);
     }
     /*=====================================================================*/
     
@@ -491,14 +518,32 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         gainStage3.process(drySampsBlock3, processBlock,
                            *treeState.getRawParameterValue("PREGAIN3"),
                            *treeState.getRawParameterValue("MIX3"));
+
+        sanitizeBuffer(buffer);
     }
+
     
     
     EQStage.process(*treeState.getRawParameterValue("LOW"),
                     *treeState.getRawParameterValue("MID"),
                     *treeState.getRawParameterValue("HIGH"),
                     processBlock, getSampleRate());
-    
+    /*for(int i = 0; i < buffer.getNumChannels(); i++)
+        for(int j = 0; j < buffer.getNumSamples(); j++)
+        {
+            auto samp = buffer.getSample(i, j);
+            
+            if(samp < -1.0f || samp > 1.0f)
+                debugFile<< "EQ: Val out of range\n";
+            
+            if(isnan(samp))
+            {
+                debugFile << "EQ: NAN\n";
+                //buffer.setSample(i, j, 0.0f);
+            }
+            if(isinf(samp))
+                debugFile << "EQ: inf\n";
+        }*/
     
     
     /*=====================================================================*/
@@ -510,14 +555,16 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
                                  *treeState.getRawParameterValue("RELEASEC"));*/
     
     if(*treeState.getRawParameterValue("BOOSTONOFF"))
+    {
         boostStage.process(processBlock, juce::dsp::AudioBlock<float>(buffer), getSampleRate());
+        sanitizeBuffer(buffer);
+    }
     
-    
+
     //If there is an IR loaded, process it
     if(*treeState.getRawParameterValue("IRONOFF"))
         if(irLoader.getCurrentIRSize() > 0)
             irLoader.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
-    
     
     /*=====================================================================*/
     //OUTPUTGAIN
@@ -528,7 +575,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     //juce::dsp::AudioBlock<float> outputGainBlock (buffer);
     outputGain.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
-
+    sanitizeBuffer(buffer);
 }
 
 

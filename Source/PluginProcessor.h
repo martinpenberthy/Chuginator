@@ -18,6 +18,10 @@
 #include "Compressor.h"
 #include "BoostStage.h"
 
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
 //==============================================================================
 /**
 */
@@ -70,6 +74,7 @@ public:
     std::string getWaveshapeFuncParam(int gainStageNum);
     std::string getParamIntToString(int numOfDistType);
     
+    void sanitizeBuffer(juce::AudioBuffer<float>& buffer);
     juce::AudioProcessorValueTreeState treeState;
     
     juce::File root, savedFile;
@@ -123,6 +128,8 @@ private:
     BoostStage boostStage;
     
     juce::dsp::Gain<float> outputGain;
+    
+    std::ofstream debugFile;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChuginatorAudioProcessor)
 };
