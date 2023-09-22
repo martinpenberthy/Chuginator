@@ -125,7 +125,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     waveshapeType1.addItem("Amp3", 3);
     waveshapeType1.addItem("Tanh", 4);
     waveshapeType1.addItem("Atan", 5);
-    waveshapeType1.addItem("HalfRect", 6);
+    waveshapeType1.addItem("HardClip", 6);
     waveshapeType1.addItem("Screamer", 7);
 
     waveshapeType1.onChange = [this]{
@@ -182,7 +182,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     waveshapeType2.addItem("Amp3", 3);
     waveshapeType2.addItem("Tanh", 4);
     waveshapeType2.addItem("Atan", 5);
-    waveshapeType2.addItem("HalfRect", 6);
+    waveshapeType2.addItem("HardClip", 6);
     waveshapeType2.addItem("Screamer", 7);
     
     waveshapeType2.onChange = [this]{
@@ -238,7 +238,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     waveshapeType3.addItem("Amp3", 3);
     waveshapeType3.addItem("Tanh", 4);
     waveshapeType3.addItem("Atan", 5);
-    waveshapeType3.addItem("HalfRect", 6);
+    waveshapeType3.addItem("HardClip", 6);
     waveshapeType3.addItem("Screamer", 7);
     
     waveshapeType3.onChange = [this]{
@@ -591,8 +591,8 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
 
                 break;
                 
-            case 6://HalfRect
-                audioProcessor.waveshapeFunction1 = "HalfRect";
+            case 6://HardClip
+                audioProcessor.waveshapeFunction1 = "HardClip";
                 break;
             
             case 7:
@@ -630,8 +630,8 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
 
                 break;
                 
-            case 6://HalfRect
-                audioProcessor.waveshapeFunction2 = "HalfRect";
+            case 6://HardClip
+                audioProcessor.waveshapeFunction2 = "HardClip";
                 break;
                 
             case 7:
@@ -668,8 +668,8 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
                 audioProcessor.waveshapeFunction3 = "Atan";
                 break;
                 
-            case 6://HalfRect
-                audioProcessor.waveshapeFunction3 = "HalfRect";
+            case 6://HardClip
+                audioProcessor.waveshapeFunction3 = "HardClip";
                 break;
                 
             case 7:

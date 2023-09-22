@@ -107,14 +107,17 @@ void Stage2::setWaveshapeFunc(std::string func)
             return std::atan(x);
         };
     }
-    else if(func == "HalfRect")
+    else if(func == "HardClip")
     {
         waveshaper2.functionToUse = [](float x)
         {
-            if(x < 0.0f)
-                return 0.0f;
+            if(x < 0.0f && x < -0.7f)
+                return -0.7f;
+            else if(x > 0.0f && x > 0.7f)
+                return 0.7f;
             else
-                return x * 0.5f;
+                return x;
+            
         };
     }else if (func == "Screamer")
     {
