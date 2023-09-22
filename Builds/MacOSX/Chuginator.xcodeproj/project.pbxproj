@@ -65,7 +65,6 @@
 		C1BBF678CDE0A14181FDB7EC /* include_juce_dsp.mm */ = {isa = PBXBuildFile; fileRef = 73FCCCB755CAEAE073A758F6; };
 		C31F7D8CF3F9F3FB36A5340F /* CoreAudioKit.framework */ = {isa = PBXBuildFile; fileRef = 9A67842F3ACFE43199CA407E; };
 		C4DE85F359D1D0FFF0E047FE /* BoostStage.cpp */ = {isa = PBXBuildFile; fileRef = 350A2A142FA460DF35EB1C33; };
-		C6BCB984C5741AA089E71747 /* Compressor.cpp */ = {isa = PBXBuildFile; fileRef = 5860CE9627C53E03C2EE0149; };
 		C744459BCEEB1BB376F44882 /* CoreAudio.framework */ = {isa = PBXBuildFile; fileRef = 8E5E9CEFED81E39013AB179F; };
 		CD58C5C7C74152CEB3856B41 /* juce_VST3ManifestHelper.mm */ = {isa = PBXBuildFile; fileRef = 06EC03D7E8EE30F2AD977681; settings = { COMPILER_FLAGS = "-std=c++17 -fobjc-arc -w -DJUCE_SKIP_PRECOMPILED_HEADER"; }; };
 		D08D43C0368AC81145A6C148 /* include_juce_core.mm */ = {isa = PBXBuildFile; fileRef = 73FDA86B1937FA1C94C82F4D; };
@@ -103,7 +102,7 @@
 		4C87ACA8BA981CAB955A189B /* EQInternal.h */ /* EQInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EQInternal.h; path = ../../Source/EQInternal.h; sourceTree = SOURCE_ROOT; };
 		4DF4A13D248C3ACDE35C2597 /* Standalone Plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chuginator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55639808300DA87D31F1BAAC /* VST3 */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Chuginator.vst3; sourceTree = BUILT_PRODUCTS_DIR; };
-		5860CE9627C53E03C2EE0149 /* Compressor.cpp */ /* Compressor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Compressor.cpp; path = ../../Source/Compressor.cpp; sourceTree = SOURCE_ROOT; };
+		59235DC1959B9BFE41F8CB28 /* myLookAndFeel.h */ /* myLookAndFeel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = myLookAndFeel.h; path = ../../../WaveshaperBasic/Source/myLookAndFeel.h; sourceTree = SOURCE_ROOT; };
 		593D7E3FD0173C8FA2A52B1A /* Shared Code */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libChuginator.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BD21A374F4B694805C64B7E /* DiscRecording.framework */ /* DiscRecording.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiscRecording.framework; path = System/Library/Frameworks/DiscRecording.framework; sourceTree = SDKROOT; };
 		5C2A26E2EBC17A4848395A92 /* AudioToolbox.framework */ /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -157,7 +156,6 @@
 		F6683D754B225F1A1F6A3F54 /* JucePluginDefines.h */ /* JucePluginDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JucePluginDefines.h; path = ../../JuceLibraryCode/JucePluginDefines.h; sourceTree = SOURCE_ROOT; };
 		F70223F21F6BD9CEE0C19185 /* Stage3.cpp */ /* Stage3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Stage3.cpp; path = ../../Source/Stage3.cpp; sourceTree = SOURCE_ROOT; };
 		FBA1774C1EA787E71EE7C453 /* PluginProcessor.cpp */ /* PluginProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginProcessor.cpp; path = ../../Source/PluginProcessor.cpp; sourceTree = SOURCE_ROOT; };
-		FD78735F94073CEDA80B7D53 /* Compressor.h */ /* Compressor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Compressor.h; path = ../../Source/Compressor.h; sourceTree = SOURCE_ROOT; };
 		FED163E2F9F5D638361D391E /* include_juce_audio_plugin_client_AU_1.mm */ /* include_juce_audio_plugin_client_AU_1.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_AU_1.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_AU_1.mm; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -291,10 +289,9 @@
 			isa = PBXGroup;
 			children = (
 				A6F5C35BB0DD5E89DB8CFCA5,
+				59235DC1959B9BFE41F8CB28,
 				350A2A142FA460DF35EB1C33,
 				B7F0B736D3A59785A4A28E14,
-				5860CE9627C53E03C2EE0149,
-				FD78735F94073CEDA80B7D53,
 				CAD639AF4645FAA8942100BC,
 				4C87ACA8BA981CAB955A189B,
 				47077552D34694090A0A5108,
@@ -727,7 +724,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4DE85F359D1D0FFF0E047FE,
-				C6BCB984C5741AA089E71747,
 				1A85E99EFB66C782B7E478E2,
 				2DC78630DB4F1E03C99A5C38,
 				5EC72B573106C2B27CDB3CF6,

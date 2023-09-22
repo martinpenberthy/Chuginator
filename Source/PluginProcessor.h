@@ -103,28 +103,15 @@ private:
     
     EQInternal internalEQ;
     //GAIN1
-/*juce::dsp::Gain<float> preGain1;
-    juce::dsp::WaveShaper<float> waveshaper1;
-    juce::dsp::DryWetMixer<float> mix1;*/
     Stage1 gainStage1;
 
-    
-    /*juce::dsp::Gain<float> preGain2;
-    juce::dsp::WaveShaper<float> waveshaper2;
-    juce::dsp::DryWetMixer<float> mix2;
-     */
     Stage2 gainStage2;
-    
-    
-    /*juce::dsp::Gain<float> preGain3;
-    juce::dsp::WaveShaper<float> waveshaper3;
-    juce::dsp::DryWetMixer<float> mix3;*/
+
     Stage3 gainStage3;
     
     EQStage EQStage;
     
     NoiseGateStage noiseGateStage;
-    Compressor compressorStage;
     BoostStage boostStage;
     
     juce::dsp::Gain<float> outputGain;

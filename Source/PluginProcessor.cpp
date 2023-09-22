@@ -218,7 +218,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     preEQ.reset();
     preEQ.prepare(spec);
     updatePreEQ();
-    
+            
     
     //InternalEQ
     internalEQ.prepare(spec, sampleRate);
@@ -528,32 +528,8 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
                     *treeState.getRawParameterValue("MID"),
                     *treeState.getRawParameterValue("HIGH"),
                     processBlock, getSampleRate());
-    /*for(int i = 0; i < buffer.getNumChannels(); i++)
-        for(int j = 0; j < buffer.getNumSamples(); j++)
-        {
-            auto samp = buffer.getSample(i, j);
-            
-            if(samp < -1.0f || samp > 1.0f)
-                debugFile<< "EQ: Val out of range\n";
-            
-            if(isnan(samp))
-            {
-                debugFile << "EQ: NAN\n";
-                //buffer.setSample(i, j, 0.0f);
-            }
-            if(isinf(samp))
-                debugFile << "EQ: inf\n";
-        }*/
-    
-    
-    /*=====================================================================*/
-    //Compressor
-    /*compressorStage.process(processBlock,
-                                 *treeState.getRawParameterValue("THRESHOLDC"),
-                                 *treeState.getRawParameterValue("RATIOC"),
-                                 *treeState.getRawParameterValue("ATTACKC"),
-                                 *treeState.getRawParameterValue("RELEASEC"));*/
-    
+
+
     if(*treeState.getRawParameterValue("BOOSTONOFF"))
     {
         boostStage.process(processBlock, juce::dsp::AudioBlock<float>(buffer), getSampleRate());

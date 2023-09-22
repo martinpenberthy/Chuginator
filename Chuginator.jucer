@@ -9,10 +9,9 @@
         <FILE id="Lu3eLj" name="_Logos_Final2_alpha.png" compile="0" resource="1"
               file="../../../_MUSIC_/_Logos/_Logos_Final2_alpha.png"/>
       </GROUP>
+      <FILE id="qLrnpb" name="myLookAndFeel.h" compile="0" resource="0" file="../WaveshaperBasic/Source/myLookAndFeel.h"/>
       <FILE id="BvmBX9" name="BoostStage.cpp" compile="1" resource="0" file="Source/BoostStage.cpp"/>
       <FILE id="heummp" name="BoostStage.h" compile="0" resource="0" file="Source/BoostStage.h"/>
-      <FILE id="luakNq" name="Compressor.cpp" compile="1" resource="0" file="Source/Compressor.cpp"/>
-      <FILE id="L3UlZH" name="Compressor.h" compile="0" resource="0" file="Source/Compressor.h"/>
       <FILE id="vloSHh" name="EQInternal.cpp" compile="1" resource="0" file="Source/EQInternal.cpp"/>
       <FILE id="HRZ21q" name="EQInternal.h" compile="0" resource="0" file="Source/EQInternal.h"/>
       <FILE id="eqWcOr" name="NoiseGateStage.cpp" compile="1" resource="0"
