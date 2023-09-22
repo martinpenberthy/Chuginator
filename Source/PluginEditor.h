@@ -33,9 +33,6 @@ public:
     void sliderValueChanged(juce::Slider *slider, juce::Label *label);
     
 private:
-    
-
-    
     juce::LookAndFeel_V4 lookAndFeel;
     juce::Image backgroundImage;
     

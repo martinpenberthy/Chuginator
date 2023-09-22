@@ -21,7 +21,7 @@ class EQStage
         void prepare(juce::dsp::ProcessSpec spec, float lowGain, float midGain, float highGain, double sampleRate);
         void process(float lowGain, float midGain, float highGain, juce::dsp::AudioBlock<float> processBlock, double sampleRate);
         float checkGain(float gain);
-    
+        
     private:
         using IIRFilter = juce::dsp::IIR::Filter<float>;
         using IIRCoefs = juce::dsp::IIR::Coefficients<float>;
