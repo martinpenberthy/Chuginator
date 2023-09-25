@@ -690,10 +690,10 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
 void ChuginatorAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (juce::Colour::fromRGB(20, 20, 40));
-
-    //backgroundImage = juce::ImageCache::getFromMemory(BinaryData::AmpBackground1_png, BinaryData::AmpBackground1_pngSize);
-    //g.drawImageWithin(backgroundImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
+    juce::Rectangle<int> area (0, 0, getWidth(), getHeight());
+    juce::ColourGradient bgGradient = juce::ColourGradient(juce::Colours::navy, 0, 0, juce::Colours::grey, getWidth(), getHeight(), false);
+    g.setGradientFill(bgGradient);
+    g.fillRect (area);
 }
 
 void ChuginatorAudioProcessorEditor::resized()

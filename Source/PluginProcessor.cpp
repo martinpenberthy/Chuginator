@@ -267,10 +267,10 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     /*=====================================================================*/
     //Compressor
-    compressorStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLDC"),
+   /* compressorStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLDC"),
                                  *treeState.getRawParameterValue("RATIOC"),
                                  *treeState.getRawParameterValue("ATTACKC"),
-                                 *treeState.getRawParameterValue("RELEASEC"));
+                                 *treeState.getRawParameterValue("RELEASEC"));*/
     
     
     /*=====================================================================*/

@@ -15,7 +15,6 @@
 #include "EQStage.h"
 #include "EQInternal.h"
 #include "NoiseGateStage.h"
-#include "Compressor.h"
 #include "BoostStage.h"
 
 #include <iostream>
