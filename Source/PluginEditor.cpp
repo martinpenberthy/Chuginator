@@ -23,11 +23,11 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(buttonIROnOff);
     buttonIROnOff.setToggleable(true);
     
-    lookAndFeel.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
+    /*lookAndFeel.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(0.0f));
     lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
     lookAndFeel.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.25f));
     lookAndFeel.setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::whitesmoke.withAlpha(0.25f));
-    lookAndFeel.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));
+    lookAndFeel.setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.0f));*/
     
     addAndMakeVisible(loadButton);
     loadButton.setButtonText("Load IR");
@@ -38,79 +38,96 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     irName.setText(audioProcessor.savedFile.getFileName(), juce::dontSendNotification);
     
     addAndMakeVisible(irName);
-
+    
+    /*=====================================================================*/
     //INPUT
     addAndMakeVisible(sliderInputGain);
     addAndMakeVisible(labelInputGain);
     addAndMakeVisible(labelInputGainVal);
     
+    //Slider
     setSliderPropertiesRotary(&sliderInputGain);
     sliderInputGain.setLookAndFeel(&lookAndFeel);
+    //Label
     labelInputGain.setText("Input(dB)", juce::dontSendNotification);
+    labelInputGain.setLookAndFeel(&lookAndFeel);
     
     sliderInputGain.onValueChange = [this]()
     {
         labelInputGainVal.setText(juce::String((int)sliderInputGain.getValue()), juce::dontSendNotification);
     };
-    
+    //Label val
     labelInputGainVal.setText(juce::String((int)sliderInputGain.getValue()), juce::dontSendNotification);
     labelInputGainVal.setJustificationType(juce::Justification::centred);
+    labelInputGainVal.setLookAndFeel(&lookAndFeel);
     
+    /*=====================================================================*/
     //PREEQ
     addAndMakeVisible(sliderPreEQ);
     addAndMakeVisible(labelPreEQ);
     addAndMakeVisible(labelPreEQVal);
     
+    //Slider
     setSliderPropertiesRotary(&sliderPreEQ);
     sliderPreEQ.setLookAndFeel(&lookAndFeel);
+    //Label
     labelPreEQ.setText("PreEQ", juce::dontSendNotification);
+    labelPreEQ.setLookAndFeel(&lookAndFeel);
     
     sliderPreEQ.onValueChange = [this]()
     {
         labelPreEQVal.setText(juce::String(sliderPreEQ.getValue()), juce::dontSendNotification);
     };
-    
+    //Label val
     labelPreEQVal.setText(juce::String(sliderPreEQ.getValue()), juce::dontSendNotification);
     labelPreEQVal.setJustificationType(juce::Justification::centred);
+    labelPreEQVal.setLookAndFeel(&lookAndFeel);
 
-    
+    /*=====================================================================*/
     //OUTPUT
     addAndMakeVisible(sliderOutputGain);
     addAndMakeVisible(labelOutputGain);
     addAndMakeVisible(labelOutputGainVal);
     
+    //Slider
     setSliderPropertiesRotary(&sliderOutputGain);
     sliderOutputGain.setLookAndFeel(&lookAndFeel);
+    //Label
     labelOutputGain.setText("Output(dB)", juce::dontSendNotification);
+    labelOutputGain.setLookAndFeel(&lookAndFeel);
     
     sliderOutputGain.onValueChange = [this]()
     {
         labelOutputGainVal.setText(juce::String((int)sliderOutputGain.getValue()), juce::dontSendNotification);
     };
-    
+    //Label val
     labelOutputGainVal.setText(juce::String((int)sliderOutputGain.getValue()), juce::dontSendNotification);
     labelOutputGainVal.setJustificationType(juce::Justification::centred);
-
+    labelOutputGainVal.setLookAndFeel(&lookAndFeel);
     
+    /*=====================================================================*/
     //PREGAIN1
     addAndMakeVisible(sliderPreGain1);
     addAndMakeVisible(labelPreGain1);
     addAndMakeVisible(labelPreGain1Val);
     
+    //Slider
     setSliderPropertiesRotary(&sliderPreGain1);
     sliderPreGain1.setLookAndFeel(&lookAndFeel);
+    //Label
     labelPreGain1.setText("Gain1", juce::dontSendNotification);
-
+    labelPreGain1.setLookAndFeel(&lookAndFeel);
     
     //Value readout setup
     sliderPreGain1.onValueChange = [this]()
     {
         labelPreGain1Val.setText(juce::String((int)sliderPreGain1.getValue()), juce::dontSendNotification);
     };
-    
+    //Label val
     labelPreGain1Val.setText(juce::String((int)sliderPreGain1.getValue()), juce::dontSendNotification);
     labelPreGain1Val.setJustificationType(juce::Justification::centred);
-
+    labelPreGain1Val.setLookAndFeel(&lookAndFeel);
+    
     addAndMakeVisible(buttonGain1);
     addAndMakeVisible(waveshapeType1);
     buttonGain1.setToggleable(true);
@@ -119,7 +136,8 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelWaveshapeType1.attachToComponent(&waveshapeType1, false);
     labelWaveshapeType1.setColour(juce::Label::textColourId, juce::Colours::white);
     labelWaveshapeType1.setText("Dist Type", juce::dontSendNotification);
-        
+    labelWaveshapeType1.setLookAndFeel(&lookAndFeel);
+    
     waveshapeType1.addItem("Amp1", 1);
     waveshapeType1.addItem("Amp2", 2);
     waveshapeType1.addItem("Amp3", 3);
@@ -131,7 +149,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     waveshapeType1.onChange = [this]{
                 modeMenuChanged(1);
     };
-    
+    waveshapeType1.setLookAndFeel(&lookAndFeel);
     
     //MIX1
     addAndMakeVisible(sliderMix1);
@@ -141,6 +159,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesRotary(&sliderMix1);
     sliderMix1.setLookAndFeel(&lookAndFeel);
     labelMix1.setText("Mix1", juce::dontSendNotification);
+    labelMix1.setLookAndFeel(&lookAndFeel);
     
     sliderMix1.onValueChange = [this]()
     {
@@ -149,8 +168,9 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     labelMix1Val.setText(juce::String(sliderMix1.getValue()), juce::dontSendNotification);
     labelMix1Val.setJustificationType(juce::Justification::centred);
+    labelMix1Val.setLookAndFeel(&lookAndFeel);
     
-    
+    /*=====================================================================*/
     //PREGAIN2
     addAndMakeVisible(sliderPreGain2);
     addAndMakeVisible(labelPreGain2);
@@ -159,6 +179,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesRotary(&sliderPreGain2);
     sliderPreGain2.setLookAndFeel(&lookAndFeel);
     labelPreGain2.setText("Gain2", juce::dontSendNotification);
+    labelPreGain2.setLookAndFeel(&lookAndFeel);
     
     sliderPreGain2.onValueChange = [this]()
     {
@@ -167,6 +188,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     labelPreGain2Val.setText(juce::String((int)sliderPreGain2.getValue()), juce::dontSendNotification);
     labelPreGain2Val.setJustificationType(juce::Justification::centred);
+    labelPreGain2Val.setLookAndFeel(&lookAndFeel);
     
     addAndMakeVisible(buttonGain2);
     addAndMakeVisible(waveshapeType2);
@@ -176,7 +198,8 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelWaveshapeType2.attachToComponent(&waveshapeType2, false);
     labelWaveshapeType2.setColour(juce::Label::textColourId, juce::Colours::white);
     labelWaveshapeType2.setText("Dist Type", juce::dontSendNotification);
-        
+    labelWaveshapeType2.setLookAndFeel(&lookAndFeel);
+    
     waveshapeType2.addItem("Amp1", 1);
     waveshapeType2.addItem("Amp2", 2);
     waveshapeType2.addItem("Amp3", 3);
@@ -189,6 +212,8 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
                 modeMenuChanged(2);
     };
     
+    waveshapeType2.setLookAndFeel(&lookAndFeel);
+    
     //MIX2
     addAndMakeVisible(sliderMix2);
     addAndMakeVisible(labelMix2);
@@ -197,6 +222,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesRotary(&sliderMix2);
     sliderMix2.setLookAndFeel(&lookAndFeel);
     labelMix2.setText("Mix2", juce::dontSendNotification);
+    labelMix2.setLookAndFeel(&lookAndFeel);
     
     sliderMix2.onValueChange = [this]()
     {
@@ -205,16 +231,18 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     labelMix2Val.setText(juce::String(sliderMix2.getValue()), juce::dontSendNotification);
     labelMix2Val.setJustificationType(juce::Justification::centred);
+    labelMix2Val.setLookAndFeel(&lookAndFeel);
     
+    /*=====================================================================*/
     //PREGAIN3
     addAndMakeVisible(sliderPreGain3);
     addAndMakeVisible(labelPreGain3);
     addAndMakeVisible(labelPreGain3Val);
 
-    
     setSliderPropertiesRotary(&sliderPreGain3);
     sliderPreGain3.setLookAndFeel(&lookAndFeel);
     labelPreGain3.setText("Gain3", juce::dontSendNotification);
+    labelPreGain3.setLookAndFeel(&lookAndFeel);
     
     sliderPreGain3.onValueChange = [this]()
     {
@@ -223,6 +251,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     labelPreGain3Val.setText(juce::String((int)sliderPreGain3.getValue()), juce::dontSendNotification);
     labelPreGain3Val.setJustificationType(juce::Justification::centred);
+    labelPreGain3Val.setLookAndFeel(&lookAndFeel);
     
     addAndMakeVisible(buttonGain3);
     addAndMakeVisible(waveshapeType3);
@@ -232,7 +261,8 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelWaveshapeType3.attachToComponent(&waveshapeType3, false);
     labelWaveshapeType3.setColour(juce::Label::textColourId, juce::Colours::white);
     labelWaveshapeType3.setText("Dist Type", juce::dontSendNotification);
-        
+    labelWaveshapeType3.setLookAndFeel(&lookAndFeel);
+    
     waveshapeType3.addItem("Amp1", 1);
     waveshapeType3.addItem("Amp2", 2);
     waveshapeType3.addItem("Amp3", 3);
@@ -244,6 +274,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     waveshapeType3.onChange = [this]{
                 modeMenuChanged(3);
     };
+    waveshapeType3.setLookAndFeel(&lookAndFeel);
     
     //MIX3
     addAndMakeVisible(sliderMix3);
@@ -253,6 +284,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesRotary(&sliderMix3);
     sliderMix3.setLookAndFeel(&lookAndFeel);
     labelMix3.setText("Mix3", juce::dontSendNotification);
+    labelMix3.setLookAndFeel(&lookAndFeel);
     
     sliderMix3.onValueChange = [this]()
     {
@@ -261,8 +293,9 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     labelMix3Val.setText(juce::String(sliderMix3.getValue()), juce::dontSendNotification);
     labelMix3Val.setJustificationType(juce::Justification::centred);
+    labelMix3Val.setLookAndFeel(&lookAndFeel);
     
-    
+    /*=====================================================================*/
     //EQ
     //Low
     addAndMakeVisible(sliderFilterLowGain);
@@ -272,6 +305,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesRotary(&sliderFilterLowGain);
     sliderFilterLowGain.setLookAndFeel(&lookAndFeel);
     labelFilterLowGain.setText("Low", juce::dontSendNotification);
+    labelFilterLowGain.setLookAndFeel(&lookAndFeel);
     
     sliderFilterLowGain.onValueChange = [this]()
     {
@@ -280,6 +314,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     labelFilterLowGainVal.setText(juce::String(sliderFilterLowGain.getValue()), juce::dontSendNotification);
     labelFilterLowGainVal.setJustificationType(juce::Justification::centred);
+    labelFilterLowGainVal.setLookAndFeel(&lookAndFeel);
     
     //Mid
     addAndMakeVisible(sliderFilterMidGain);
@@ -289,6 +324,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesRotary(&sliderFilterMidGain);
     sliderFilterMidGain.setLookAndFeel(&lookAndFeel);
     labelFilterMidGain.setText("Mid", juce::dontSendNotification);
+    labelFilterMidGain.setLookAndFeel(&lookAndFeel);
     
     sliderFilterMidGain.onValueChange = [this]()
     {
@@ -297,6 +333,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     labelFilterMidGainVal.setText(juce::String(sliderFilterMidGain.getValue()), juce::dontSendNotification);
     labelFilterMidGainVal.setJustificationType(juce::Justification::centred);
+    labelFilterMidGainVal.setLookAndFeel(&lookAndFeel);
     
     //High
     addAndMakeVisible(sliderFilterHighGain);
@@ -306,6 +343,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesRotary(&sliderFilterHighGain);
     sliderFilterHighGain.setLookAndFeel(&lookAndFeel);
     labelFilterHighGain.setText("High", juce::dontSendNotification);
+    labelFilterHighGain.setLookAndFeel(&lookAndFeel);
     
     sliderFilterHighGain.onValueChange = [this]()
     {
@@ -314,6 +352,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     labelFilterHighGainVal.setText(juce::String(sliderFilterHighGain.getValue()), juce::dontSendNotification);
     labelFilterHighGainVal.setJustificationType(juce::Justification::centred);
+    labelFilterHighGainVal.setLookAndFeel(&lookAndFeel);
     
     //Noise Gate
     //Threshold
@@ -324,13 +363,15 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesVertical(&sliderNoiseGateThresh);
     sliderNoiseGateThresh.setLookAndFeel(&lookAndFeel);
     labelNoiseGateThresh.setText("Thr", juce::dontSendNotification);
-
+    labelNoiseGateThresh.setLookAndFeel(&lookAndFeel);
+    
     sliderNoiseGateThresh.onValueChange = [this]()
     {
         labelNoiseGateThreshVal.setText(juce::String(sliderNoiseGateThresh.getValue()), juce::dontSendNotification);
     };
     
     labelNoiseGateThreshVal.setText(juce::String(sliderNoiseGateThresh.getValue()), juce::dontSendNotification);
+    labelNoiseGateThreshVal.setLookAndFeel(&lookAndFeel);
     
     //Ratio
     addAndMakeVisible(sliderNoiseGateRatio);
@@ -340,6 +381,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesVertical(&sliderNoiseGateRatio);
     sliderNoiseGateRatio.setLookAndFeel(&lookAndFeel);
     labelNoiseGateRatio.setText("Rat", juce::dontSendNotification);
+    labelNoiseGateRatio.setLookAndFeel(&lookAndFeel);
     
     sliderNoiseGateRatio.onValueChange = [this]()
     {
@@ -347,7 +389,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     };
     
     labelNoiseGateRatioVal.setText(juce::String(sliderNoiseGateRatio.getValue()), juce::dontSendNotification);
-    
+    labelNoiseGateRatioVal.setLookAndFeel(&lookAndFeel);
     
     //Attack
     addAndMakeVisible(sliderNoiseGateAttack);
@@ -357,6 +399,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesVertical(&sliderNoiseGateAttack);
     sliderNoiseGateAttack.setLookAndFeel(&lookAndFeel);
     labelNoiseGateAttack.setText("A", juce::dontSendNotification);
+    labelNoiseGateAttack.setLookAndFeel(&lookAndFeel);
     
     sliderNoiseGateAttack.onValueChange = [this]()
     {
@@ -364,6 +407,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     };
     
     labelNoiseGateAttackVal.setText(juce::String(sliderNoiseGateAttack.getValue()), juce::dontSendNotification);
+    labelNoiseGateAttackVal.setLookAndFeel(&lookAndFeel);
     
     //Release
     addAndMakeVisible(sliderNoiseGateRelease);
@@ -373,6 +417,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSliderPropertiesVertical(&sliderNoiseGateRelease);
     sliderNoiseGateRelease.setLookAndFeel(&lookAndFeel);
     labelNoiseGateRelease.setText("R", juce::dontSendNotification);
+    labelNoiseGateRelease.setLookAndFeel(&lookAndFeel);
     
     sliderNoiseGateRelease.onValueChange = [this]()
     {
@@ -380,7 +425,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     };
     
     labelNoiseGateReleaseVal.setText(juce::String(sliderNoiseGateRelease.getValue()), juce::dontSendNotification);
-    
+    labelNoiseGateReleaseVal.setLookAndFeel(&lookAndFeel);
     
     
     //COMPRESSOR

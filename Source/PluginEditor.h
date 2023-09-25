@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "myLookAndFeel.h"
 
 //==============================================================================
 /**
@@ -33,7 +34,8 @@ public:
     void sliderValueChanged(juce::Slider *slider, juce::Label *label);
     
 private:
-    juce::LookAndFeel_V4 lookAndFeel;
+    //juce::LookAndFeel_V4 lookAndFeel;
+    myLookAndFeel lookAndFeel;
     juce::Image backgroundImage;
     
     juce::TextButton loadButton;
