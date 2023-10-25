@@ -18,7 +18,9 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     setSize (500, 520);
     
     addAndMakeVisible(buttonBoost);
+    addAndMakeVisible(labelBoostButton);
     buttonBoost.setToggleable(true);
+    labelBoostButton.setText("Boost", juce::dontSendNotification);
     
     addAndMakeVisible(buttonIROnOff);
     buttonIROnOff.setToggleable(true);
@@ -854,21 +856,21 @@ void ChuginatorAudioProcessorEditor::resized()
     labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() + 65, 40, 38);
     
-    sliderNoiseGateRatio.setBounds(sliderNoiseGateThresh.getX() + 30, sliderNoiseGateThresh.getY(), 50, 90);
+    sliderNoiseGateRatio.setBounds(sliderNoiseGateThresh.getX() + 35, sliderNoiseGateThresh.getY(), 50, 90);
     labelNoiseGateRatio.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateRatioVal.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() + 65, 40, 38);
 
     
-    sliderNoiseGateAttack.setBounds(sliderNoiseGateRatio.getX() + 30, sliderNoiseGateRatio.getY(), 50, 90);
+    sliderNoiseGateAttack.setBounds(sliderNoiseGateRatio.getX() + 35, sliderNoiseGateRatio.getY(), 50, 90);
     labelNoiseGateAttack.setBounds(sliderNoiseGateAttack.getX() + 10, sliderNoiseGateAttack.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateAttackVal.setBounds(sliderNoiseGateAttack.getX(), sliderNoiseGateAttack.getY() + 65, 40, 38);
 
     
-    sliderNoiseGateRelease.setBounds(sliderNoiseGateAttack.getX() + 30, sliderNoiseGateAttack.getY(), 50, 90);
+    sliderNoiseGateRelease.setBounds(sliderNoiseGateAttack.getX() + 35, sliderNoiseGateAttack.getY(), 50, 90);
     labelNoiseGateRelease.setBounds(sliderNoiseGateRelease.getX() + 10, sliderNoiseGateRelease.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateReleaseVal.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() + 65, 40, 38);
 
-    
+        
     //Compressor
     /*sliderCompressorThresh.setBounds(sliderNoiseGateRelease.getX() + 50, getHeight() - 110, 50, 90);
     labelCompressorThresh.setBounds(sliderCompressorThresh.getX(), sliderCompressorThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
@@ -890,9 +892,10 @@ void ChuginatorAudioProcessorEditor::resized()
     
     */  
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
-    irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 60, 25);
+    irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 150, 25);
     
     
-    buttonBoost.setBounds((getWidth() / 2) + 150, getHeight() - 50, 30, 30);
-    buttonIROnOff.setBounds((getWidth() / 2) + 100, getHeight() - 50, 30, 30);
+    buttonBoost.setBounds((getWidth() / 2) + 50, getHeight() - 50, 30, 30);
+    labelBoostButton.setBounds(buttonBoost.getX(), buttonBoost.getY() - 30, 50, 20);
+    buttonIROnOff.setBounds(irName.getX(), getHeight() - 50, 30, 30);
 }

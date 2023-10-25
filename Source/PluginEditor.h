@@ -144,6 +144,7 @@ private:
     juce::Label labelCompressorReleaseVal;
     
     juce::ToggleButton buttonBoost;
+    juce::Label labelBoostButton;
     juce::ToggleButton buttonIROnOff;
     juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;
