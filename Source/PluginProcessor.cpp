@@ -233,7 +233,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     //debugFile << *waveshapeInitFunction1;
     setFunctionToUse(1, getParamIntToString(((int) * waveshapeInitFunction1)));
-    debugFile <<getParamIntToString(((int) * waveshapeInitFunction1));
+    debugFile <<  getParamIntToString(((int) * waveshapeInitFunction1));
     
     gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"),
                              *treeState.getRawParameterValue("MIX1"));
@@ -495,9 +495,13 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     if(*treeState.getRawParameterValue("GAIN1ONOFF"))
     {
         //Update waveshape function if needed
-        if(waveshapeFunction1 != waveshapeFunctionCurrent1)
-            setFunctionToUse(1, waveshapeFunction1);
-
+        //if(waveshapeFunction1 != waveshapeFunctionCurrent1)
+            //setFunctionToUse(1, waveshapeFunction1);
+        
+        auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
+        setFunctionToUse(1, getParamIntToString(((int) * waveshapeInitFunction1) + 1));
+        
+        debugFile << getParamIntToString(((int) * waveshapeInitFunction1) + 1);
         juce::dsp::AudioBlock<float> drySampsBlock1 (buffer);
         
         gainStage1.process(drySampsBlock1, processBlock,
@@ -507,13 +511,19 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         sanitizeBuffer(buffer);
     }
     
+    
     /*=====================================================================*/
 
     if(*treeState.getRawParameterValue("GAIN2ONOFF"))
     {
         //Update waveshape function if needed
-        if(waveshapeFunction2 != waveshapeFunctionCurrent2)
-            setFunctionToUse(2, waveshapeFunction2);
+        //if(waveshapeFunction2 != waveshapeFunctionCurrent2)
+            //setFunctionToUse(2, waveshapeFunction2);
+        
+        auto waveshapeInitFunction2 = treeState.getRawParameterValue("TYPE2");
+        setFunctionToUse(2, getParamIntToString(((int) * waveshapeInitFunction2) + 1));
+        
+        debugFile << getParamIntToString(((int) * waveshapeInitFunction2) + 1);
         
         juce::dsp::AudioBlock<float> drySampsBlock2 (buffer);
         
@@ -528,8 +538,13 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     if(*treeState.getRawParameterValue("GAIN3ONOFF"))
     {
         //Update waveshape function if needed
-        if(waveshapeFunction3 != waveshapeFunctionCurrent3)
-            setFunctionToUse(3, waveshapeFunction3);
+        //if(waveshapeFunction3 != waveshapeFunctionCurrent3)
+            //setFunctionToUse(3, waveshapeFunction3);
+        
+        auto waveshapeInitFunction3 = treeState.getRawParameterValue("TYPE3");
+        setFunctionToUse(3, getParamIntToString(((int) * waveshapeInitFunction3) + 1));
+        
+        debugFile << getParamIntToString(((int) * waveshapeInitFunction3) + 1);
         
         juce::dsp::AudioBlock<float> drySampsBlock3 (buffer);
         
