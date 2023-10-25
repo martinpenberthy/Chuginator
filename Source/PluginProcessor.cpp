@@ -34,7 +34,7 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
             }
         }
     };
-    //x prepareToPlay(getSampleRate(), getBlockSize());
+    //prepareToPlay(getSampleRate(), getBlockSize());
     /*gainStage1 = Stage1(getWaveshapeFuncParam(1));
     gainStage2 = Stage2(getWaveshapeFuncParam(2));
     gainStage3 = Stage3(getWaveshapeFuncParam(3));*/
@@ -74,7 +74,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
                                                                                     "HardClip",
                                                                                     "Screamer"
                                                                                 },
-                                                                                    1));
+                                                                                    3));
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN2", 1}, "Gain2", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX2", 1}, "Mix2", 0.0f, 1.0f, 0.5f));
@@ -89,7 +89,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
                                                                                     "HardClip",
                                                                                     "Screamer"
                                                                                 },
-                                                                                    1));
+                                                                                    3));
     
     
     
@@ -106,7 +106,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
                                                                                     "HardClip",
                                                                                     "Screamer"
                                                                                 },
-                                                                                    1));
+                                                                                    3));
     
     //EQs
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"LOW", 1}, "Low", 0.0f, 2.0f, 1.0f));
@@ -225,30 +225,46 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     /*=====================================================================*/
     //gainStage1.distTypeListCopy = distTypeList;
+    /*std::string gainStage1Func = getWaveshapeFuncParam(1);
+    setFunctionToUse(1, gainStage1Func);
+    waveshapeFunction1 = gainStage1Func;*/
+    
+    auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
+    
+    //debugFile << *waveshapeInitFunction1;
+    setFunctionToUse(1, getParamIntToString(((int) * waveshapeInitFunction1)));
+    debugFile <<getParamIntToString(((int) * waveshapeInitFunction1));
+    
     gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"),
                              *treeState.getRawParameterValue("MIX1"));
     
-    std::string gainStage1Func = getWaveshapeFuncParam(1);
-    setFunctionToUse(1, gainStage1Func);
-    waveshapeFunction1 = gainStage1Func;
+
     //waveshapeFunction1 = "";
     
     /*=====================================================================*/
-    gainStage2.prepare(spec, *treeState.getRawParameterValue("PREGAIN2"),
-                             *treeState.getRawParameterValue("MIX2"));
-    
     std::string gainStage2Func = getWaveshapeFuncParam(2);
     setFunctionToUse(2, gainStage2Func);
     waveshapeFunction2 = gainStage2Func;
+    
+    debugFile << gainStage2Func;
+    
+    gainStage2.prepare(spec, *treeState.getRawParameterValue("PREGAIN2"),
+                             *treeState.getRawParameterValue("MIX2"));
+    
+
     //waveshapeFunction2 = "";
     
     /*=====================================================================*/
-    gainStage3.prepare(spec, *treeState.getRawParameterValue("PREGAIN3"),
-                             *treeState.getRawParameterValue("MIX3"));
-    
     std::string gainStage3Func = getWaveshapeFuncParam(3);
     setFunctionToUse(3, gainStage3Func);
     waveshapeFunction3 = gainStage3Func;
+    
+    debugFile << gainStage3Func;
+    
+    gainStage3.prepare(spec, *treeState.getRawParameterValue("PREGAIN3"),
+                             *treeState.getRawParameterValue("MIX3"));
+    
+
    // waveshapeFunction3 = "";
     
     /*=====================================================================*/
@@ -298,16 +314,19 @@ std::string ChuginatorAudioProcessor::getWaveshapeFuncParam(int gainStageNum)
     if(gainStageNum == 1)
     {
         auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
+        //debugFile << getParamIntToString(((int) * waveshapeInitFunction1) + 1);
         return getParamIntToString(((int) * waveshapeInitFunction1) + 1);
     }
     else if(gainStageNum == 2)
     {
         auto waveshapeInitFunction2 = treeState.getRawParameterValue("TYPE2");
+        //debugFile << getParamIntToString(((int) * waveshapeInitFunction2) + 1);
         return getParamIntToString(((int) * waveshapeInitFunction2) + 1);
     }
     else if(gainStageNum == 3)
     {
         auto waveshapeInitFunction3 = treeState.getRawParameterValue("TYPE3");
+        //debugFile << getParamIntToString(((int) * waveshapeInitFunction3) + 1);
         return getParamIntToString(((int) * waveshapeInitFunction3) + 1);
     }
     else
@@ -325,19 +344,19 @@ void ChuginatorAudioProcessor::setFunctionToUse(int gainStageNum, std::string fu
     {
         gainStage1.setWaveshapeFunc(func);
         waveshapeFunctionCurrent1 = func;
-        //waveshapeFunctionCurrent1 = "";
+        //waveshapeFunction1 = "";
     }
     else if(gainStageNum == 2)
     {
         gainStage2.setWaveshapeFunc(func);
         waveshapeFunctionCurrent2 = func;
-       //waveshapeFunctionCurrent2 = "";
+        //waveshapeFunction2 = "";
     }
     else if(gainStageNum == 3)
     {
         gainStage3.setWaveshapeFunc(func);
         waveshapeFunctionCurrent3 = func;
-        //waveshapeFunctionCurrent3 = "";
+        //waveshapeFunction3 = "";
 
     }
     return;
@@ -421,7 +440,7 @@ void ChuginatorAudioProcessor::sanitizeBuffer(juce::AudioBuffer<float>& buffer)
             
             if((samp < -1.0f || samp > 1.0f) || isnan(samp) || isinf(samp))
             {
-                debugFile<< "Val Sanitized\n";
+                //debugFile<< "Val Sanitized\n";
                 buffer.setSample(i, j, 0.0f);
             }
         }
@@ -442,8 +461,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    
-    //sanitizeBuffer(buffer);
+    sanitizeBuffer(buffer);
     /*=====================================================================*/
     //INPUTGAIN
     float newInputGain = *treeState.getRawParameterValue("INPUTGAIN");
