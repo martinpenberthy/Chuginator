@@ -11,14 +11,14 @@
 
 //==============================================================================
 ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), genericAudioProcessorEditor(p),
+    : AudioProcessorEditor (&p), audioProcessor (p), //genericAudioProcessorEditor(p),
         presetPanel(p.getPresetManager())
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (500, 520);
     
-    addAndMakeVisible(genericAudioProcessorEditor);
+    //addAndMakeVisible(genericAudioProcessorEditor);
     addAndMakeVisible(presetPanel);
     
     addAndMakeVisible(buttonBoost);
@@ -767,7 +767,7 @@ void ChuginatorAudioProcessorEditor::resized()
     
     int row4XOffset =  getWidth() / 4;
     int row4YOffset = getHeight() / 4;
-    
+        
     //ROW1
     sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
@@ -902,4 +902,11 @@ void ChuginatorAudioProcessorEditor::resized()
     buttonBoost.setBounds((getWidth() / 2) + 50, getHeight() - 50, 30, 30);
     labelBoostButton.setBounds(buttonBoost.getX(), buttonBoost.getY() - 30, 50, 20);
     buttonIROnOff.setBounds(irName.getX(), getHeight() - 50, 30, 30);
+    
+    
+    
+    //genericAudioProcessorEditor.setBounds(getLocalBounds()
+     //     .withSizeKeepingCentre(getLocalBounds().proportionOfWidth(0.9f), getLocalBounds().proportionOfHeight(0.5f)));
+      
+    presetPanel.setBounds(getLocalBounds().removeFromTop(proportionOfHeight(0.05f)));
 }
