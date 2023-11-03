@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "myLookAndFeel.h"
+#include "PresetPanel.h"
 
 //==============================================================================
 /**
@@ -194,5 +195,8 @@ private:
     // access the processor object that created it.
     ChuginatorAudioProcessor& audioProcessor;
 
+    juce::GenericAudioProcessorEditor genericAudioProcessorEditor;
+    Gui::PresetPanel presetPanel;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChuginatorAudioProcessorEditor)
 };

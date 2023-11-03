@@ -11,11 +11,15 @@
 
 //==============================================================================
 ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+    : AudioProcessorEditor (&p), audioProcessor (p), genericAudioProcessorEditor(p),
+        presetPanel(p.getPresetManager())
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (500, 520);
+    
+    addAndMakeVisible(genericAudioProcessorEditor);
+    addAndMakeVisible(presetPanel);
     
     addAndMakeVisible(buttonBoost);
     addAndMakeVisible(labelBoostButton);

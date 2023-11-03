@@ -16,6 +16,7 @@
 #include "EQInternal.h"
 #include "NoiseGateStage.h"
 #include "BoostStage.h"
+#include "PresetManager.h"
 
 #include <iostream>
 #include <fstream>
@@ -74,6 +75,8 @@ public:
     std::string getParamIntToString(int numOfDistType);
     
     void sanitizeBuffer(juce::AudioBuffer<float>& buffer);
+    Service::PresetManager& getPresetManager(){return *presetManager;}
+    
     juce::AudioProcessorValueTreeState treeState;
     
     juce::File root, savedFile;
@@ -116,6 +119,8 @@ private:
     juce::dsp::Gain<float> outputGain;
     
     std::ofstream debugFile;
+    
+    std::unique_ptr<Service::PresetManager> presetManager;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChuginatorAudioProcessor)
 };

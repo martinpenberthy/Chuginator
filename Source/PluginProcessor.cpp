@@ -41,6 +41,11 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
 
     treeState.state.addListener(this);
     
+    treeState.state.setProperty(Service::PresetManager::presetNameProperty, "", nullptr);
+    treeState.state.setProperty("version", ProjectInfo::versionString, nullptr);
+    
+    presetManager = std::make_unique<Service::PresetManager>(treeState);
+    
     debugFile.open("/Users/martinpenberthy/Desktop/debugFile.txt");
 }
 

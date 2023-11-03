@@ -5,6 +5,12 @@
               companyName="Black Martini">
   <MAINGROUP id="b48WrN" name="Chuginator">
     <GROUP id="{59562548-40C6-E0F5-04C4-C08F52A52683}" name="Source">
+      <GROUP id="{37E6DBED-A753-B3B4-9597-44E5944871B1}" name="PresetManager">
+        <FILE id="lNTdea" name="PresetManager.cpp" compile="1" resource="0"
+              file="../PresetManager/Source/PresetManager.cpp"/>
+        <FILE id="j1sYzX" name="PresetManager.h" compile="0" resource="0" file="../PresetManager/Source/PresetManager.h"/>
+        <FILE id="stsod4" name="PresetPanel.h" compile="0" resource="0" file="../PresetManager/Source/PresetPanel.h"/>
+      </GROUP>
       <GROUP id="{9D5167FE-ADD9-448E-1958-6234079719A5}" name="Assets">
         <FILE id="Lu3eLj" name="_Logos_Final2_alpha.png" compile="0" resource="1"
               file="../../../_MUSIC_/_Logos/_Logos_Final2_alpha.png"/>
