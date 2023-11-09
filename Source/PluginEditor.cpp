@@ -366,7 +366,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(labelNoiseGateThresh);
     addAndMakeVisible(labelNoiseGateThreshVal);
     
-    setSliderPropertiesVertical(&sliderNoiseGateThresh);
+    setSliderPropertiesRotary(&sliderNoiseGateThresh);
     sliderNoiseGateThresh.setLookAndFeel(&lookAndFeel);
     labelNoiseGateThresh.setText("Thr", juce::dontSendNotification);
     labelNoiseGateThresh.setLookAndFeel(&lookAndFeel);
@@ -380,7 +380,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelNoiseGateThreshVal.setLookAndFeel(&lookAndFeel);
     
     //Ratio
-    addAndMakeVisible(sliderNoiseGateRatio);
+    /*addAndMakeVisible(sliderNoiseGateRatio);
     addAndMakeVisible(labelNoiseGateRatio);
     addAndMakeVisible(labelNoiseGateRatioVal);
     
@@ -431,7 +431,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     };
     
     labelNoiseGateReleaseVal.setText(juce::String(sliderNoiseGateRelease.getValue()), juce::dontSendNotification);
-    labelNoiseGateReleaseVal.setLookAndFeel(&lookAndFeel);
+    labelNoiseGateReleaseVal.setLookAndFeel(&lookAndFeel);*/
     
     
     //COMPRESSOR
@@ -579,9 +579,9 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     
     //NOISE GATE
     sliderAttachmentNoiseGateThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLDNG", sliderNoiseGateThresh);
-    sliderAttachmentNoiseGateRatio = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RATIONG", sliderNoiseGateRatio);
+    /*sliderAttachmentNoiseGateRatio = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RATIONG", sliderNoiseGateRatio);
     sliderAttachmentNoiseGateAttack = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "ATTACKNG", sliderNoiseGateAttack);
-    sliderAttachmentNoiseGateRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASENG", sliderNoiseGateRelease);
+    sliderAttachmentNoiseGateRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASENG", sliderNoiseGateRelease);*/
     
     
     //COMPRESSOR
@@ -767,7 +767,7 @@ void ChuginatorAudioProcessorEditor::resized()
     
     int row4XOffset =  getWidth() / 4;
     int row4YOffset = getHeight() / 4;
-        
+            
     //ROW1
     sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
@@ -856,11 +856,11 @@ void ChuginatorAudioProcessorEditor::resized()
     /*=====================================================================*/
     //ROW4
     //Noise Gate
-    sliderNoiseGateThresh.setBounds(leftOffset - 20, getHeight() - 110, 50, 90);
+    sliderNoiseGateThresh.setBounds(leftOffset - 20, getHeight() - 110, knobSizeLarge, knobSizeLarge);
     labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() + 65, 40, 38);
     
-    sliderNoiseGateRatio.setBounds(sliderNoiseGateThresh.getX() + 35, sliderNoiseGateThresh.getY(), 50, 90);
+    /*sliderNoiseGateRatio.setBounds(sliderNoiseGateThresh.getX() + 35, sliderNoiseGateThresh.getY(), 50, 90);
     labelNoiseGateRatio.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateRatioVal.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() + 65, 40, 38);
 
@@ -872,7 +872,7 @@ void ChuginatorAudioProcessorEditor::resized()
     
     sliderNoiseGateRelease.setBounds(sliderNoiseGateAttack.getX() + 35, sliderNoiseGateAttack.getY(), 50, 90);
     labelNoiseGateRelease.setBounds(sliderNoiseGateRelease.getX() + 10, sliderNoiseGateRelease.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelNoiseGateReleaseVal.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() + 65, 40, 38);
+    labelNoiseGateReleaseVal.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() + 65, 40, 38);*/
 
         
     //Compressor

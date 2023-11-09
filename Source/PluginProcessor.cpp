@@ -120,9 +120,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     
     //Noise Gate
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDNG", 1}, "Threshold", -96, 6, 1));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RATIONG", 1}, "Ratio", 1, 10, 1));
+    /*params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RATIONG", 1}, "Ratio", 1, 10, 1));
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"ATTACKNG", 1}, "Attack", 1, 300, 20));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASENG", 1}, "Release", 1, 700, 20));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASENG", 1}, "Release", 1, 700, 20));*/
     
     //Compressor
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDC", 1}, "Threshold", -12, 6, 1));
@@ -281,10 +281,10 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     /*=====================================================================*/
     //Noise Gate
-    noiseGateStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLDNG"),
-                                 *treeState.getRawParameterValue("RATIONG"),
+    noiseGateStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLDNG"));
+                                 /*treeState.getRawParameterValue("RATIONG"),
                                  *treeState.getRawParameterValue("ATTACKNG"),
-                                 *treeState.getRawParameterValue("RELEASENG"));
+                                 *treeState.getRawParameterValue("RELEASENG"));*/
     
     /*=====================================================================*/
     //Compressor
@@ -488,10 +488,10 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
    
     //NOISEGATE
     noiseGateStage.process(processBlock,
-                           *treeState.getRawParameterValue("THRESHOLDNG"),
+                           *treeState.getRawParameterValue("THRESHOLDNG"));/*,
                            *treeState.getRawParameterValue("RATIONG"),
                            *treeState.getRawParameterValue("ATTACKNG"),
-                           *treeState.getRawParameterValue("RELEASENG"));
+                           *treeState.getRawParameterValue("RELEASENG"));*/
     
     
 

@@ -115,7 +115,7 @@ private:
     juce::Label labelNoiseGateThresh;
     juce::Label labelNoiseGateThreshVal;
     
-    juce::Slider sliderNoiseGateRatio;
+    /*juce::Slider sliderNoiseGateRatio;
     juce::Label labelNoiseGateRatio;
     juce::Label labelNoiseGateRatioVal;
 
@@ -125,7 +125,7 @@ private:
     
     juce::Slider sliderNoiseGateRelease;
     juce::Label labelNoiseGateRelease;
-    juce::Label labelNoiseGateReleaseVal;
+    juce::Label labelNoiseGateReleaseVal;*/
 
     //Compressor
     juce::Slider sliderCompressorThresh;
@@ -176,9 +176,9 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentFilterLowGain;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateThresh;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateRatio;
+    /*std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateRatio;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateAttack;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateRelease;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateRelease;*/
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorThresh;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorRatio;

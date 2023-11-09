@@ -18,8 +18,8 @@ public:
     NoiseGateStage();
     ~NoiseGateStage();
 
-    void prepare(juce::dsp::ProcessSpec spec, float thresh, float ratio, float attack, float release);
-    void process(juce::dsp::AudioBlock<float> processBlock, float thresh, float ratio, float attack, float release);
+    void prepare(juce::dsp::ProcessSpec spec, float thresh);//, float ratio, float attack, float release);
+    void process(juce::dsp::AudioBlock<float> processBlock, float thresh);//float ratio, float attack, float release);
     
 private:
     juce::dsp::NoiseGate<float> noiseGate;

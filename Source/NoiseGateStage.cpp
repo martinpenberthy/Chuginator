@@ -20,23 +20,23 @@ NoiseGateStage::~NoiseGateStage()
 {
 }
 
-void NoiseGateStage::prepare(juce::dsp::ProcessSpec spec, float thresh, float ratio, float attack, float release)
+void NoiseGateStage::prepare(juce::dsp::ProcessSpec spec, float thresh)//, float ratio, float attack, float release)
 {
     noiseGate.reset();
     noiseGate.prepare(spec);
     
     noiseGate.setThreshold(thresh);
-    noiseGate.setRatio(ratio);
-    noiseGate.setAttack(attack);
-    noiseGate.setRelease(release);
+    noiseGate.setRatio(3.0f);
+    noiseGate.setAttack(20.0f);
+    noiseGate.setRelease(20.0f);
     
     currentThresh = thresh;
-    currentRatio = ratio;
+    /*currentRatio = ratio;
     currentAttack = attack;
-    currentRelease = release;
+    currentRelease = release;*/
 }
 
-void NoiseGateStage::process(juce::dsp::AudioBlock<float> processBlock, float thresh, float ratio, float attack, float release)
+void NoiseGateStage::process(juce::dsp::AudioBlock<float> processBlock, float thresh)//, float ratio, float attack, float release)
 {
     if(thresh != currentThresh)
     {
@@ -44,7 +44,7 @@ void NoiseGateStage::process(juce::dsp::AudioBlock<float> processBlock, float th
         currentThresh = thresh;
     }
     
-    if(ratio != currentRatio)
+    /*if(ratio != currentRatio)
     {
         noiseGate.setRatio(ratio);
         currentRatio = ratio;
@@ -60,7 +60,7 @@ void NoiseGateStage::process(juce::dsp::AudioBlock<float> processBlock, float th
     {
         noiseGate.setRelease(release);
         currentRelease = release;   
-    }
+    }*/
     
     noiseGate.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
