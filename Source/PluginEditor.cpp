@@ -517,13 +517,6 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentNoiseGateRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASENG", sliderNoiseGateRelease);*/
     
     
-    //COMPRESSOR
-    sliderAttachmentCompressorThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLDC", sliderCompressorThresh);
-    sliderAttachmentCompressorRatio = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RATIOC", sliderCompressorRatio);
-    sliderAttachmentCompressorAttack = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "ATTACKC", sliderCompressorAttack);
-    sliderAttachmentCompressorRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASEC", sliderCompressorRelease);
-    
-    
     buttonAttachmentBoost = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "BOOSTONOFF", buttonBoost);
     buttonAttachmentIROnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "IRONOFF", buttonIROnOff);
     
