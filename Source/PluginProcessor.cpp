@@ -34,10 +34,6 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
             }
         }
     };
-    //prepareToPlay(getSampleRate(), getBlockSize());
-    /*gainStage1 = Stage1(getWaveshapeFuncParam(1));
-    gainStage2 = Stage2(getWaveshapeFuncParam(2));
-    gainStage3 = Stage3(getWaveshapeFuncParam(3));*/
 
     treeState.state.addListener(this);
     
@@ -79,7 +75,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
                                                                                     "HardClip",
                                                                                     "Screamer"
                                                                                 },
-                                                                                    3));
+                                                                                    0));
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN2", 1}, "Gain2", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX2", 1}, "Mix2", 0.0f, 1.0f, 0.5f));
@@ -94,7 +90,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
                                                                                     "HardClip",
                                                                                     "Screamer"
                                                                                 },
-                                                                                    3));
+                                                                                    4));
     
     
     
@@ -111,7 +107,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
                                                                                     "HardClip",
                                                                                     "Screamer"
                                                                                 },
-                                                                                    3));
+                                                                                    6));
     
     //EQs
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"LOW", 1}, "Low", 0.0f, 2.0f, 1.0f));
@@ -123,12 +119,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     /*params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RATIONG", 1}, "Ratio", 1, 10, 1));
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"ATTACKNG", 1}, "Attack", 1, 300, 20));
     params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASENG", 1}, "Release", 1, 700, 20));*/
-    
-    //Compressor
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDC", 1}, "Threshold", -12, 6, 1));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RATIOC", 1}, "Ratio", 1, 10, 1));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"ATTACKC", 1}, "Attack", 1, 100, 20));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASEC", 1}, "Release", 1, 200, 20));
     
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"BOOSTONOFF", 1}, "BoostOnOff", false));
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"IRONOFF", 1}, "IROnOff", false));

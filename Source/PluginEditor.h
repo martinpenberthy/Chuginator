@@ -127,22 +127,7 @@ private:
     juce::Label labelNoiseGateRelease;
     juce::Label labelNoiseGateReleaseVal;*/
 
-    //Compressor
-    juce::Slider sliderCompressorThresh;
-    juce::Label labelCompressorThresh;
-    juce::Label labelCompressorThreshVal;
-    
-    juce::Slider sliderCompressorRatio;
-    juce::Label labelCompressorRatio;
-    juce::Label labelCompressorRatioVal;
 
-    juce::Slider sliderCompressorAttack;
-    juce::Label labelCompressorAttack;
-    juce::Label labelCompressorAttackVal;
-    
-    juce::Slider sliderCompressorRelease;
-    juce::Label labelCompressorRelease;
-    juce::Label labelCompressorReleaseVal;
     
     juce::ToggleButton buttonBoost;
     juce::Label labelBoostButton;
