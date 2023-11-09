@@ -42,13 +42,13 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
     
     presetManager = std::make_unique<Service::PresetManager>(treeState);
     
-    debugFile.open("/Users/martinpenberthy/Desktop/debugFile.txt");
+    //debugFile.open("/Users/martinpenberthy/Desktop/debugFile.txt");
 }
 
 ChuginatorAudioProcessor::~ChuginatorAudioProcessor()
 {
     treeState.state.removeListener(this);
-    debugFile.close();
+    //debugFile.close();
 }
 
 
@@ -115,11 +115,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"HIGH", 1}, "High", 0.0f, 2.0f, 1.0f));
     
     //Noise Gate
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDNG", 1}, "Threshold", -96, 6, 1));
-    /*params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RATIONG", 1}, "Ratio", 1, 10, 1));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"ATTACKNG", 1}, "Attack", 1, 300, 20));
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"RELEASENG", 1}, "Release", 1, 700, 20));*/
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDNG", 1}, "ThresholdNG", -96, 6, 0));
     
+    //Boost
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"BOOSTONOFF", 1}, "BoostOnOff", false));
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"IRONOFF", 1}, "IROnOff", false));
     
@@ -272,16 +270,6 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     /*=====================================================================*/
     //Noise Gate
     noiseGateStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLDNG"));
-                                 /*treeState.getRawParameterValue("RATIONG"),
-                                 *treeState.getRawParameterValue("ATTACKNG"),
-                                 *treeState.getRawParameterValue("RELEASENG"));*/
-    
-    /*=====================================================================*/
-    //Compressor
-   /* compressorStage.prepare(spec, *treeState.getRawParameterValue("THRESHOLDC"),
-                                 *treeState.getRawParameterValue("RATIOC"),
-                                 *treeState.getRawParameterValue("ATTACKC"),
-                                 *treeState.getRawParameterValue("RELEASEC"));*/
     
     
     /*=====================================================================*/
@@ -478,12 +466,9 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
    
     //NOISEGATE
     noiseGateStage.process(processBlock,
-                           *treeState.getRawParameterValue("THRESHOLDNG"));/*,
-                           *treeState.getRawParameterValue("RATIONG"),
-                           *treeState.getRawParameterValue("ATTACKNG"),
-                           *treeState.getRawParameterValue("RELEASENG"));*/
-    
-    
+                           *treeState.getRawParameterValue("THRESHOLDNG"));
+
+
 
     
     /*=====================================================================*/

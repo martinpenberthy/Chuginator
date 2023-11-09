@@ -379,60 +379,6 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelNoiseGateThreshVal.setText(juce::String(sliderNoiseGateThresh.getValue()), juce::dontSendNotification);
     labelNoiseGateThreshVal.setLookAndFeel(&lookAndFeel);
     
-    //Ratio
-    /*addAndMakeVisible(sliderNoiseGateRatio);
-    addAndMakeVisible(labelNoiseGateRatio);
-    addAndMakeVisible(labelNoiseGateRatioVal);
-    
-    setSliderPropertiesVertical(&sliderNoiseGateRatio);
-    sliderNoiseGateRatio.setLookAndFeel(&lookAndFeel);
-    labelNoiseGateRatio.setText("Rat", juce::dontSendNotification);
-    labelNoiseGateRatio.setLookAndFeel(&lookAndFeel);
-    
-    sliderNoiseGateRatio.onValueChange = [this]()
-    {
-        labelNoiseGateRatioVal.setText(juce::String(sliderNoiseGateRatio.getValue()), juce::dontSendNotification);
-    };
-    
-    labelNoiseGateRatioVal.setText(juce::String(sliderNoiseGateRatio.getValue()), juce::dontSendNotification);
-    labelNoiseGateRatioVal.setLookAndFeel(&lookAndFeel);
-    
-    //Attack
-    addAndMakeVisible(sliderNoiseGateAttack);
-    addAndMakeVisible(labelNoiseGateAttack);
-    addAndMakeVisible(labelNoiseGateAttackVal);
-    
-    setSliderPropertiesVertical(&sliderNoiseGateAttack);
-    sliderNoiseGateAttack.setLookAndFeel(&lookAndFeel);
-    labelNoiseGateAttack.setText("A", juce::dontSendNotification);
-    labelNoiseGateAttack.setLookAndFeel(&lookAndFeel);
-    
-    sliderNoiseGateAttack.onValueChange = [this]()
-    {
-        labelNoiseGateAttackVal.setText(juce::String(sliderNoiseGateAttack.getValue()), juce::dontSendNotification);
-    };
-    
-    labelNoiseGateAttackVal.setText(juce::String(sliderNoiseGateAttack.getValue()), juce::dontSendNotification);
-    labelNoiseGateAttackVal.setLookAndFeel(&lookAndFeel);
-    
-    //Release
-    addAndMakeVisible(sliderNoiseGateRelease);
-    addAndMakeVisible(labelNoiseGateRelease);
-    addAndMakeVisible(labelNoiseGateReleaseVal);
-    
-    setSliderPropertiesVertical(&sliderNoiseGateRelease);
-    sliderNoiseGateRelease.setLookAndFeel(&lookAndFeel);
-    labelNoiseGateRelease.setText("R", juce::dontSendNotification);
-    labelNoiseGateRelease.setLookAndFeel(&lookAndFeel);
-    
-    sliderNoiseGateRelease.onValueChange = [this]()
-    {
-        labelNoiseGateReleaseVal.setText(juce::String(sliderNoiseGateRelease.getValue()), juce::dontSendNotification);
-    };
-    
-    labelNoiseGateReleaseVal.setText(juce::String(sliderNoiseGateRelease.getValue()), juce::dontSendNotification);
-    labelNoiseGateReleaseVal.setLookAndFeel(&lookAndFeel);*/
-    
     
     makeSliderAttachments();
 }
@@ -512,10 +458,7 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     
     //NOISE GATE
     sliderAttachmentNoiseGateThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLDNG", sliderNoiseGateThresh);
-    /*sliderAttachmentNoiseGateRatio = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RATIONG", sliderNoiseGateRatio);
-    sliderAttachmentNoiseGateAttack = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "ATTACKNG", sliderNoiseGateAttack);
-    sliderAttachmentNoiseGateRelease = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "RELEASENG", sliderNoiseGateRelease);*/
-    
+
     
     buttonAttachmentBoost = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "BOOSTONOFF", buttonBoost);
     buttonAttachmentIROnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "IRONOFF", buttonIROnOff);
@@ -785,22 +728,6 @@ void ChuginatorAudioProcessorEditor::resized()
     sliderNoiseGateThresh.setBounds(leftOffset - 20, getHeight() - 110, knobSizeLarge, knobSizeLarge);
     labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() + 65, 40, 38);
-    
-    /*sliderNoiseGateRatio.setBounds(sliderNoiseGateThresh.getX() + 35, sliderNoiseGateThresh.getY(), 50, 90);
-    labelNoiseGateRatio.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelNoiseGateRatioVal.setBounds(sliderNoiseGateRatio.getX(), sliderNoiseGateRatio.getY() + 65, 40, 38);
-
-    
-    sliderNoiseGateAttack.setBounds(sliderNoiseGateRatio.getX() + 35, sliderNoiseGateRatio.getY(), 50, 90);
-    labelNoiseGateAttack.setBounds(sliderNoiseGateAttack.getX() + 10, sliderNoiseGateAttack.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelNoiseGateAttackVal.setBounds(sliderNoiseGateAttack.getX(), sliderNoiseGateAttack.getY() + 65, 40, 38);
-
-    
-    sliderNoiseGateRelease.setBounds(sliderNoiseGateAttack.getX() + 35, sliderNoiseGateAttack.getY(), 50, 90);
-    labelNoiseGateRelease.setBounds(sliderNoiseGateRelease.getX() + 10, sliderNoiseGateRelease.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelNoiseGateReleaseVal.setBounds(sliderNoiseGateRelease.getX(), sliderNoiseGateRelease.getY() + 65, 40, 38);*/
-
-        
 
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
     irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 150, 25);

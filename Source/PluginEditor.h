@@ -114,19 +114,6 @@ private:
     juce::Slider sliderNoiseGateThresh;
     juce::Label labelNoiseGateThresh;
     juce::Label labelNoiseGateThreshVal;
-    
-    /*juce::Slider sliderNoiseGateRatio;
-    juce::Label labelNoiseGateRatio;
-    juce::Label labelNoiseGateRatioVal;
-
-    juce::Slider sliderNoiseGateAttack;
-    juce::Label labelNoiseGateAttack;
-    juce::Label labelNoiseGateAttackVal;
-    
-    juce::Slider sliderNoiseGateRelease;
-    juce::Label labelNoiseGateRelease;
-    juce::Label labelNoiseGateReleaseVal;*/
-
 
     
     juce::ToggleButton buttonBoost;
@@ -161,14 +148,6 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentFilterLowGain;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateThresh;
-    /*std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateRatio;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateAttack;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentNoiseGateRelease;*/
-
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorThresh;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorRatio;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorAttack;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentCompressorRelease;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentBoost;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachmentIROnOff;

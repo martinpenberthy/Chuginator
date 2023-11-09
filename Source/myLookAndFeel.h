@@ -9,7 +9,6 @@
 */
 
 #pragma once
-#pragma once
 class myLookAndFeel : public juce::LookAndFeel_V4
 {
 public:
