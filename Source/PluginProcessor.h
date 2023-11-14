@@ -107,9 +107,10 @@ private:
     //GAIN1
     Stage1 gainStage1;
 
-    Stage2 gainStage2;
-
-    Stage3 gainStage3;
+    //Stage2 gainStage2;
+    Stage1 gainStage2;
+   // Stage3 gainStage3;
+    Stage1 gainStage3;
     
     EQStage EQStage;
     

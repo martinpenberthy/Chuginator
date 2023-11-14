@@ -217,7 +217,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     internalEQ.prepare(spec, sampleRate);
     
     /*=====================================================================*/
-    //gainStage1.distTypeListCopy = distTypeList;
+    //gainStage1.distTypeListCopy = distTypeList;       
     /*std::string gainStage1Func = getWaveshapeFuncParam(1);
     setFunctionToUse(1, gainStage1Func);
     waveshapeFunction1 = gainStage1Func;*/
