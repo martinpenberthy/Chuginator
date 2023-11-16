@@ -9,9 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "Stage1.h"
-#include "Stage2.h"
-#include "Stage3.h"
+#include "GainStage.h"
 #include "EQStage.h"
 #include "EQInternal.h"
 #include "NoiseGateStage.h"
@@ -105,12 +103,12 @@ private:
     
     EQInternal internalEQ;
     //GAIN1
-    Stage1 gainStage1;
+    GainStage gainStage1;
 
     //Stage2 gainStage2;
-    Stage1 gainStage2;
+    GainStage gainStage2;
    // Stage3 gainStage3;
-    Stage1 gainStage3;
+    GainStage gainStage3;
     
     EQStage EQStage;
     

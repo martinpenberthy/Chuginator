@@ -25,12 +25,8 @@
             file="Source/NoiseGateStage.h"/>
       <FILE id="OjKCbA" name="EQStage.cpp" compile="1" resource="0" file="Source/EQStage.cpp"/>
       <FILE id="lpfX4w" name="EQStage.h" compile="0" resource="0" file="Source/EQStage.h"/>
-      <FILE id="EdgfEE" name="Stage3.cpp" compile="1" resource="0" file="Source/Stage3.cpp"/>
-      <FILE id="LGxJkN" name="Stage3.h" compile="0" resource="0" file="Source/Stage3.h"/>
-      <FILE id="ZhibO7" name="Stage2.cpp" compile="1" resource="0" file="Source/Stage2.cpp"/>
-      <FILE id="MHdnRV" name="Stage2.h" compile="0" resource="0" file="Source/Stage2.h"/>
-      <FILE id="vxYn1b" name="Stage1.cpp" compile="1" resource="0" file="Source/Stage1.cpp"/>
-      <FILE id="kSlvM5" name="Stage1.h" compile="0" resource="0" file="Source/Stage1.h"/>
+      <FILE id="vxYn1b" name="GainStage.cpp" compile="1" resource="0" file="Source/GainStage.cpp"/>
+      <FILE id="kSlvM5" name="GainStage.h" compile="0" resource="0" file="Source/GainStage.h"/>
       <FILE id="bwffew" name="myLookAndFeel.h" compile="0" resource="0" file="Source/myLookAndFeel.h"/>
       <FILE id="LWyAtH" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

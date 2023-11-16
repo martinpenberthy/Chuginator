@@ -8,23 +8,23 @@
   ==============================================================================
 */
 
-#include "Stage1.h"
+#include "GainStage.h"
 
 
-Stage1::Stage1(std::string func)
+GainStage::GainStage(std::string func)
 {
     setWaveshapeFunc(func);
 }
 
-Stage1::Stage1()
+GainStage::GainStage()
 {
 }
 
-Stage1::~Stage1()
+GainStage::~GainStage()
 {
 }
 
-void Stage1::prepare(juce::dsp::ProcessSpec spec, float preGain, float mix)
+void GainStage::prepare(juce::dsp::ProcessSpec spec, float preGain, float mix)
 {
     
     //PREGAIN1
@@ -50,7 +50,7 @@ void Stage1::prepare(juce::dsp::ProcessSpec spec, float preGain, float mix)
 }
 
 
-void Stage1::process(juce::dsp::AudioBlock<float> drySampsBlock, juce::dsp::AudioBlock<float> processBlock, float preGain, float mix)
+void GainStage::process(juce::dsp::AudioBlock<float> drySampsBlock, juce::dsp::AudioBlock<float> processBlock, float preGain, float mix)
 {
     //juce::dsp::AudioBlock<float> drySampsBlock1 (buffer);
     mix1.pushDrySamples(drySampsBlock);
@@ -68,8 +68,7 @@ void Stage1::process(juce::dsp::AudioBlock<float> drySampsBlock, juce::dsp::Audi
 }
 
 
-
-void Stage1::setWaveshapeFunc(std::string func)
+void GainStage::setWaveshapeFunc(std::string func)
 {
     if(func == "Amp1")
     {
