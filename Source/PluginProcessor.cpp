@@ -39,6 +39,7 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
     
     treeState.state.setProperty(Service::PresetManager::presetNameProperty, "", nullptr);
     treeState.state.setProperty("version", ProjectInfo::versionString, nullptr);
+    treeState.state.appendChild(variableTree, nullptr);
     
     presetManager = std::make_unique<Service::PresetManager>(treeState);
     
