@@ -79,7 +79,7 @@ public:
     
     juce::File root, savedFile;
     juce::dsp::Convolution irLoader;
-    juce::ValueTree variableTree;
+    juce::ValueTree IRFilePathTree;
 
     
     std::string waveshapeFunction1;

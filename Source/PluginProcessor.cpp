@@ -22,7 +22,7 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
                        ), treeState(*this, nullptr, juce::Identifier("PARAMETERS"), createParameterLayout())
 #endif
 {
-    variableTree =
+    IRFilePathTree =
     {
         "Variables", {},
         {
@@ -39,7 +39,7 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
     
     treeState.state.setProperty(Service::PresetManager::presetNameProperty, "", nullptr);
     treeState.state.setProperty("version", ProjectInfo::versionString, nullptr);
-    treeState.state.appendChild(variableTree, nullptr);
+    //treeState.state.appendChild(IRFilePathTree, nullptr);
     
     presetManager = std::make_unique<Service::PresetManager>(treeState);
     
@@ -123,7 +123,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"IRONOFF", 1}, "IROnOff", false));
     
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"OUTPUTGAIN", 1}, "OutputGain", -96.0f, 48.0f, 0.0f));
-
+    //std::make_unique<juce::ValueTree
+    
     return {params.begin(), params.end()};
 }
 
@@ -584,7 +585,7 @@ juce::AudioProcessorEditor* ChuginatorAudioProcessor::createEditor()
 //==============================================================================
 void ChuginatorAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    treeState.state.appendChild(variableTree, nullptr);
+    treeState.state.appendChild(IRFilePathTree, nullptr);
     juce::MemoryOutputStream stream(destData, false);
     treeState.state.writeToStream(stream);
 }
@@ -592,14 +593,14 @@ void ChuginatorAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 void ChuginatorAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     auto tree = juce::ValueTree::readFromData(data, size_t(sizeInBytes));
-    variableTree = tree.getChildWithName("Variables");
+    IRFilePathTree = tree.getChildWithName("Variables");
 
     if(tree.isValid())
     {
         treeState.state = tree;
         
-        savedFile = juce::File(variableTree.getProperty("file1"));
-        root = juce::File(variableTree.getProperty("root"));
+        savedFile = juce::File(IRFilePathTree.getProperty("file1"));
+        root = juce::File(IRFilePathTree.getProperty("root"));
         
         irLoader.loadImpulseResponse(savedFile, juce::dsp::Convolution::Stereo::yes, juce::dsp::Convolution::Trim::yes, 0);
     }

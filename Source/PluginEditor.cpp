@@ -411,8 +411,8 @@ void ChuginatorAudioProcessorEditor::fileLoader()
             audioProcessor.savedFile = result;
             audioProcessor.root = result.getParentDirectory().getFullPathName();
             
-            audioProcessor.variableTree.setProperty("file1", result.getFullPathName(), nullptr);
-            audioProcessor.variableTree.setProperty("root", result.getParentDirectory().getFullPathName(), nullptr);
+            audioProcessor.IRFilePathTree.setProperty("file1", result.getFullPathName(), nullptr);
+            audioProcessor.IRFilePathTree.setProperty("root", result.getParentDirectory().getFullPathName(), nullptr);
             
             
             audioProcessor.irLoader.reset();
