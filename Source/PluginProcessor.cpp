@@ -43,13 +43,13 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
     
     presetManager = std::make_unique<Service::PresetManager>(treeState);
     
-    //debugFile.open("/Users/martinpenberthy/Desktop/debugFile.txt");
+    debugFile.open("/Users/martinpenberthy/Desktop/debugFile.txt");
 }
 
 ChuginatorAudioProcessor::~ChuginatorAudioProcessor()
 {
     treeState.state.removeListener(this);
-    //debugFile.close();
+    debugFile.close();
 }
 
 
@@ -228,7 +228,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     
     //debugFile << *waveshapeInitFunction1;
     setFunctionToUse(1, getParamIntToString(((int) * waveshapeInitFunction1)));
-    debugFile <<  getParamIntToString(((int) * waveshapeInitFunction1));
+    //debugFile <<  getParamIntToString(((int) * waveshapeInitFunction1));
     
     gainStage1.prepare(spec, *treeState.getRawParameterValue("PREGAIN1"),
                              *treeState.getRawParameterValue("MIX1"));
@@ -241,7 +241,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     setFunctionToUse(2, gainStage2Func);
     waveshapeFunction2 = gainStage2Func;
     
-    debugFile << gainStage2Func;
+    //debugFile << gainStage2Func;
     
     gainStage2.prepare(spec, *treeState.getRawParameterValue("PREGAIN2"),
                              *treeState.getRawParameterValue("MIX2"));
@@ -254,7 +254,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     setFunctionToUse(3, gainStage3Func);
     waveshapeFunction3 = gainStage3Func;
     
-    debugFile << gainStage3Func;
+    //debugFile << gainStage3Func;
     
     gainStage3.prepare(spec, *treeState.getRawParameterValue("PREGAIN3"),
                              *treeState.getRawParameterValue("MIX3"));
@@ -446,6 +446,8 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    debugFile << IRFilePathTree.toXmlString();
+    
     sanitizeBuffer(buffer);
     /*=====================================================================*/
     //INPUTGAIN
@@ -483,7 +485,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
         setFunctionToUse(1, getParamIntToString(((int) * waveshapeInitFunction1) + 1));
         
-        debugFile << getParamIntToString(((int) * waveshapeInitFunction1) + 1);
+        //debugFile << getParamIntToString(((int) * waveshapeInitFunction1) + 1);
         juce::dsp::AudioBlock<float> drySampsBlock1 (buffer);
         
         gainStage1.process(drySampsBlock1, processBlock,
@@ -505,7 +507,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         auto waveshapeInitFunction2 = treeState.getRawParameterValue("TYPE2");
         setFunctionToUse(2, getParamIntToString(((int) * waveshapeInitFunction2) + 1));
         
-        debugFile << getParamIntToString(((int) * waveshapeInitFunction2) + 1);
+        //debugFile << getParamIntToString(((int) * waveshapeInitFunction2) + 1);
         
         juce::dsp::AudioBlock<float> drySampsBlock2 (buffer);
         
@@ -526,7 +528,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         auto waveshapeInitFunction3 = treeState.getRawParameterValue("TYPE3");
         setFunctionToUse(3, getParamIntToString(((int) * waveshapeInitFunction3) + 1));
         
-        debugFile << getParamIntToString(((int) * waveshapeInitFunction3) + 1);
+        //debugFile << getParamIntToString(((int) * waveshapeInitFunction3) + 1);
         
         juce::dsp::AudioBlock<float> drySampsBlock3 (buffer);
         
