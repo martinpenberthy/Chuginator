@@ -39,8 +39,8 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
     
     treeState.state.setProperty(Service::PresetManager::presetNameProperty, "", nullptr);
     treeState.state.setProperty("version", ProjectInfo::versionString, nullptr);
-    //treeState.state.appendChild(IRFilePathTree, nullptr);
-    
+
+
     presetManager = std::make_unique<Service::PresetManager>(treeState);
     
     debugFile.open("/Users/martinpenberthy/Desktop/debugFile.txt");
@@ -287,9 +287,12 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     outputGain.setGainDecibels(*treeState.getRawParameterValue("OUTPUTGAIN"));
     
     /*=====================================================================*/
+    
     //Prepare convolution
     irLoader.reset();
     irLoader.prepare(spec);
+    
+    
     
     if(savedFile.existsAsFile())
     {
@@ -610,6 +613,8 @@ void ChuginatorAudioProcessor::setStateInformation (const void* data, int sizeIn
         
         irLoader.loadImpulseResponse(savedFile, juce::dsp::Convolution::Stereo::yes, juce::dsp::Convolution::Trim::yes, 0);
     }
+    
+    debugFile << "Set state called" << std::endl;
 }
 
 //==============================================================================
