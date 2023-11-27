@@ -44,6 +44,8 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
     presetManager = std::make_unique<Service::PresetManager>(treeState);
     
     debugFile.open("/Users/martinpenberthy/Desktop/debugFile.txt");
+    
+    debugFile << "From treeState: " << treeState.state.toXmlString() << std::endl;
 }
 
 ChuginatorAudioProcessor::~ChuginatorAudioProcessor()
@@ -587,6 +589,7 @@ juce::AudioProcessorEditor* ChuginatorAudioProcessor::createEditor()
 //==============================================================================
 void ChuginatorAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
+    
     treeState.state.appendChild(IRFilePathTree, nullptr);
     juce::MemoryOutputStream stream(destData, false);
     treeState.state.writeToStream(stream);
@@ -597,6 +600,7 @@ void ChuginatorAudioProcessor::setStateInformation (const void* data, int sizeIn
     auto tree = juce::ValueTree::readFromData(data, size_t(sizeInBytes));
     IRFilePathTree = tree.getChildWithName("Variables");
 
+    
     if(tree.isValid())
     {
         treeState.state = tree;
