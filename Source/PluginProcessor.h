@@ -90,7 +90,7 @@ public:
     
     std::string waveshapeFunction3;
     std::string waveshapeFunctionCurrent3;
-    
+    std::unique_ptr<Service::PresetManager> presetManager;
 private:
     juce::dsp::ProcessSpec spec;
 
@@ -119,7 +119,7 @@ private:
     
     std::ofstream debugFile;
     
-    std::unique_ptr<Service::PresetManager> presetManager;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChuginatorAudioProcessor)
 };

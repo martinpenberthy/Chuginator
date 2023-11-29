@@ -42,7 +42,8 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
 
 
     presetManager = std::make_unique<Service::PresetManager>(treeState);//, irLoader);
-    presetManager->setConv(&irLoader);
+    //presetManager->setConv(&irLoader);
+    
     
     debugFile.open("/Users/martinpenberthy/Desktop/debugFile.txt");
     
@@ -452,7 +453,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    debugFile << IRFilePathTree.toXmlString();
+    //debugFile << IRFilePathTree.toXmlString();
     
     sanitizeBuffer(buffer);
     /*=====================================================================*/
