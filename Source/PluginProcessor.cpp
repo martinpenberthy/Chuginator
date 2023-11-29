@@ -294,6 +294,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     irLoader.reset();
     irLoader.prepare(spec);
     
+    //auto IRToLoad = Service::PresetManager::defaultDirectory.get
     
     
     if(savedFile.existsAsFile())
