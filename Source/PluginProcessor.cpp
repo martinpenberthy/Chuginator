@@ -208,6 +208,8 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     spec.maximumBlockSize = samplesPerBlock;
     spec.numChannels = getTotalNumOutputChannels();
     
+    debugFile << "PrepareToPlay called" << std::endl;
+    
     //INPUTGAIN
     inputGain.reset();
     inputGain.prepare(spec);
@@ -561,6 +563,12 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         sanitizeBuffer(buffer);
     }
     
+    //Get potential file to load
+    /*auto IRFileToLoad = Service::PresetManager::defaultDirectory.getChildFile(Service::PresetManager::defaultDirectory.getFullPathName().toStdString() + "/IRFile.txt");
+    if(IRFileToLoad.existsAsFile())
+    {
+        
+    }*/
 
     //If there is an IR loaded, process it
     if(*treeState.getRawParameterValue("IRONOFF"))
@@ -600,6 +608,8 @@ void ChuginatorAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
     juce::MemoryOutputStream stream(destData, false);
     treeState.state.writeToStream(stream);
 }
+
+
 
 void ChuginatorAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {

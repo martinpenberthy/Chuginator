@@ -48,6 +48,8 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     //Slider
     setSliderPropertiesRotary(&sliderInputGain);
     sliderInputGain.setLookAndFeel(&lookAndFeel);
+    sliderInputGain.setSkewFactor(0.1f);
+    
     //Label
     labelInputGain.setText("Input(dB)", juce::dontSendNotification);
     labelInputGain.setLookAndFeel(&lookAndFeel);
@@ -92,6 +94,8 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     //Slider
     setSliderPropertiesRotary(&sliderOutputGain);
     sliderOutputGain.setLookAndFeel(&lookAndFeel);
+    sliderOutputGain.setSkewFactor(0.1f);
+    
     //Label
     labelOutputGain.setText("Output(dB)", juce::dontSendNotification);
     labelOutputGain.setLookAndFeel(&lookAndFeel);

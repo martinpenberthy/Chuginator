@@ -72,6 +72,8 @@ public:
     std::string getWaveshapeFuncParam(int gainStageNum);
     std::string getParamIntToString(int numOfDistType);
     
+    //void loadIR(juce::File
+    
     void sanitizeBuffer(juce::AudioBuffer<float>& buffer);
     Service::PresetManager& getPresetManager(){return *presetManager;}
     
