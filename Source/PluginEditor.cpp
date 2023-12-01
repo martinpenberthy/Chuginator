@@ -48,7 +48,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     //Slider
     setSliderPropertiesRotary(&sliderInputGain);
     sliderInputGain.setLookAndFeel(&lookAndFeel);
-    sliderInputGain.setSkewFactor(0.1f);
+    sliderInputGain.setSkewFactor(5.0f);
     
     //Label
     labelInputGain.setText("Input(dB)", juce::dontSendNotification);

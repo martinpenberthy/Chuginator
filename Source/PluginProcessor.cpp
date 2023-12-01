@@ -297,7 +297,7 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     irLoader.prepare(spec);
     
     //auto IRToLoad = Service::PresetManager::defaultDirectory.get
-    
+
     
     if(savedFile.existsAsFile())
     {
@@ -572,8 +572,19 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
 
     //If there is an IR loaded, process it
     if(*treeState.getRawParameterValue("IRONOFF"))
+    {
+        //Try to get the IRFile text document
+        juce::File IRToLoad = juce::File(Service::PresetManager::defaultDirectory.getFullPathName() + "/IRFile.txt");
+        //If it exists
+        if(IRToLoad.existsAsFile())
+        {
+            auto IRXML = juce::XmlDocument(IRToLoad).getDocumentElement();
+            auto IRValueTree = juce::ValueTree::fromXml(*IRXML);
+        }
+        
         if(irLoader.getCurrentIRSize() > 0)
             irLoader.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
+    }
     
     /*=====================================================================*/
     //OUTPUTGAIN
