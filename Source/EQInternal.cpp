@@ -26,7 +26,7 @@ void EQInternal::prepare(juce::dsp::ProcessSpec spec, double sampleRate)
     //*highBoostEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 2300.0f, 1.0f, 3.0f);
     internalLowEQ.reset();
     internalLowEQ.prepare(spec);
-    *internalLowEQ.state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, 400.0f, 0.4f, 0.1f);
+    *internalLowEQ.state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, 400.0f, 0.4f, 0.2f);
 
 }
 

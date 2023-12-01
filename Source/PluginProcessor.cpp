@@ -41,9 +41,7 @@ ChuginatorAudioProcessor::ChuginatorAudioProcessor()
     treeState.state.setProperty("version", ProjectInfo::versionString, nullptr);
 
 
-    presetManager = std::make_unique<Service::PresetManager>(treeState);//, irLoader);
-    //presetManager->setConv(&irLoader);
-    
+    presetManager = std::make_unique<Service::PresetManager>(treeState);
     
     debugFile.open("/Users/martinpenberthy/Desktop/debugFile.txt");
     
@@ -120,15 +118,14 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"HIGH", 1}, "High", 0.0f, 2.0f, 1.0f));
     
     //Noise Gate
-    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDNG", 1}, "ThresholdNG", -96, 6, 0));
+    params.push_back(std::make_unique<juce::AudioParameterInt>(juce::ParameterID{"THRESHOLDNG", 1}, "ThresholdNG", -96, 6, -55  ));
     
     //Boost
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"BOOSTONOFF", 1}, "BoostOnOff", false));
     params.push_back(std::make_unique<juce::AudioParameterBool>(juce::ParameterID {"IRONOFF", 1}, "IROnOff", false));
     
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"OUTPUTGAIN", 1}, "OutputGain", -96.0f, 48.0f, 0.0f));
-    //std::make_unique<juce::ValueTree
-    
+
     return {params.begin(), params.end()};
 }
 
@@ -225,11 +222,6 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     internalEQ.prepare(spec, sampleRate);
     
     /*=====================================================================*/
-    //gainStage1.distTypeListCopy = distTypeList;       
-    /*std::string gainStage1Func = getWaveshapeFuncParam(1);
-    setFunctionToUse(1, gainStage1Func);
-    waveshapeFunction1 = gainStage1Func;*/
-    
     auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
     
     //debugFile << *waveshapeInitFunction1;
@@ -295,9 +287,6 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     //Prepare convolution
     irLoader.reset();
     irLoader.prepare(spec);
-    
-    //auto IRToLoad = Service::PresetManager::defaultDirectory.get
-
     
     if(savedFile.existsAsFile())
     {
@@ -455,8 +444,6 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     // this code if your algorithm always overwrites all the output channels.
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-
-    //debugFile << IRFilePathTree.toXmlString();
     
     sanitizeBuffer(buffer);
     /*=====================================================================*/
@@ -474,28 +461,19 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     updatePreEQ();
     preEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
 
-    /*if(*treeState.getRawParameterValue("EQTESTONOFF"))
-        internalEQ.process(processBlock, getSampleRate());*/
     internalEQ.process(processBlock, getSampleRate());
    
     //NOISEGATE
     noiseGateStage.process(processBlock,
                            *treeState.getRawParameterValue("THRESHOLDNG"));
 
-
-
     
     /*=====================================================================*/
     if(*treeState.getRawParameterValue("GAIN1ONOFF"))
     {
-        //Update waveshape function if needed
-        //if(waveshapeFunction1 != waveshapeFunctionCurrent1)
-            //setFunctionToUse(1, waveshapeFunction1);
-        
         auto waveshapeInitFunction1 = treeState.getRawParameterValue("TYPE1");
         setFunctionToUse(1, getParamIntToString(((int) * waveshapeInitFunction1) + 1));
-        
-        //debugFile << getParamIntToString(((int) * waveshapeInitFunction1) + 1);
+
         juce::dsp::AudioBlock<float> drySampsBlock1 (buffer);
         
         gainStage1.process(drySampsBlock1, processBlock,
@@ -505,20 +483,12 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         sanitizeBuffer(buffer);
     }
     
-    
     /*=====================================================================*/
-
     if(*treeState.getRawParameterValue("GAIN2ONOFF"))
     {
-        //Update waveshape function if needed
-        //if(waveshapeFunction2 != waveshapeFunctionCurrent2)
-            //setFunctionToUse(2, waveshapeFunction2);
-        
         auto waveshapeInitFunction2 = treeState.getRawParameterValue("TYPE2");
         setFunctionToUse(2, getParamIntToString(((int) * waveshapeInitFunction2) + 1));
-        
-        //debugFile << getParamIntToString(((int) * waveshapeInitFunction2) + 1);
-        
+
         juce::dsp::AudioBlock<float> drySampsBlock2 (buffer);
         
         gainStage2.process(drySampsBlock2, processBlock,
@@ -527,18 +497,12 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         
         sanitizeBuffer(buffer);
     }
-    /*=====================================================================*/
     
+    /*=====================================================================*/
     if(*treeState.getRawParameterValue("GAIN3ONOFF"))
     {
-        //Update waveshape function if needed
-        //if(waveshapeFunction3 != waveshapeFunctionCurrent3)
-            //setFunctionToUse(3, waveshapeFunction3);
-        
         auto waveshapeInitFunction3 = treeState.getRawParameterValue("TYPE3");
         setFunctionToUse(3, getParamIntToString(((int) * waveshapeInitFunction3) + 1));
-        
-        //debugFile << getParamIntToString(((int) * waveshapeInitFunction3) + 1);
         
         juce::dsp::AudioBlock<float> drySampsBlock3 (buffer);
         
@@ -549,7 +513,6 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         sanitizeBuffer(buffer);
     }
 
-    
     
     EQStage.process(*treeState.getRawParameterValue("LOW"),
                     *treeState.getRawParameterValue("MID"),
@@ -562,27 +525,24 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         boostStage.process(processBlock, juce::dsp::AudioBlock<float>(buffer), getSampleRate());
         sanitizeBuffer(buffer);
     }
-    
-    //Get potential file to load
-    /*auto IRFileToLoad = Service::PresetManager::defaultDirectory.getChildFile(Service::PresetManager::defaultDirectory.getFullPathName().toStdString() + "/IRFile.txt");
-    if(IRFileToLoad.existsAsFile())
-    {
-        
-    }*/
 
     //If there is an IR loaded, process it
     if(*treeState.getRawParameterValue("IRONOFF"))
     {
         //Try to get the IRFile text document
         juce::File IRToLoad = juce::File(Service::PresetManager::defaultDirectory.getFullPathName() + "/IRFile.txt");
-        //If it exists
+        //If it exists load it
         if(IRToLoad.existsAsFile())
         {
+            //Make the file an XML element
             auto IRXML = juce::XmlDocument(IRToLoad).getDocumentElement();
+            //Get the value tree child info
             auto IRValueTree = juce::ValueTree::fromXml(*IRXML).getChildWithName("Variables");
+            //Make a file out of it
             savedFile = juce::File(IRValueTree.getProperty("file1"));
+            //Load it to the convolver
             irLoader.loadImpulseResponse(savedFile, juce::dsp::Convolution::Stereo::yes, juce::dsp::Convolution::Trim::yes, 0);
-            
+            //Delete the file
             IRToLoad.deleteFile();
         }
         
