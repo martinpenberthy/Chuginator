@@ -579,7 +579,11 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         if(IRToLoad.existsAsFile())
         {
             auto IRXML = juce::XmlDocument(IRToLoad).getDocumentElement();
-            auto IRValueTree = juce::ValueTree::fromXml(*IRXML);
+            auto IRValueTree = juce::ValueTree::fromXml(*IRXML).getChildWithName("Variables");
+            savedFile = juce::File(IRValueTree.getProperty("file1"));
+            irLoader.loadImpulseResponse(savedFile, juce::dsp::Convolution::Stereo::yes, juce::dsp::Convolution::Trim::yes, 0);
+            
+            IRToLoad.deleteFile();
         }
         
         if(irLoader.getCurrentIRSize() > 0)
