@@ -529,7 +529,7 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     //If there is an IR loaded, process it
     if(*treeState.getRawParameterValue("IRONOFF"))
     {
-        //Try to get the IRFile text document
+     /*   //Try to get the IRFile text document
         juce::File IRToLoad = juce::File(Service::PresetManager::defaultDirectory.getFullPathName() + "/IRFile.txt");
         //If it exists load it
         if(IRToLoad.existsAsFile())
@@ -540,12 +540,14 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
             auto IRValueTree = juce::ValueTree::fromXml(*IRXML).getChildWithName("Variables");
             //Make a file out of it
             savedFile = juce::File(IRValueTree.getProperty("file1"));
+            
+            irLoader.reset();
             //Load it to the convolver
             irLoader.loadImpulseResponse(savedFile, juce::dsp::Convolution::Stereo::yes, juce::dsp::Convolution::Trim::yes, 0);
             //Delete the file
             IRToLoad.deleteFile();
-        }
-        
+        }*/
+        //If there is an IR loaded, process it
         if(irLoader.getCurrentIRSize() > 0)
             irLoader.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     }
@@ -583,7 +585,6 @@ void ChuginatorAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
     juce::MemoryOutputStream stream(destData, false);
     treeState.state.writeToStream(stream);
 }
-
 
 
 void ChuginatorAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
