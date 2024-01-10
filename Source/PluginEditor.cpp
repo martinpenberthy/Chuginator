@@ -635,10 +635,15 @@ void ChuginatorAudioProcessorEditor::resized()
     int row4XOffset =  getWidth() / 4;
     int row4YOffset = getHeight() / 4;
             
+    const auto container = getLocalBounds();
+    auto bounds = container;
+    int sliderMargin = 15;
+    
     //ROW1
-    sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
+   /* sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
-    labelInputGainVal.setBounds(sliderInputGain.getX() + 5, sliderInputGain.getY() + 70, 76, 38);
+    labelInputGainVal.setBounds(sliderInputGain.getX() + 5, sliderInputGain.getY() + 70, 76, 38);*/
+    sliderInputGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.3f)).removeFromTop(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
     
     sliderPreEQ.setBounds((getWidth() / 2) - 40, topOffset, knobSizeLarge, knobSizeLarge);
     labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - 15, 76, 38);
@@ -727,6 +732,8 @@ void ChuginatorAudioProcessorEditor::resized()
     labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() + 65, 40, 38);
 
+    
+    
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
     irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 150, 25);
     
@@ -734,9 +741,7 @@ void ChuginatorAudioProcessorEditor::resized()
     buttonBoost.setBounds((getWidth() / 2) + 50, getHeight() - 50, 30, 30);
     labelBoostButton.setBounds(buttonBoost.getX(), buttonBoost.getY() - 30, 50, 20);
     buttonIROnOff.setBounds(irName.getX(), getHeight() - 50, 30, 30);
-    
-    
-    
+
     //genericAudioProcessorEditor.setBounds(getLocalBounds()
      //     .withSizeKeepingCentre(getLocalBounds().proportionOfWidth(0.9f), getLocalBounds().proportionOfHeight(0.5f)));
       

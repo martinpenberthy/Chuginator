@@ -39,7 +39,7 @@ void NoiseGateStage::prepare(juce::dsp::ProcessSpec spec, float thresh)
 }
 
 /*
- * juce::dsp::AudioBlock<float> processBlock : the bblock to process
+ * juce::dsp::AudioBlock<float> processBlock : the block to process
  * float thresh : The threshold value to set and use
  */
 void NoiseGateStage::process(juce::dsp::AudioBlock<float> processBlock, float thresh)
@@ -51,4 +51,6 @@ void NoiseGateStage::process(juce::dsp::AudioBlock<float> processBlock, float th
     }
     noiseGate.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
 }
+
+
 
