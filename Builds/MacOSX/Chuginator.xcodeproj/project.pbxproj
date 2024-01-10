@@ -35,7 +35,6 @@
 		231CC8188CEBFE5584F1EF81 /* include_juce_events.mm */ = {isa = PBXBuildFile; fileRef = 8BDD1EB5C6D6B5F6785A98C9; };
 		25AA42C60FE36D1E73F5079F /* include_juce_gui_extra.mm */ = {isa = PBXBuildFile; fileRef = 90A5E6D692B808956271AE59; };
 		27BA7459EABD52BB8E121102 /* BinaryData.cpp */ = {isa = PBXBuildFile; fileRef = 804D039341CAF891D868AAED; };
-		2DC78630DB4F1E03C99A5C38 /* NoiseGateStage.cpp */ = {isa = PBXBuildFile; fileRef = 47077552D34694090A0A5108; };
 		30E6A0391E4161C0D02A7718 /* DiscRecording.framework */ = {isa = PBXBuildFile; fileRef = 5BD21A374F4B694805C64B7E; };
 		43B9ADB09D2447C60877A29B /* Accelerate.framework */ = {isa = PBXBuildFile; fileRef = ECF78D2C79DE88A28A315668; };
 		4A006F0D8515062B3CB8C856 /* include_juce_gui_basics.mm */ = {isa = PBXBuildFile; fileRef = C1DC06341DC35363CC1C3238; };
@@ -78,6 +77,7 @@
 /* Begin PBXFileReference section */
 		030668EA38A1AB4909E5E7A1 /* BinaryData.h */ /* BinaryData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BinaryData.h; path = ../../JuceLibraryCode/BinaryData.h; sourceTree = SOURCE_ROOT; };
 		0476F20F5299D2E4DE798DBD /* juce_data_structures */ /* juce_data_structures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_data_structures; path = /Applications/JUCE/modules/juce_data_structures; sourceTree = "<absolute>"; };
+		04FEE315271825B5B5C7AA9D /* NoiseGateGUI.h */ /* NoiseGateGUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NoiseGateGUI.h; path = ../../Source/NoiseGateGUI.h; sourceTree = SOURCE_ROOT; };
 		06996AA5275EE5D781CDCD64 /* include_juce_audio_utils.mm */ /* include_juce_audio_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_utils.mm; sourceTree = SOURCE_ROOT; };
 		06EC03D7E8EE30F2AD977681 /* juce_VST3ManifestHelper.mm */ /* juce_VST3ManifestHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_VST3ManifestHelper.mm; path = /Applications/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm; sourceTree = "<absolute>"; };
 		07C731A0D58061A8F1BBCB83 /* NoiseGateStage.h */ /* NoiseGateStage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NoiseGateStage.h; path = ../../Source/NoiseGateStage.h; sourceTree = SOURCE_ROOT; };
@@ -96,7 +96,6 @@
 		3D5861692CC511218BDF4546 /* QuartzCore.framework */ /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		43289CF76EC6F0E010CF2C70 /* VST3 Manifest Helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = juce_vst3_helper; sourceTree = BUILT_PRODUCTS_DIR; };
 		463EEC5B4B25BF4D809ED305 /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
-		47077552D34694090A0A5108 /* NoiseGateStage.cpp */ /* NoiseGateStage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NoiseGateStage.cpp; path = ../../Source/NoiseGateStage.cpp; sourceTree = SOURCE_ROOT; };
 		48E781BF9C76517E1B378880 /* _Logos_Final2_alpha.png */ /* _Logos_Final2_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = _Logos_Final2_alpha.png; path = ../../../../../_MUSIC_/_Logos/_Logos_Final2_alpha.png; sourceTree = SOURCE_ROOT; };
 		49405428DB7A1CA7980894A7 /* juce_gui_extra */ /* juce_gui_extra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_extra; path = /Applications/JUCE/modules/juce_gui_extra; sourceTree = "<absolute>"; };
 		4C87ACA8BA981CAB955A189B /* EQInternal.h */ /* EQInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EQInternal.h; path = ../../Source/EQInternal.h; sourceTree = SOURCE_ROOT; };
@@ -292,7 +291,7 @@
 				B7F0B736D3A59785A4A28E14,
 				CAD639AF4645FAA8942100BC,
 				4C87ACA8BA981CAB955A189B,
-				47077552D34694090A0A5108,
+				04FEE315271825B5B5C7AA9D,
 				07C731A0D58061A8F1BBCB83,
 				B24A948F0616AD98AEFF97EE,
 				1734731AB0060371CE42DCED,
@@ -731,7 +730,6 @@
 				740B67EACCA9B27BE5908738,
 				C4DE85F359D1D0FFF0E047FE,
 				1A85E99EFB66C782B7E478E2,
-				2DC78630DB4F1E03C99A5C38,
 				5EC72B573106C2B27CDB3CF6,
 				DBCB6BF4B77AB4E0EA6FD851,
 				AD6BCA287DD54BF0D3BCADB2,

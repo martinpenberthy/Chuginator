@@ -19,8 +19,7 @@
       <FILE id="heummp" name="BoostStage.h" compile="0" resource="0" file="Source/BoostStage.h"/>
       <FILE id="vloSHh" name="EQInternal.cpp" compile="1" resource="0" file="Source/EQInternal.cpp"/>
       <FILE id="HRZ21q" name="EQInternal.h" compile="0" resource="0" file="Source/EQInternal.h"/>
-      <FILE id="eqWcOr" name="NoiseGateStage.cpp" compile="1" resource="0"
-            file="Source/NoiseGateStage.cpp"/>
+      <FILE id="kLAZjx" name="NoiseGateGUI.h" compile="0" resource="0" file="Source/NoiseGateGUI.h"/>
       <FILE id="dqUVTj" name="NoiseGateStage.h" compile="0" resource="0"
             file="Source/NoiseGateStage.h"/>
       <FILE id="OjKCbA" name="EQStage.cpp" compile="1" resource="0" file="Source/EQStage.cpp"/>

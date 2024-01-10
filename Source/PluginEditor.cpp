@@ -637,20 +637,25 @@ void ChuginatorAudioProcessorEditor::resized()
             
     const auto container = getLocalBounds();
     auto bounds = container;
-    int sliderMargin = 15;
+    int sliderMargin = 18;
     
     //ROW1
    /* sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
     labelInputGainVal.setBounds(sliderInputGain.getX() + 5, sliderInputGain.getY() + 70, 76, 38);*/
-    sliderInputGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.3f)).removeFromTop(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
+    sliderInputGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromTop(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
+    labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - sliderMargin, 76, 38);
+    labelInputGainVal.setBounds(sliderInputGain.getX(), sliderInputGain.getY() + (sliderMargin * 4), 76, 38);
     
-    sliderPreEQ.setBounds((getWidth() / 2) - 40, topOffset, knobSizeLarge, knobSizeLarge);
-    labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - 15, 76, 38);
-    labelPreEQVal.setBounds(sliderPreEQ.getX() + 5, sliderPreEQ.getY() + 70, 76, 38);
+    
+    //sliderPreEQ.setBounds((getWidth() / 2) - 40, topOffset, knobSizeLarge, knobSizeLarge);
+    sliderPreEQ.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromTop(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
+    labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - sliderMargin, 76, 38);
+    labelPreEQVal.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() + (sliderMargin * 4), 76, 38);
 
     
-    sliderOutputGain.setBounds(getWidth() - (leftOffset + knobSizeLarge), topOffset, knobSizeLarge, knobSizeLarge);
+    //sliderOutputGain.setBounds(getWidth() - (leftOffset + knobSizeLarge), topOffset, knobSizeLarge, knobSizeLarge);
+    sliderOutputGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromTop(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
     labelOutputGain.setBounds(sliderOutputGain.getX(), sliderOutputGain.getY() - 15, 76, 38);
     labelOutputGainVal.setBounds(sliderOutputGain.getX() + 5, sliderOutputGain.getY() + 70, 76, 38);
 
@@ -745,5 +750,5 @@ void ChuginatorAudioProcessorEditor::resized()
     //genericAudioProcessorEditor.setBounds(getLocalBounds()
      //     .withSizeKeepingCentre(getLocalBounds().proportionOfWidth(0.9f), getLocalBounds().proportionOfHeight(0.5f)));
       
-    presetPanel.setBounds(getLocalBounds().removeFromTop(proportionOfHeight(0.05f)));
+    //presetPanel.setBounds(getLocalBounds().removeFromTop(proportionOfHeight(0.05f)));
 }
