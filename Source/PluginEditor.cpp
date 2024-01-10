@@ -738,8 +738,8 @@ void ChuginatorAudioProcessorEditor::resized()
     /*sliderNoiseGateThresh.setBounds(leftOffset - 20, getHeight() - 110, knobSizeLarge, knobSizeLarge);
     labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() + 65, 40, 38);*/
-    noiseGateGUI.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromBottom(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
-
+    //noiseGateGUI.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromBottom(container.proportionOfHeight(0.25f)));
+    noiseGateGUI.setBounds(getWidth() / 2, getHeight() / 2, 100, 100);
     
     
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);

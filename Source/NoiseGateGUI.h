@@ -52,14 +52,12 @@ public:
     {
         
     }
-    
-
 
     void resized() override
     {
         const auto container = getLocalBounds();
         auto bounds = container;
-        sliderNoiseGateThresh.setBounds(bounds);
+        sliderNoiseGateThresh.setBounds(getWidth() / 2, getHeight() / 2, 100, 100);
     }
     
 
