@@ -41,7 +41,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     /*=====================================================================*/
     //INPUT
-    addAndMakeVisible(sliderInputGain);
+    /*addAndMakeVisible(sliderInputGain);
     addAndMakeVisible(labelInputGain);
     addAndMakeVisible(labelInputGainVal);
     
@@ -62,10 +62,10 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelInputGainVal.setText(juce::String((int)sliderInputGain.getValue()), juce::dontSendNotification);
     labelInputGainVal.setJustificationType(juce::Justification::centred);
     labelInputGainVal.setLookAndFeel(&lookAndFeel);
-    
+    */
     /*=====================================================================*/
     //PREEQ
-    addAndMakeVisible(sliderPreEQ);
+    /*addAndMakeVisible(sliderPreEQ);
     addAndMakeVisible(labelPreEQ);
     addAndMakeVisible(labelPreEQVal);
     
@@ -83,11 +83,11 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     //Label val
     labelPreEQVal.setText(juce::String(sliderPreEQ.getValue()), juce::dontSendNotification);
     labelPreEQVal.setJustificationType(juce::Justification::centred);
-    labelPreEQVal.setLookAndFeel(&lookAndFeel);
+    labelPreEQVal.setLookAndFeel(&lookAndFeel);*/
 
     /*=====================================================================*/
     //OUTPUT
-    addAndMakeVisible(sliderOutputGain);
+    /*addAndMakeVisible(sliderOutputGain);
     addAndMakeVisible(labelOutputGain);
     addAndMakeVisible(labelOutputGainVal);
     
@@ -107,7 +107,9 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     //Label val
     labelOutputGainVal.setText(juce::String((int)sliderOutputGain.getValue()), juce::dontSendNotification);
     labelOutputGainVal.setJustificationType(juce::Justification::centred);
-    labelOutputGainVal.setLookAndFeel(&lookAndFeel);
+    labelOutputGainVal.setLookAndFeel(&lookAndFeel);*/
+    
+    addAndMakeVisible(row1GUI);
     
     /*=====================================================================*/
     //PREGAIN1
@@ -427,9 +429,9 @@ void ChuginatorAudioProcessorEditor::fileLoader()
 
 void ChuginatorAudioProcessorEditor::makeSliderAttachments()
 {
-    sliderAttachmentInputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "INPUTGAIN", sliderInputGain);
+    sliderAttachmentInputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "INPUTGAIN", row1GUI.sliderInputGain);
     
-    sliderAttachmentPreEQ = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREEQ", sliderPreEQ);
+    sliderAttachmentPreEQ = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREEQ", row1GUI.sliderPreEQ);
     
     sliderAttachmentPreGain1 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN1", sliderPreGain1);
     sliderAttachmentMix1 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX1", sliderMix1);
@@ -463,7 +465,7 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     buttonAttachmentBoost = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "BOOSTONOFF", buttonBoost);
     buttonAttachmentIROnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "IRONOFF", buttonIROnOff);
     
-    sliderAttachmentOutputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "OUTPUTGAIN", sliderOutputGain);
+    sliderAttachmentOutputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "OUTPUTGAIN", row1GUI.sliderOutputGain);
 }
 
 void ChuginatorAudioProcessorEditor::setSliderPropertiesRotary(juce::Slider *sliderToSet)
@@ -645,7 +647,7 @@ void ChuginatorAudioProcessorEditor::resized()
    /* sliderInputGain.setBounds(leftOffset, topOffset, knobSizeLarge, knobSizeLarge);
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - 15, 76, 38);
     labelInputGainVal.setBounds(sliderInputGain.getX() + 5, sliderInputGain.getY() + 70, 76, 38);*/
-    sliderInputGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromTop(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
+    /*sliderInputGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromTop(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
     labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - sliderMargin, 76, 38);
     labelInputGainVal.setBounds(sliderInputGain.getX(), sliderInputGain.getY() + (sliderMargin * 4), 76, 38);
     
@@ -661,6 +663,10 @@ void ChuginatorAudioProcessorEditor::resized()
     labelOutputGain.setBounds(sliderOutputGain.getX(), sliderOutputGain.getY() - 15, 76, 38);
     labelOutputGainVal.setBounds(sliderOutputGain.getX() + 5, sliderOutputGain.getY() + 70, 76, 38);
 
+    */
+    
+    row1GUI.setBounds(bounds.removeFromTop(container.proportionOfHeight(0.25f)));
+    
     
     //ROW2
     /*=====================================================================*/
@@ -684,7 +690,7 @@ void ChuginatorAudioProcessorEditor::resized()
     /*=====================================================================*/
     //GAIN2
     //Gain
-    sliderPreGain2.setBounds(sliderPreEQ.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
+    sliderPreGain2.setBounds(row1GUI.sliderPreEQ.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
     labelPreGain2.setBounds(sliderPreGain2.getX(), sliderPreGain2.getY() - 15, 76, 38);
     labelPreGain2Val.setBounds(sliderPreGain2.getX() - 7, sliderPreGain2.getY() + 50, 76, 38);
 
@@ -702,7 +708,7 @@ void ChuginatorAudioProcessorEditor::resized()
     /*=====================================================================*/
     //GAIN3
     //Gain
-    sliderPreGain3.setBounds(sliderOutputGain.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
+    sliderPreGain3.setBounds(row1GUI.sliderOutputGain.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
     labelPreGain3.setBounds(sliderPreGain3.getX(), sliderPreGain3.getY() - 15, 76, 38);
     labelPreGain3Val.setBounds(sliderPreGain3.getX() - 7, sliderPreGain3.getY() + 50, 76, 38);
 
@@ -717,16 +723,16 @@ void ChuginatorAudioProcessorEditor::resized()
 
     /*=====================================================================*/
     //ROW3
-    sliderFilterLowGain.setBounds(sliderInputGain.getX(), sliderMix1.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
+    sliderFilterLowGain.setBounds(row1GUI.sliderInputGain.getX(), sliderMix1.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterLowGain.setBounds(sliderFilterLowGain.getX(), sliderFilterLowGain.getY() - 15, 76, 38);
     labelFilterLowGainVal.setBounds(sliderFilterLowGain.getX() + 5, sliderFilterLowGain.getY() + 70, 76, 38);
     
-    sliderFilterMidGain.setBounds(sliderPreEQ.getX(), sliderMix2.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
+    sliderFilterMidGain.setBounds(row1GUI.sliderPreEQ.getX(), sliderMix2.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterMidGain.setBounds(sliderFilterMidGain.getX(), sliderFilterMidGain.getY() - 15, 76, 38);
     labelFilterMidGainVal.setBounds(sliderFilterMidGain.getX() + 5, sliderFilterMidGain.getY() + 70, 76, 38);
     
     
-    sliderFilterHighGain.setBounds(sliderOutputGain.getX(), sliderMix3.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
+    sliderFilterHighGain.setBounds(row1GUI.sliderOutputGain.getX(), sliderMix3.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterHighGain.setBounds(sliderFilterHighGain.getX(), sliderFilterHighGain.getY() - 15, 76, 38);
     labelFilterHighGainVal.setBounds(sliderFilterHighGain.getX() + 5, sliderFilterHighGain.getY() + 70, 76, 38);
 

@@ -13,6 +13,7 @@
 #include "myLookAndFeel.h"
 #include "PresetPanel.h"
 #include "NoiseGateGUI.h"
+#include "Row1GUI.h"
 
 //==============================================================================
 /**
@@ -45,13 +46,15 @@ private:
     
     std::unique_ptr<juce::FileChooser> fileChooser;
     
-    juce::Slider sliderInputGain;
+    /*juce::Slider sliderInputGain;
     juce::Label labelInputGain;
     juce::Label labelInputGainVal;
     
     juce::Slider sliderPreEQ;//PreEQ slider
     juce::Label labelPreEQ; //PreEQ label
-    juce::Label labelPreEQVal;
+    juce::Label labelPreEQVal;*/
+    
+    Row1GUI row1GUI;
     
     //Gain1
     juce::Slider sliderPreGain1;
@@ -121,9 +124,10 @@ private:
     juce::ToggleButton buttonBoost;
     juce::Label labelBoostButton;
     juce::ToggleButton buttonIROnOff;
-    juce::Slider sliderOutputGain;
+    
+    /*juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;
-    juce::Label labelOutputGainVal;
+    juce::Label labelOutputGainVal;*/
 
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachmentInputGain;

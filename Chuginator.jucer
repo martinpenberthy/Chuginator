@@ -33,6 +33,7 @@
             file="Source/PluginProcessor.h"/>
       <FILE id="F11tGZ" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
+      <FILE id="zid2kM" name="Row1GUI.h" compile="0" resource="0" file="Source/Row1GUI.h"/>
       <FILE id="eByjtE" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
   </MAINGROUP>

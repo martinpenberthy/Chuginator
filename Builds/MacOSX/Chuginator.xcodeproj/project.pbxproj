@@ -95,6 +95,7 @@
 		3B18C90ECD778B54A074B111 /* AudioUnit.framework */ /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		3D5861692CC511218BDF4546 /* QuartzCore.framework */ /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		43289CF76EC6F0E010CF2C70 /* VST3 Manifest Helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = juce_vst3_helper; sourceTree = BUILT_PRODUCTS_DIR; };
+		438DD00692770A5093BEB746 /* Row1GUI.h */ /* Row1GUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Row1GUI.h; path = ../../Source/Row1GUI.h; sourceTree = SOURCE_ROOT; };
 		463EEC5B4B25BF4D809ED305 /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		48E781BF9C76517E1B378880 /* _Logos_Final2_alpha.png */ /* _Logos_Final2_alpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = _Logos_Final2_alpha.png; path = ../../../../../_MUSIC_/_Logos/_Logos_Final2_alpha.png; sourceTree = SOURCE_ROOT; };
 		49405428DB7A1CA7980894A7 /* juce_gui_extra */ /* juce_gui_extra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_extra; path = /Applications/JUCE/modules/juce_gui_extra; sourceTree = "<absolute>"; };
@@ -301,6 +302,7 @@
 				FBA1774C1EA787E71EE7C453,
 				6F9B5DF496D29F71C36A3A63,
 				DE7E5FBAB5A19C2D3CB79344,
+				438DD00692770A5093BEB746,
 				7D67A982129104C479D7C90E,
 			);
 			name = Source;
