@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "myLookAndFeel.h"
 #include "PresetPanel.h"
+#include "NoiseGateGUI.h"
 
 //==============================================================================
 /**
@@ -111,10 +112,11 @@ private:
 
     
     //Noise Gate
-    juce::Slider sliderNoiseGateThresh;
+    /*juce::Slider sliderNoiseGateThresh;
     juce::Label labelNoiseGateThresh;
-    juce::Label labelNoiseGateThreshVal;
-
+    juce::Label labelNoiseGateThreshVal;*/
+    NoiseGateGUI noiseGateGUI;
+    
     
     juce::ToggleButton buttonBoost;
     juce::Label labelBoostButton;

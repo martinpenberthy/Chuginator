@@ -360,7 +360,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     //Noise Gate
     //Threshold
-    addAndMakeVisible(sliderNoiseGateThresh);
+    /*addAndMakeVisible(sliderNoiseGateThresh);
     addAndMakeVisible(labelNoiseGateThresh);
     addAndMakeVisible(labelNoiseGateThreshVal);
     
@@ -375,7 +375,9 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     };
     
     labelNoiseGateThreshVal.setText(juce::String(sliderNoiseGateThresh.getValue()), juce::dontSendNotification);
-    labelNoiseGateThreshVal.setLookAndFeel(&lookAndFeel);
+    labelNoiseGateThreshVal.setLookAndFeel(&lookAndFeel);*/
+    
+    addAndMakeVisible(noiseGateGUI);
     
     
     makeSliderAttachments();
@@ -455,7 +457,7 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentFilterHighGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "HIGH", sliderFilterHighGain);
     
     //NOISE GATE
-    sliderAttachmentNoiseGateThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLDNG", sliderNoiseGateThresh);
+    sliderAttachmentNoiseGateThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLDNG", noiseGateGUI.sliderNoiseGateThresh);
 
     
     buttonAttachmentBoost = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "BOOSTONOFF", buttonBoost);
@@ -733,9 +735,10 @@ void ChuginatorAudioProcessorEditor::resized()
     /*=====================================================================*/
     //ROW4
     //Noise Gate
-    sliderNoiseGateThresh.setBounds(leftOffset - 20, getHeight() - 110, knobSizeLarge, knobSizeLarge);
+    /*sliderNoiseGateThresh.setBounds(leftOffset - 20, getHeight() - 110, knobSizeLarge, knobSizeLarge);
     labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
-    labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() + 65, 40, 38);
+    labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() + 65, 40, 38);*/
+    noiseGateGUI.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromBottom(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
 
     
     
