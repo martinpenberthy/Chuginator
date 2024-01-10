@@ -12,7 +12,7 @@
 
 #include <JuceHeader.h>
 
-class NoiseGateStage
+class NoiseGateStage : public juce::Component
 {
 public:
     NoiseGateStage();
