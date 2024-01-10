@@ -113,19 +113,19 @@ public:
         auto bounds = container;
         int sliderMargin = 18;
         
-        sliderInputGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromTop(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
+        sliderInputGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).reduced(sliderMargin));
         labelInputGain.setBounds(sliderInputGain.getX(), sliderInputGain.getY() - sliderMargin, 76, 38);
         labelInputGainVal.setBounds(sliderInputGain.getX(), sliderInputGain.getY() + (sliderMargin * 4), 76, 38);
         
         
         //sliderPreEQ.setBounds((getWidth() / 2) - 40, topOffset, knobSizeLarge, knobSizeLarge);
-        sliderPreEQ.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromTop(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
+        sliderPreEQ.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).reduced(sliderMargin));
         labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - sliderMargin, 76, 38);
         labelPreEQVal.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() + (sliderMargin * 4), 76, 38);
 
         
         //sliderOutputGain.setBounds(getWidth() - (leftOffset + knobSizeLarge), topOffset, knobSizeLarge, knobSizeLarge);
-        sliderOutputGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromTop(container.proportionOfHeight(0.25f)).reduced(sliderMargin));
+        sliderOutputGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).reduced(sliderMargin));
         labelOutputGain.setBounds(sliderOutputGain.getX(), sliderOutputGain.getY() - 15, 76, 38);
         labelOutputGainVal.setBounds(sliderOutputGain.getX() + 5, sliderOutputGain.getY() + 70, 76, 38);
     }
@@ -133,7 +133,6 @@ public:
     
     void setSliderPropertiesRotary(juce::Slider *sliderToSet)
     {
-
         sliderToSet->setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
         sliderToSet->setTextBoxStyle(juce::Slider::NoTextBox, false, 76, 38);
         sliderToSet->setDoubleClickReturnValue(true, 0.0f);
