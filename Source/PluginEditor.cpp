@@ -179,7 +179,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     addAndMakeVisible(row2GUI);
     row2GUI.gain1.waveshapeType.onChange = [this]{
         modeMenuChanged(1);
-};
+    };
     
     
     /*=====================================================================*/

@@ -50,10 +50,11 @@ public:
         buttonGain.setToggleable(true);
         
         //Menu
-        labelWaveshapeType.attachToComponent(&waveshapeType, false);
+        //labelWaveshapeType.attachToComponent(&waveshapeType, false);
         labelWaveshapeType.setColour(juce::Label::textColourId, juce::Colours::white);
         labelWaveshapeType.setText("Dist Type", juce::dontSendNotification);
         labelWaveshapeType.setLookAndFeel(&lookAndFeel);
+
         
         waveshapeType.addItem("Amp1", 1);
         waveshapeType.addItem("Amp2", 2);
@@ -63,10 +64,13 @@ public:
         waveshapeType.addItem("HardClip", 6);
         waveshapeType.addItem("Screamer", 7);
 
+        
         /*waveshapeType.onChange = [this]{
                     modeMenuChanged(1);
         };*/
         waveshapeType.setLookAndFeel(&lookAndFeel);
+        waveshapeType.setJustificationType(juce::Justification::centred);
+        
         
         //MIX1
         addAndMakeVisible(sliderMix);
@@ -112,6 +116,9 @@ public:
         g.drawText ("GainStageGUI", getLocalBounds(),
                     juce::Justification::centred, true);   // draw some placeholder text
  */
+        
+        g.setColour(juce::Colours::white);
+        g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
     }
 
     void resized() override
@@ -120,26 +127,29 @@ public:
         // components that your component contains..
         
         const auto container = getLocalBounds();
-        auto bounds = container;
+        auto boundsTop = container;
+        boundsTop = boundsTop.removeFromTop(container.proportionOfHeight(0.2f));
+        auto boundsBottom = container;
+        boundsBottom = boundsBottom.removeFromBottom(container.proportionOfHeight(0.8f));
+        
         
         //Toggle
-        buttonGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.2f)).removeFromTop(container.proportionOfHeight(0.3f)));
-        waveshapeType.setBounds(bounds);
-        //labelWaveshapeType1.setBounds(waveshapeType1.getX(), waveshapeType1.getY() - 25, 50, 25);
+        //labelWaveshapeType.setBounds(bounds);
+        buttonGain.setBounds(boundsTop.removeFromLeft(boundsTop.proportionOfWidth(0.3f)));
+        waveshapeType.setBounds(boundsTop);
         
         
         //Gain
-        sliderPreGain.setBounds(bounds);
-       /* labelPreGain.setBounds(sliderPreGain.getX(), sliderPreGain.getY() - 15, 76, 38);
-        labelPreGainVal.setBounds(sliderPreGain.getX() - 7, sliderPreGain.getY() + 50, 76, 38);
+        /*sliderPreGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).removeFromBottom(container.proportionOfHeight(0.7f)));
+        //labelPreGain.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
+        labelPreGainVal.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
         
-
         
         //Mix
-        sliderMix.setBounds(sliderPreGain1.getX() + (knobSizeMedium / 2) + 25, sliderPreGain.getY(), knobSizeMedium, knobSizeMedium);
-        labelMix.setBounds(sliderMix.getX(), sliderMix.getY() - 15, 76, 38);
-        labelMixVal.setBounds(sliderMix.getX() - 7, sliderMix.getY() + 50, 76, 38);*/
-
+        sliderMix.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).removeFromBottom(container.proportionOfHeight(0.7f)));
+        //labelMix.setBounds(sliderMix.getX(), sliderMix.getY() - 15, 76, 38);
+        labelMixVal.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
+*/
     }
     
     
