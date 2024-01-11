@@ -135,19 +135,15 @@ public:
         auto boundsBottom = container;
         boundsBottom = boundsBottom.removeFromBottom(container.proportionOfHeight(0.8f));
         
-        
         //Toggle
         //labelWaveshapeType.setBounds(bounds);
         buttonGain.setBounds(boundsTop.removeFromLeft(boundsTop.proportionOfWidth(0.3f)));
         waveshapeType.setBounds(boundsTop);
         
-        
-        
         //Gain
-
         sliderPreGain.setBounds(boundsBottom.removeFromLeft(boundsBottom.proportionOfWidth(0.5f)));
         labelPreGain.setBounds(sliderPreGain.getX(), sliderPreGain.getY(), 40, 30);
-        labelPreGainVal.setBounds(sliderPreGain.getX() + 15, sliderPreGain.getY() + 60, 40, 30);
+        labelPreGainVal.setBounds(sliderPreGain.getX() + 15, sliderPreGain.getY() + 65, 40, 30);
         /*sliderPreGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).removeFromBottom(container.proportionOfHeight(0.7f)));
         //labelPreGain.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
         labelPreGainVal.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
@@ -156,7 +152,7 @@ public:
         //Mix
         sliderMix.setBounds(boundsBottom);
         labelMix.setBounds(sliderMix.getX(), sliderMix.getY(), 40, 30);
-        labelMixVal.setBounds(sliderMix.getX() + 15, sliderMix.getY() + 60, 40, 30);
+        labelMixVal.setBounds(sliderMix.getX() + 15, sliderMix.getY() + 65, 40, 30);
      /*   sliderMix.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).removeFromBottom(container.proportionOfHeight(0.7f)));
         labelMix.setBounds(sliderMix.getX(), sliderMix.getY() - 15, 76, 38);
         labelMixVal.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
