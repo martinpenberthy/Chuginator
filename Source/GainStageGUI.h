@@ -32,6 +32,7 @@ public:
         setSliderPropertiesRotary(&sliderPreGain);
         sliderPreGain.setLookAndFeel(&lookAndFeel);
         //Label
+        labelPreGain.attachToComponent(&sliderPreGain, false);
         labelPreGain.setText("Gain", juce::dontSendNotification);
         labelPreGain.setLookAndFeel(&lookAndFeel);
         
@@ -79,8 +80,10 @@ public:
         
         setSliderPropertiesRotary(&sliderMix);
         sliderMix.setLookAndFeel(&lookAndFeel);
+        
         labelMix.setText("Mix", juce::dontSendNotification);
         labelMix.setLookAndFeel(&lookAndFeel);
+        labelMix.attachToComponent(&sliderMix, false);
         
         sliderMix.onValueChange = [this]()
         {
@@ -126,7 +129,7 @@ public:
         // This method is where you should set the bounds of any child
         // components that your component contains..
         
-        const auto container = getLocalBounds();
+        const auto container = getLocalBounds().reduced(5);
         auto boundsTop = container;
         boundsTop = boundsTop.removeFromTop(container.proportionOfHeight(0.2f));
         auto boundsBottom = container;
@@ -140,13 +143,16 @@ public:
         
         
         //Gain
+        sliderPreGain.setBounds(boundsBottom.removeFromLeft(boundsBottom.proportionOfWidth(0.5f)));
         /*sliderPreGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).removeFromBottom(container.proportionOfHeight(0.7f)));
         //labelPreGain.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
         labelPreGainVal.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
-        
+        */
         
         //Mix
-        sliderMix.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).removeFromBottom(container.proportionOfHeight(0.7f)));
+        sliderMix.setBounds(boundsBottom);
+
+     /*   sliderMix.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).removeFromBottom(container.proportionOfHeight(0.7f)));
         //labelMix.setBounds(sliderMix.getX(), sliderMix.getY() - 15, 76, 38);
         labelMixVal.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
 */
