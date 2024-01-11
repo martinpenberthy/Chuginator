@@ -14,6 +14,7 @@
 #include "PresetPanel.h"
 #include "NoiseGateGUI.h"
 #include "Row1GUI.h"
+#include "Row2GUI.h"
 
 //==============================================================================
 /**
@@ -57,7 +58,7 @@ private:
     Row1GUI row1GUI;
     
     //Gain1
-    juce::Slider sliderPreGain1;
+    /*juce::Slider sliderPreGain1;
     juce::Label labelPreGain1;
     juce::Label labelPreGain1Val;
     
@@ -69,6 +70,10 @@ private:
     
     juce::Label labelWaveshapeType1;//Label for menu
     juce::ComboBox waveshapeType1; //Menu selecting waveshaping function
+    */
+    
+    Row2GUI row2GUI;
+    
     
     //Gain2
     juce::Slider sliderPreGain2;

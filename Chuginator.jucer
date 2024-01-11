@@ -5,6 +5,7 @@
               companyName="Black Martini">
   <MAINGROUP id="b48WrN" name="Chuginator">
     <GROUP id="{59562548-40C6-E0F5-04C4-C08F52A52683}" name="Source">
+      <FILE id="JDE3GS" name="Row2GUI.h" compile="0" resource="0" file="Source/Row2GUI.h"/>
       <GROUP id="{37E6DBED-A753-B3B4-9597-44E5944871B1}" name="PresetManager">
         <FILE id="lNTdea" name="PresetManager.cpp" compile="1" resource="0"
               file="../PresetManager/Source/PresetManager.cpp"/>
@@ -24,6 +25,7 @@
             file="Source/NoiseGateStage.h"/>
       <FILE id="OjKCbA" name="EQStage.cpp" compile="1" resource="0" file="Source/EQStage.cpp"/>
       <FILE id="lpfX4w" name="EQStage.h" compile="0" resource="0" file="Source/EQStage.h"/>
+      <FILE id="BqQCa9" name="GainStageGUI.h" compile="0" resource="0" file="Source/GainStageGUI.h"/>
       <FILE id="vxYn1b" name="GainStage.cpp" compile="1" resource="0" file="Source/GainStage.cpp"/>
       <FILE id="kSlvM5" name="GainStage.h" compile="0" resource="0" file="Source/GainStage.h"/>
       <FILE id="bwffew" name="myLookAndFeel.h" compile="0" resource="0" file="Source/myLookAndFeel.h"/>
