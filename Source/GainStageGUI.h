@@ -32,7 +32,7 @@ public:
         setSliderPropertiesRotary(&sliderPreGain);
         sliderPreGain.setLookAndFeel(&lookAndFeel);
         //Label
-        labelPreGain.attachToComponent(&sliderPreGain, false);
+        //labelPreGain.attachToComponent(&sliderPreGain, false);
         labelPreGain.setText("Gain", juce::dontSendNotification);
         labelPreGain.setLookAndFeel(&lookAndFeel);
         
@@ -83,7 +83,7 @@ public:
         
         labelMix.setText("Mix", juce::dontSendNotification);
         labelMix.setLookAndFeel(&lookAndFeel);
-        labelMix.attachToComponent(&sliderMix, false);
+        //labelMix.attachToComponent(&sliderMix, false);
         
         sliderMix.onValueChange = [this]()
         {
@@ -142,8 +142,12 @@ public:
         waveshapeType.setBounds(boundsTop);
         
         
+        
         //Gain
+
         sliderPreGain.setBounds(boundsBottom.removeFromLeft(boundsBottom.proportionOfWidth(0.5f)));
+        labelPreGain.setBounds(sliderPreGain.getX(), sliderPreGain.getY(), 40, 30);
+        labelPreGainVal.setBounds(sliderPreGain.getX() + 15, sliderPreGain.getY() + 60, 40, 30);
         /*sliderPreGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).removeFromBottom(container.proportionOfHeight(0.7f)));
         //labelPreGain.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
         labelPreGainVal.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
@@ -151,9 +155,10 @@ public:
         
         //Mix
         sliderMix.setBounds(boundsBottom);
-
+        labelMix.setBounds(sliderMix.getX(), sliderMix.getY(), 40, 30);
+        labelMixVal.setBounds(sliderMix.getX() + 15, sliderMix.getY() + 60, 40, 30);
      /*   sliderMix.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).removeFromBottom(container.proportionOfHeight(0.7f)));
-        //labelMix.setBounds(sliderMix.getX(), sliderMix.getY() - 15, 76, 38);
+        labelMix.setBounds(sliderMix.getX(), sliderMix.getY() - 15, 76, 38);
         labelMixVal.setBounds(bounds.removeFromBottom(container.proportionOfHeight(0.1f)));
 */
     }
@@ -161,7 +166,6 @@ public:
     
     void setSliderPropertiesRotary(juce::Slider *sliderToSet)
     {
-
         sliderToSet->setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
         sliderToSet->setTextBoxStyle(juce::Slider::NoTextBox, false, 76, 38);
         sliderToSet->setDoubleClickReturnValue(true, 0.0f);
