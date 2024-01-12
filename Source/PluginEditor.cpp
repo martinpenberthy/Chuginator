@@ -312,9 +312,11 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
         modeMenuChanged(3);
     };
     /*=====================================================================*/
+    addAndMakeVisible(row3GUI);
+    
     //EQ
     //Low
-    addAndMakeVisible(sliderFilterLowGain);
+   /* addAndMakeVisible(sliderFilterLowGain);
     addAndMakeVisible(labelFilterLowGain);
     addAndMakeVisible(labelFilterLowGainVal);
     
@@ -369,7 +371,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelFilterHighGainVal.setText(juce::String(sliderFilterHighGain.getValue()), juce::dontSendNotification);
     labelFilterHighGainVal.setJustificationType(juce::Justification::centred);
     labelFilterHighGainVal.setLookAndFeel(&lookAndFeel);
-    
+    */
     //Noise Gate
     //Threshold
     /*addAndMakeVisible(sliderNoiseGateThresh);
@@ -466,10 +468,10 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
 
     
     //EQ
-    sliderAttachmentFilterLowGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "LOW", sliderFilterLowGain);
-    sliderAttachmentFilterMidGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MID", sliderFilterMidGain);
+    sliderAttachmentFilterLowGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "LOW", row3GUI.sliderFilterLowGain);
+    sliderAttachmentFilterMidGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MID", row3GUI.sliderFilterMidGain);
     
-    sliderAttachmentFilterHighGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "HIGH", sliderFilterHighGain);
+    sliderAttachmentFilterHighGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "HIGH", row3GUI.sliderFilterHighGain);
     
     //NOISE GATE
     sliderAttachmentNoiseGateThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLDNG", noiseGateGUI.sliderNoiseGateThresh);
@@ -744,7 +746,7 @@ void ChuginatorAudioProcessorEditor::resized()
     labelFilterLowGain.setBounds(sliderFilterLowGain.getX(), sliderFilterLowGain.getY() - 15, 76, 38);
     labelFilterLowGainVal.setBounds(sliderFilterLowGain.getX() + 5, sliderFilterLowGain.getY() + 70, 76, 38);
     */
-    sliderFilterMidGain.setBounds(row1GUI.sliderPreEQ.getX(), row2GUI.gain2.sliderMix.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
+    /*sliderFilterMidGain.setBounds(row1GUI.sliderPreEQ.getX(), row2GUI.gain2.sliderMix.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterMidGain.setBounds(sliderFilterMidGain.getX(), sliderFilterMidGain.getY() - 15, 76, 38);
     labelFilterMidGainVal.setBounds(sliderFilterMidGain.getX() + 5, sliderFilterMidGain.getY() + 70, 76, 38);
     
@@ -752,7 +754,7 @@ void ChuginatorAudioProcessorEditor::resized()
     sliderFilterHighGain.setBounds(row1GUI.sliderOutputGain.getX(), row2GUI.gain3.sliderMix.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterHighGain.setBounds(sliderFilterHighGain.getX(), sliderFilterHighGain.getY() - 15, 76, 38);
     labelFilterHighGainVal.setBounds(sliderFilterHighGain.getX() + 5, sliderFilterHighGain.getY() + 70, 76, 38);
-
+*/
     
     
     /*=====================================================================*/

@@ -15,6 +15,8 @@
 #include "NoiseGateGUI.h"
 #include "Row1GUI.h"
 #include "Row2GUI.h"
+#include "Row3GUI.h"
+
 
 //==============================================================================
 /**
@@ -104,8 +106,10 @@ private:
     juce::Label labelWaveshapeType3;//Label for menu
     juce::ComboBox waveshapeType3; //Menu selecting waveshaping function
     */
+    
+    Row3GUI row3GUI;
     //Filters
-    juce::Slider sliderFilterHighGain;
+    /*juce::Slider sliderFilterHighGain;
     juce::Label labelFilterHighGain;
     juce::Label labelFilterHighGainVal;
     
@@ -116,7 +120,7 @@ private:
     
     juce::Slider sliderFilterLowGain;
     juce::Label labelFilterLowGain;
-    juce::Label labelFilterLowGainVal;
+    juce::Label labelFilterLowGainVal;*/
 
     
     //Noise Gate

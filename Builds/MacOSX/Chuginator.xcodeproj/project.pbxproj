@@ -91,6 +91,7 @@
 		2915AD5AD2DB80B058840766 /* WebKit.framework */ /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2A9282EDF6ED9DE977DEB6FC /* include_juce_audio_plugin_client_ARA.cpp */ /* include_juce_audio_plugin_client_ARA.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_ARA.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_ARA.cpp; sourceTree = SOURCE_ROOT; };
 		30E21CE5A6587E447FDF2894 /* juce_audio_plugin_client */ /* juce_audio_plugin_client */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_plugin_client; path = /Applications/JUCE/modules/juce_audio_plugin_client; sourceTree = "<absolute>"; };
+		340C8BA6CDD0C43EE0575880 /* Row3GUI.h */ /* Row3GUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Row3GUI.h; path = ../../Source/Row3GUI.h; sourceTree = SOURCE_ROOT; };
 		350A2A142FA460DF35EB1C33 /* BoostStage.cpp */ /* BoostStage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BoostStage.cpp; path = ../../Source/BoostStage.cpp; sourceTree = SOURCE_ROOT; };
 		3B18C90ECD778B54A074B111 /* AudioUnit.framework */ /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		3D5861692CC511218BDF4546 /* QuartzCore.framework */ /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -288,7 +289,6 @@
 		78E921E5FEAAB9955A4BDD94 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				F17196E0CF81E5B7A848ECB7,
 				F16EF3165206DDA06AE4E2DF,
 				A6F5C35BB0DD5E89DB8CFCA5,
 				350A2A142FA460DF35EB1C33,
@@ -305,8 +305,10 @@
 				DD789E7B797D06E8BAE45468,
 				FBA1774C1EA787E71EE7C453,
 				6F9B5DF496D29F71C36A3A63,
-				DE7E5FBAB5A19C2D3CB79344,
 				438DD00692770A5093BEB746,
+				F17196E0CF81E5B7A848ECB7,
+				340C8BA6CDD0C43EE0575880,
+				DE7E5FBAB5A19C2D3CB79344,
 				7D67A982129104C479D7C90E,
 			);
 			name = Source;

@@ -5,7 +5,6 @@
               companyName="Black Martini">
   <MAINGROUP id="b48WrN" name="Chuginator">
     <GROUP id="{59562548-40C6-E0F5-04C4-C08F52A52683}" name="Source">
-      <FILE id="JDE3GS" name="Row2GUI.h" compile="0" resource="0" file="Source/Row2GUI.h"/>
       <GROUP id="{37E6DBED-A753-B3B4-9597-44E5944871B1}" name="PresetManager">
         <FILE id="lNTdea" name="PresetManager.cpp" compile="1" resource="0"
               file="../PresetManager/Source/PresetManager.cpp"/>
@@ -33,9 +32,11 @@
             file="Source/PluginProcessor.cpp"/>
       <FILE id="lnxDJK" name="PluginProcessor.h" compile="0" resource="0"
             file="Source/PluginProcessor.h"/>
+      <FILE id="zid2kM" name="Row1GUI.h" compile="0" resource="0" file="Source/Row1GUI.h"/>
+      <FILE id="JDE3GS" name="Row2GUI.h" compile="0" resource="0" file="Source/Row2GUI.h"/>
+      <FILE id="cDf1FP" name="Row3GUI.h" compile="0" resource="0" file="Source/Row3GUI.h"/>
       <FILE id="F11tGZ" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
-      <FILE id="zid2kM" name="Row1GUI.h" compile="0" resource="0" file="Source/Row1GUI.h"/>
       <FILE id="eByjtE" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
   </MAINGROUP>
