@@ -180,7 +180,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     /*=====================================================================*/
     //PREGAIN2
-    addAndMakeVisible(sliderPreGain2);
+    /*addAndMakeVisible(sliderPreGain2);
     addAndMakeVisible(labelPreGain2);
     addAndMakeVisible(labelPreGain2Val);
     
@@ -240,10 +240,14 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelMix2Val.setText(juce::String(sliderMix2.getValue()), juce::dontSendNotification);
     labelMix2Val.setJustificationType(juce::Justification::centred);
     labelMix2Val.setLookAndFeel(&lookAndFeel);
+    */
     
+    row2GUI.gain2.waveshapeType.onChange = [this]{
+        modeMenuChanged(2);
+    };
     /*=====================================================================*/
     //PREGAIN3
-    addAndMakeVisible(sliderPreGain3);
+    /*addAndMakeVisible(sliderPreGain3);
     addAndMakeVisible(labelPreGain3);
     addAndMakeVisible(labelPreGain3Val);
 
@@ -302,7 +306,11 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelMix3Val.setText(juce::String(sliderMix3.getValue()), juce::dontSendNotification);
     labelMix3Val.setJustificationType(juce::Justification::centred);
     labelMix3Val.setLookAndFeel(&lookAndFeel);
+    */
     
+    row2GUI.gain3.waveshapeType.onChange = [this]{
+        modeMenuChanged(3);
+    };
     /*=====================================================================*/
     //EQ
     //Low
@@ -444,17 +452,17 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     comboAttachmentWaveshapeType1 = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, "TYPE1", row2GUI.gain1.waveshapeType);
     
     
-    sliderAttachmentPreGain2 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN2", sliderPreGain2);
-    sliderAttachmentMix2 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX2", sliderMix2);
-    buttonAttachmentGain2OnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "GAIN2ONOFF", buttonGain2);
-    comboAttachmentWaveshapeType2 = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, "TYPE2", waveshapeType2);
+    sliderAttachmentPreGain2 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN2", row2GUI.gain2.sliderPreGain);
+    sliderAttachmentMix2 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX2", row2GUI.gain2.sliderMix);
+    buttonAttachmentGain2OnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "GAIN2ONOFF", row2GUI.gain2.buttonGain);
+    comboAttachmentWaveshapeType2 = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, "TYPE2", row2GUI.gain2.waveshapeType);
 
     
     
-    sliderAttachmentPreGain3 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN3", sliderPreGain3);
-    sliderAttachmentMix3 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX3", sliderMix3);
-    buttonAttachmentGain3OnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "GAIN3ONOFF", buttonGain3);
-    comboAttachmentWaveshapeType3 = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, "TYPE3", waveshapeType3);
+    sliderAttachmentPreGain3 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN3", row2GUI.gain3.sliderPreGain);
+    sliderAttachmentMix3 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX3", row2GUI.gain3.sliderMix);
+    buttonAttachmentGain3OnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "GAIN3ONOFF", row2GUI.gain3.buttonGain);
+    comboAttachmentWaveshapeType3 = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, "TYPE3", row2GUI.gain3.waveshapeType);
 
     
     //EQ
@@ -534,7 +542,7 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
     else if(gainStageNum == 2)
     {
         //Set the string in the audio processor with the function to use
-        switch (waveshapeType2.getSelectedId())
+        switch (row2GUI.gain2.waveshapeType.getSelectedId())
         {
             case 1://Amp1
                 audioProcessor.waveshapeFunction2 = "Amp1";
@@ -573,7 +581,7 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
     else if(gainStageNum == 3)
     {
         //Set the string in the audio processor with the function to use
-        switch (waveshapeType3.getSelectedId())
+        switch (row2GUI.gain3.waveshapeType.getSelectedId())
         {
             case 1://Amp1
                 audioProcessor.waveshapeFunction3 = "Amp1";
@@ -698,7 +706,7 @@ void ChuginatorAudioProcessorEditor::resized()
     /*=====================================================================*/
     //GAIN2
     //Gain
-    sliderPreGain2.setBounds(row1GUI.sliderPreEQ.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
+    /*sliderPreGain2.setBounds(row1GUI.sliderPreEQ.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
     labelPreGain2.setBounds(sliderPreGain2.getX(), sliderPreGain2.getY() - 15, 76, 38);
     labelPreGain2Val.setBounds(sliderPreGain2.getX() - 7, sliderPreGain2.getY() + 50, 76, 38);
 
@@ -711,12 +719,13 @@ void ChuginatorAudioProcessorEditor::resized()
     sliderMix2.setBounds(sliderPreGain2.getX() + (knobSizeMedium / 2) + 25, sliderPreGain2.getY(), knobSizeMedium, knobSizeMedium);
     labelMix2.setBounds(sliderMix2.getX(), sliderMix2.getY() - 15, 76, 38);
     labelMix2Val.setBounds(sliderMix2.getX() - 7, sliderMix2.getY() + 50, 76, 38);
-
+*/
+    
     
     /*=====================================================================*/
     //GAIN3
     //Gain
-    sliderPreGain3.setBounds(row1GUI.sliderOutputGain.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
+    /*sliderPreGain3.setBounds(row1GUI.sliderOutputGain.getX() - 10, topOffset + knobSizeLarge + 55, knobSizeMedium, knobSizeMedium);
     labelPreGain3.setBounds(sliderPreGain3.getX(), sliderPreGain3.getY() - 15, 76, 38);
     labelPreGain3Val.setBounds(sliderPreGain3.getX() - 7, sliderPreGain3.getY() + 50, 76, 38);
 
@@ -728,19 +737,19 @@ void ChuginatorAudioProcessorEditor::resized()
     sliderMix3.setBounds(sliderPreGain3.getX() + (knobSizeMedium / 2) + 25, sliderPreGain3.getY(), knobSizeMedium, knobSizeMedium);
     labelMix3.setBounds(sliderMix3.getX(), sliderMix3.getY() - 15, 76, 38);
     labelMix3Val.setBounds(sliderMix3.getX() - 7, sliderMix3.getY() + 50, 76, 38);
-
+*/
     /*=====================================================================*/
     //ROW3
     /*sliderFilterLowGain.setBounds(row1GUI.sliderInputGain.getX(), sliderMix1.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterLowGain.setBounds(sliderFilterLowGain.getX(), sliderFilterLowGain.getY() - 15, 76, 38);
     labelFilterLowGainVal.setBounds(sliderFilterLowGain.getX() + 5, sliderFilterLowGain.getY() + 70, 76, 38);
     */
-    sliderFilterMidGain.setBounds(row1GUI.sliderPreEQ.getX(), sliderMix2.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
+    sliderFilterMidGain.setBounds(row1GUI.sliderPreEQ.getX(), row2GUI.gain2.sliderMix.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterMidGain.setBounds(sliderFilterMidGain.getX(), sliderFilterMidGain.getY() - 15, 76, 38);
     labelFilterMidGainVal.setBounds(sliderFilterMidGain.getX() + 5, sliderFilterMidGain.getY() + 70, 76, 38);
     
     
-    sliderFilterHighGain.setBounds(row1GUI.sliderOutputGain.getX(), sliderMix3.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
+    sliderFilterHighGain.setBounds(row1GUI.sliderOutputGain.getX(), row2GUI.gain3.sliderMix.getY() + (knobSizeLarge), knobSizeLarge, knobSizeLarge);
     labelFilterHighGain.setBounds(sliderFilterHighGain.getX(), sliderFilterHighGain.getY() - 15, 76, 38);
     labelFilterHighGainVal.setBounds(sliderFilterHighGain.getX() + 5, sliderFilterHighGain.getY() + 70, 76, 38);
 

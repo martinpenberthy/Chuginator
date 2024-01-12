@@ -129,7 +129,7 @@ public:
         // This method is where you should set the bounds of any child
         // components that your component contains..
         
-        const auto container = getLocalBounds().reduced(5);
+        const auto container = getLocalBounds();
         auto boundsTop = container;
         boundsTop = boundsTop.removeFromTop(container.proportionOfHeight(0.2f));
         auto boundsBottom = container;

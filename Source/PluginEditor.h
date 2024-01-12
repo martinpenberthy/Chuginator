@@ -76,7 +76,7 @@ private:
     
     
     //Gain2
-    juce::Slider sliderPreGain2;
+    /*juce::Slider sliderPreGain2;
     juce::Label labelPreGain2;
     juce::Label labelPreGain2Val;
 
@@ -89,9 +89,9 @@ private:
 
     juce::Label labelWaveshapeType2;//Label for menu
     juce::ComboBox waveshapeType2; //Menu selecting waveshaping function
-    
+    */
     //Gain3
-    juce::Slider sliderPreGain3;
+    /*juce::Slider sliderPreGain3;
     juce::Label labelPreGain3;
     juce::Label labelPreGain3Val;
     
@@ -103,7 +103,7 @@ private:
 
     juce::Label labelWaveshapeType3;//Label for menu
     juce::ComboBox waveshapeType3; //Menu selecting waveshaping function
-    
+    */
     //Filters
     juce::Slider sliderFilterHighGain;
     juce::Label labelFilterHighGain;

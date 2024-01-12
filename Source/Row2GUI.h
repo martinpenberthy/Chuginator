@@ -20,12 +20,16 @@ class Row2GUI  : public juce::Component
 public:
     
     GainStageGUI gain1;
-    
+    GainStageGUI gain2;
+    GainStageGUI gain3;
     Row2GUI()
     {
         // In your constructor, you should add any child components, and
         // initialise any special settings that your component needs.
         addAndMakeVisible(gain1);
+        addAndMakeVisible(gain2);
+        addAndMakeVisible(gain3);
+        
     }
 
     ~Row2GUI() override
@@ -60,7 +64,9 @@ public:
         auto bounds = container;
         
         
-        gain1.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.3f)));
+        gain1.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.3333f)));
+        gain2.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.3333f)));
+        gain3.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.3333f)));
     }
 
     
