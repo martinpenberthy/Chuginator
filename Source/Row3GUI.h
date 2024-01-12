@@ -111,7 +111,22 @@ public:
     {
         // This method is where you should set the bounds of any child
         // components that your component contains..
-
+        const auto container = getLocalBounds();
+        auto bounds = container;
+        int sliderMargin = 18;
+        
+        sliderFilterLowGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).reduced(sliderMargin));
+        labelFilterLowGain.setBounds(sliderFilterLowGain.getX() + 45, sliderFilterLowGain.getY() - sliderMargin, 76, 38);
+        labelFilterLowGainVal.setBounds(sliderFilterLowGain.getX() + 45, sliderFilterLowGain.getY() + 80, 40, 30);
+        
+        sliderFilterMidGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).reduced(sliderMargin));
+        labelFilterMidGain.setBounds(sliderFilterMidGain.getX() + 45, sliderFilterMidGain.getY() - sliderMargin, 76, 38);
+        labelFilterMidGainVal.setBounds(sliderFilterMidGain.getX() + 45, sliderFilterMidGain.getY() + 80, 40, 30);
+        
+        
+        sliderFilterHighGain.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).reduced(sliderMargin));
+        labelFilterHighGain.setBounds(sliderFilterHighGain.getX() + 45, sliderFilterHighGain.getY() - sliderMargin, 76, 38);
+        labelFilterHighGainVal.setBounds(sliderFilterHighGain.getX() + 45, sliderFilterHighGain.getY() + 80, 40, 30);
     }
     
     

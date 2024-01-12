@@ -627,10 +627,13 @@ void ChuginatorAudioProcessorEditor::modeMenuChanged(int gainStageNum)
 void ChuginatorAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    juce::Rectangle<int> area (0, 0, getWidth(), getHeight());
+    /*juce::Rectangle<int> area (0, 0, getWidth(), getHeight());
     juce::ColourGradient bgGradient = juce::ColourGradient(juce::Colours::navy, 0, 0, juce::Colours::grey, getWidth(), getHeight(), false);
     g.setGradientFill(bgGradient);
-    g.fillRect (area);
+    g.fillRect (area);*/
+    
+    g.setColour(juce::Colours::darkgrey.darker());
+    g.fillAll();
 }
 
 void ChuginatorAudioProcessorEditor::resized()
@@ -755,7 +758,8 @@ void ChuginatorAudioProcessorEditor::resized()
     labelFilterHighGain.setBounds(sliderFilterHighGain.getX(), sliderFilterHighGain.getY() - 15, 76, 38);
     labelFilterHighGainVal.setBounds(sliderFilterHighGain.getX() + 5, sliderFilterHighGain.getY() + 70, 76, 38);
 */
-    
+    row3GUI.setBounds(bounds.removeFromTop(container.proportionOfHeight(0.25f)));
+
     
     /*=====================================================================*/
     //ROW4
@@ -764,7 +768,7 @@ void ChuginatorAudioProcessorEditor::resized()
     labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() - 20, smallLabelWidth, smallLabelHeight);
     labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX(), sliderNoiseGateThresh.getY() + 65, 40, 38);*/
     //noiseGateGUI.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33f)).removeFromBottom(container.proportionOfHeight(0.25f)));
-    noiseGateGUI.setBounds(getWidth() / 2, getHeight() / 2, 100, 100);
+    //noiseGateGUI.setBounds(getWidth() / 2, getHeight() / 2, 100, 100);
     
     
     loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
