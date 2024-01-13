@@ -12,10 +12,11 @@
 #include "PluginProcessor.h"
 #include "myLookAndFeel.h"
 #include "PresetPanel.h"
-#include "NoiseGateGUI.h"
+
 #include "Row1GUI.h"
 #include "Row2GUI.h"
 #include "Row3GUI.h"
+#include "Row4GUI.h"
 
 
 //==============================================================================
@@ -37,7 +38,6 @@ public:
     void fileLoader();
     // updateToggleState (juce::Button* button)
     void modeMenuChanged(int gainStageNum);
-    void sliderValueChanged(juce::Slider *slider, juce::Label *label);
     
 private:
     //juce::LookAndFeel_V4 lookAndFeel;
@@ -127,12 +127,15 @@ private:
     /*juce::Slider sliderNoiseGateThresh;
     juce::Label labelNoiseGateThresh;
     juce::Label labelNoiseGateThreshVal;*/
-    NoiseGateGUI noiseGateGUI;
+    
+    Row4GUI row4GUI;
+    
+    /*NoiseGateGUI noiseGateGUI;
     
     
     juce::ToggleButton buttonBoost;
     juce::Label labelBoostButton;
-    juce::ToggleButton buttonIROnOff;
+    juce::ToggleButton buttonIROnOff;*/
     
     /*juce::Slider sliderOutputGain;
     juce::Label labelOutputGain;

@@ -17,13 +17,7 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     //addAndMakeVisible(genericAudioProcessorEditor);
     addAndMakeVisible(presetPanel);
     
-    addAndMakeVisible(buttonBoost);
-    addAndMakeVisible(labelBoostButton);
-    buttonBoost.setToggleable(true);
-    labelBoostButton.setText("Boost", juce::dontSendNotification);
-    
-    addAndMakeVisible(buttonIROnOff);
-    buttonIROnOff.setToggleable(true);
+
     
     addAndMakeVisible(loadButton);
     loadButton.setButtonText("Load IR");
@@ -391,7 +385,9 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     labelNoiseGateThreshVal.setText(juce::String(sliderNoiseGateThresh.getValue()), juce::dontSendNotification);
     labelNoiseGateThreshVal.setLookAndFeel(&lookAndFeel);*/
     
-    addAndMakeVisible(noiseGateGUI);
+    //addAndMakeVisible(noiseGateGUI);
+    
+    addAndMakeVisible(row4GUI);
     
     makeSliderAttachments();
     
@@ -402,11 +398,6 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
 
 ChuginatorAudioProcessorEditor::~ChuginatorAudioProcessorEditor()
 {
-}
-
-void ChuginatorAudioProcessorEditor::sliderValueChanged(juce::Slider *slider, juce::Label *label)
-{
-
 }
 
 
@@ -474,11 +465,11 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentFilterHighGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "HIGH", row3GUI.sliderFilterHighGain);
     
     //NOISE GATE
-    sliderAttachmentNoiseGateThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLDNG", noiseGateGUI.sliderNoiseGateThresh);
+    sliderAttachmentNoiseGateThresh = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "THRESHOLDNG", row4GUI.sliderNoiseGateThresh);
 
     
-    buttonAttachmentBoost = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "BOOSTONOFF", buttonBoost);
-    buttonAttachmentIROnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "IRONOFF", buttonIROnOff);
+    buttonAttachmentBoost = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "BOOSTONOFF", row4GUI.buttonBoost);
+    buttonAttachmentIROnOff = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "IRONOFF", row4GUI.buttonIROnOff);
     
     sliderAttachmentOutputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "OUTPUTGAIN", row1GUI.sliderOutputGain);
 }
@@ -632,7 +623,7 @@ void ChuginatorAudioProcessorEditor::paint (juce::Graphics& g)
     g.setGradientFill(bgGradient);
     g.fillRect (area);*/
     
-    g.setColour(juce::Colours::darkgrey.darker());
+    g.setColour(juce::Colours::transparentBlack);
     g.fillAll();
 }
 
@@ -775,10 +766,11 @@ void ChuginatorAudioProcessorEditor::resized()
     irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 150, 25);
     
     
-    buttonBoost.setBounds((getWidth() / 2) + 50, getHeight() - 50, 30, 30);
+    row4GUI.setBounds(bounds.removeFromTop(container.proportionOfHeight(0.25f)));
+    /*buttonBoost.setBounds((getWidth() / 2) + 50, getHeight() - 50, 30, 30);
     labelBoostButton.setBounds(buttonBoost.getX(), buttonBoost.getY() - 30, 50, 20);
     buttonIROnOff.setBounds(irName.getX(), getHeight() - 50, 30, 30);
-
+*/
     //genericAudioProcessorEditor.setBounds(getLocalBounds()
      //     .withSizeKeepingCentre(getLocalBounds().proportionOfWidth(0.9f), getLocalBounds().proportionOfHeight(0.5f)));
       

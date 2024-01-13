@@ -14,14 +14,15 @@ class myLookAndFeel : public juce::LookAndFeel_V4
 public:
     myLookAndFeel()
     {
-        setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black.withAlpha(1.0f));
+        setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::navy.withAlpha(1.0f));
         setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::white.withAlpha(1.0f));
-        setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black.withAlpha(0.75f));
+        setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::grey.withAlpha(0.75f));
         setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black.withAlpha(0.75f));
         setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::black.withAlpha(0.75f));
         
         setColour(juce::PopupMenu::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.25f));
         setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black.withAlpha(0.25f));
+            
     }
     
     juce::Font getComboBoxFont (juce::ComboBox& /*box*/) override

@@ -35,6 +35,7 @@
       <FILE id="zid2kM" name="Row1GUI.h" compile="0" resource="0" file="Source/Row1GUI.h"/>
       <FILE id="JDE3GS" name="Row2GUI.h" compile="0" resource="0" file="Source/Row2GUI.h"/>
       <FILE id="cDf1FP" name="Row3GUI.h" compile="0" resource="0" file="Source/Row3GUI.h"/>
+      <FILE id="v9XmG0" name="Row4GUI.h" compile="0" resource="0" file="Source/Row4GUI.h"/>
       <FILE id="F11tGZ" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="eByjtE" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>

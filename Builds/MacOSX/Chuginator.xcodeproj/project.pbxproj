@@ -133,6 +133,7 @@
 		A0CF5B0075A70969D0F49D07 /* AU */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Chuginator.component; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7AC73313E8969F4B171036D /* JuceHeader.h */ /* JuceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JuceHeader.h; path = ../../JuceLibraryCode/JuceHeader.h; sourceTree = SOURCE_ROOT; };
 		A94C20B840FDA9518A12FA56 /* juce_audio_devices */ /* juce_audio_devices */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_devices; path = /Applications/JUCE/modules/juce_audio_devices; sourceTree = "<absolute>"; };
+		AA67817BE1DED4F0B72F5FAF /* Row4GUI.h */ /* Row4GUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Row4GUI.h; path = ../../Source/Row4GUI.h; sourceTree = SOURCE_ROOT; };
 		B049AE75798B9DC3A7D1D16B /* RecentFilesMenuTemplate.nib */ /* RecentFilesMenuTemplate.nib */ = {isa = PBXFileReference; lastKnownFileType = file.nib; name = RecentFilesMenuTemplate.nib; path = RecentFilesMenuTemplate.nib; sourceTree = SOURCE_ROOT; };
 		B24A948F0616AD98AEFF97EE /* EQStage.cpp */ /* EQStage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = EQStage.cpp; path = ../../Source/EQStage.cpp; sourceTree = SOURCE_ROOT; };
 		B3FC5C0EF347A66973FB93F9 /* juce_dsp */ /* juce_dsp */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_dsp; path = /Applications/JUCE/modules/juce_dsp; sourceTree = "<absolute>"; };
@@ -308,6 +309,7 @@
 				438DD00692770A5093BEB746,
 				F17196E0CF81E5B7A848ECB7,
 				340C8BA6CDD0C43EE0575880,
+				AA67817BE1DED4F0B72F5FAF,
 				DE7E5FBAB5A19C2D3CB79344,
 				7D67A982129104C479D7C90E,
 			);
