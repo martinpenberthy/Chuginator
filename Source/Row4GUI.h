@@ -65,7 +65,7 @@ public:
            drawing code..
         */
 
-        g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+       /* g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
 
         g.setColour (juce::Colours::grey);
         g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
@@ -73,18 +73,23 @@ public:
         g.setColour (juce::Colours::white);
         g.setFont (14.0f);
         g.drawText ("Row4GUI", getLocalBounds(),
-                    juce::Justification::centred, true);   // draw some placeholder text
+                    juce::Justification::centred, true);   // draw some placeholder text*/
     }
 
     void resized() override
     {
         // This method is where you should set the bounds of any child
         // components that your component contains..
-
+        const auto container = getLocalBounds();
+        auto bounds = container;
+        int sliderMargin = 18;
+        
+        sliderNoiseGateThresh.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33)));
+        
+        buttonBoost.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33)));
+        
+        buttonIROnOff.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33)).removeFromTop(container.proportionOfHeight(0.5f)));
     }
-    
-
-
 
     void setSliderPropertiesRotary(juce::Slider *sliderToSet)
     {
@@ -97,17 +102,18 @@ public:
     
     //NoiseGateGUI noiseGateGUI;
     
+    //Noise Gate
     juce::Slider sliderNoiseGateThresh;
     juce::Label labelNoiseGateThresh;
     juce::Label labelNoiseGateThreshVal;
     
+    //Boost
     juce::ToggleButton buttonBoost;
     juce::Label labelBoostButton;
+    
+    //IR on/off
     juce::ToggleButton buttonIROnOff;
-    
 
-    
-    
 private:
     myLookAndFeel lookAndFeel;
 
