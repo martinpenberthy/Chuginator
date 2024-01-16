@@ -34,30 +34,30 @@ void EQStage::prepare(juce::dsp::ProcessSpec spec, float lowGain, float midGain,
 {
     lowEQ.reset();
     lowEQ.prepare(spec);
-    *lowEQ.state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, 130.0f, 1.3f, checkGain(lowGain));
+    *lowEQ.state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, 300.0f, 1.3f, checkGain(lowGain));
     
     midEQ.reset();
     midEQ.prepare(spec);
-    *midEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 450.0f, 3.1f, checkGain(midGain));
+    *midEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 500.0f, 3.1f, checkGain(midGain));
     
     highEQ.reset();
     highEQ.prepare(spec);
-    *highEQ.state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(sampleRate, 2100.0f, 1.9f, checkGain(highGain));
+    *highEQ.state = *juce::dsp::IIR::Coefficients<float>::makeHighShelf(sampleRate, 1700.0f, 1.9f, checkGain(highGain));
 }
 
 void EQStage::process(float lowGain, float midGain, float highGain, juce::dsp::AudioBlock<float> processBlock, double sampleRate)
 {
     //LOW
-    *lowEQ.state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, 130.0f, 1.3f, checkGain(lowGain));
+    *lowEQ.state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(sampleRate, 300.0f, 1.3f, checkGain(lowGain));
     lowEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
     //MID
-    *midEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 450.0f, 3.1f, checkGain(midGain));
+    *midEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 500.0f, 3.1f, checkGain(midGain));
     midEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
     
     
     //HIGH
-    *highEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 2100.0f, 1.9f, checkGain(highGain));
+    *highEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 1700.0f, 1.9f, checkGain(highGain));
     highEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
 }
 

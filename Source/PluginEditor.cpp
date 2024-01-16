@@ -438,6 +438,8 @@ void ChuginatorAudioProcessorEditor::makeSliderAttachments()
     sliderAttachmentInputGain = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "INPUTGAIN", row1GUI.sliderInputGain);
     
     sliderAttachmentPreEQ = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREEQ", row1GUI.sliderPreEQ);
+    sliderAttachmentDepth = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "DEPTH", row1GUI.sliderDepth);
+    
     
     sliderAttachmentPreGain1 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "PREGAIN1", row2GUI.gain1.sliderPreGain);
     sliderAttachmentMix1 = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "MIX1", row2GUI.gain1.sliderMix);

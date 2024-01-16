@@ -63,6 +63,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChuginatorAudioProcessor::cr
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"INPUTGAIN", 1}, "InputGain", -96.0f, 48.0f, 0.0f));
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREEQ", 1}, "PreEQ", 1.0f, 10.0f, 5.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"DEPTH", 1}, "Depth", 0.1f, 2.0f, 0.5f));
+
     
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"PREGAIN1", 1}, "Gain1", 0.0f, 48.0f, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"MIX1", 1}, "Mix1", 0.0f, 1.0f, 0.5f));
@@ -135,6 +137,14 @@ void ChuginatorAudioProcessor::updatePreEQ()
     
     *preEQ.state = *juce::dsp::IIR::Coefficients<float>::makePeakFilter(getSampleRate(), preEQFreq * 1000.0f, 0.2f, 0.3f);
 }
+
+void ChuginatorAudioProcessor::updateDepth()
+{
+    float depthGain = *treeState.getRawParameterValue("DEPTH");
+    
+    *depth.state = *juce::dsp::IIR::Coefficients<float>::makeLowShelf(getSampleRate(), 500.0f, 0.2f, depthGain);
+}
+
 
 //==============================================================================
 const juce::String ChuginatorAudioProcessor::getName() const
@@ -217,6 +227,9 @@ void ChuginatorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     preEQ.prepare(spec);
     updatePreEQ();
             
+    depth.reset();
+    depth.prepare(spec);
+    updateDepth();
     
     //InternalEQ
     internalEQ.prepare(spec, sampleRate);
@@ -461,6 +474,10 @@ void ChuginatorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     updatePreEQ();
     preEQ.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
 
+    //Depth
+    updateDepth();
+    depth.process(juce::dsp::ProcessContextReplacing<float>(processBlock));
+    
     internalEQ.process(processBlock, getSampleRate());
    
     //NOISEGATE

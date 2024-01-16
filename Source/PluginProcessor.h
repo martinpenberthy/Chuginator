@@ -68,6 +68,7 @@ public:
     
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     void updatePreEQ();
+    void updateDepth();
     void setFunctionToUse(int gainStageNum, std::string func);
     std::string getWaveshapeFuncParam(int gainStageNum);
     std::string getParamIntToString(int numOfDistType);
@@ -102,6 +103,8 @@ private:
     using IIRFilter = juce::dsp::IIR::Filter<float>;
     using IIRCoefs = juce::dsp::IIR::Coefficients<float>;
     juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> preEQ;
+    
+    juce::dsp::ProcessorDuplicator<IIRFilter, IIRCoefs> depth;
     
     EQInternal internalEQ;
     //GAIN1
