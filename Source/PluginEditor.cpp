@@ -15,19 +15,9 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
         presetPanel(p.getPresetManager())
 {
     //addAndMakeVisible(genericAudioProcessorEditor);
-    addAndMakeVisible(presetPanel);
+//    addAndMakeVisible(presetPanel);
     
 
-    
-    addAndMakeVisible(loadButton);
-    loadButton.setButtonText("Load IR");
-    loadButton.onClick = [this]()
-    {
-        fileLoader();
-    };
-    irName.setText(audioProcessor.savedFile.getFileName(), juce::dontSendNotification);
-    
-    addAndMakeVisible(irName);
     
     /*=====================================================================*/
     //INPUT
@@ -389,6 +379,16 @@ ChuginatorAudioProcessorEditor::ChuginatorAudioProcessorEditor (ChuginatorAudioP
     
     addAndMakeVisible(row4GUI);
     
+    addAndMakeVisible(loadButton);
+    loadButton.setButtonText("Load IR");
+    loadButton.onClick = [this]()
+    {
+        fileLoader();
+    };
+    irName.setText(audioProcessor.savedFile.getFileName(), juce::dontSendNotification);
+    
+    addAndMakeVisible(irName);
+    
     makeSliderAttachments();
     
     // Make sure that before the constructor has finished, you've set the
@@ -623,7 +623,7 @@ void ChuginatorAudioProcessorEditor::paint (juce::Graphics& g)
     g.setGradientFill(bgGradient);
     g.fillRect (area);*/
     
-    g.setColour(juce::Colours::transparentBlack);
+    g.setColour(juce::Colours::black);
     g.fillAll();
 }
 
@@ -766,7 +766,7 @@ void ChuginatorAudioProcessorEditor::resized()
     
     row4GUI.setBounds(bounds.removeFromTop(container.proportionOfHeight(0.25f)));
     
-    loadButton.setBounds(row4GUI.buttonIROnOff.getX() + 20, row4GUI.buttonIROnOff.getY(), 75, 25);
+    loadButton.setBounds(getWidth() - 80, getHeight() - 100, 75, 25);
     irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 150, 25);
         
     /*buttonBoost.setBounds((getWidth() / 2) + 50, getHeight() - 50, 30, 30);

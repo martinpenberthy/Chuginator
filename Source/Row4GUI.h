@@ -47,6 +47,8 @@ public:
         labelBoostButton.setText("Boost", juce::dontSendNotification);
         
         addAndMakeVisible(buttonIROnOff);
+        addAndMakeVisible(labelIR);
+        labelIR.setText("IR", juce::dontSendNotification);
         buttonIROnOff.setToggleable(true);
         
 
@@ -89,9 +91,10 @@ public:
         labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX() + 45, sliderNoiseGateThresh.getY() + 80, 40, 30);
         
         buttonBoost.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33)));
-        labelBoostButton.setBounds(buttonBoost.getX(), buttonBoost.getY() - 10, 78, 38);
+        labelBoostButton.setBounds(buttonBoost.getX(), buttonBoost.getY(), 78, 38);
         
-        buttonIROnOff.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33)).removeFromTop(container.proportionOfHeight(0.5f)));
+        buttonIROnOff.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33)));
+        labelIR.setBounds(buttonIROnOff.getX(), buttonIROnOff.getY(), 78, 38);
     }
 
     void setSliderPropertiesRotary(juce::Slider *sliderToSet)
@@ -116,6 +119,7 @@ public:
     
     //IR on/off
     juce::ToggleButton buttonIROnOff;
+    juce::Label labelIR;
 
 private:
     myLookAndFeel lookAndFeel;
