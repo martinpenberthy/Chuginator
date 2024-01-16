@@ -81,8 +81,8 @@ public:
         sliderDepth.setLookAndFeel(&lookAndFeel);
         
         //Label
-        labelPreEQ.setText("Depth", juce::dontSendNotification);
-        labelPreEQ.setLookAndFeel(&lookAndFeel);
+        labelDepth.setText("Depth", juce::dontSendNotification);
+        labelDepth.setLookAndFeel(&lookAndFeel);
         
         sliderDepth.onValueChange = [this]()
         {
@@ -143,14 +143,14 @@ public:
         labelInputGainVal.setBounds(sliderInputGain.getX(), sliderInputGain.getY() + (sliderMargin * 4), 76, 38);
         
         
+        sliderDepth.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.25f)).reduced(sliderMargin));
+        labelDepth.setBounds(sliderDepth.getX(), sliderDepth.getY() - 15, 76, 38);
+        labelDepthVal.setBounds(sliderDepth.getX() + 5, sliderDepth.getY() + 70, 76, 38);
+        
         //sliderPreEQ.setBounds((getWidth() / 2) - 40, topOffset, knobSizeLarge, knobSizeLarge);
         sliderPreEQ.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.25f)).reduced(sliderMargin));
         labelPreEQ.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() - sliderMargin, 76, 38);
         labelPreEQVal.setBounds(sliderPreEQ.getX(), sliderPreEQ.getY() + (sliderMargin * 4), 76, 38);
-
-        sliderDepth.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.25f)).reduced(sliderMargin));
-        labelDepth.setBounds(sliderDepth.getX(), sliderDepth.getY() - 15, 76, 38);
-        labelDepthVal.setBounds(sliderDepth.getX() + 5, sliderDepth.getY() + 70, 76, 38);
         
         
         //sliderOutputGain.setBounds(getWidth() - (leftOffset + knobSizeLarge), topOffset, knobSizeLarge, knobSizeLarge);
