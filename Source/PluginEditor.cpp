@@ -762,11 +762,13 @@ void ChuginatorAudioProcessorEditor::resized()
     //noiseGateGUI.setBounds(getWidth() / 2, getHeight() / 2, 100, 100);
     
     
-    loadButton.setBounds(row4XOffset * 3, getHeight() - 100, 75, 25);
-    irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 150, 25);
-    
+
     
     row4GUI.setBounds(bounds.removeFromTop(container.proportionOfHeight(0.25f)));
+    
+    loadButton.setBounds(row4GUI.buttonIROnOff.getX() + 20, row4GUI.buttonIROnOff.getY(), 75, 25);
+    irName.setBounds(loadButton.getX(), loadButton.getY() + 25, 150, 25);
+        
     /*buttonBoost.setBounds((getWidth() / 2) + 50, getHeight() - 50, 30, 30);
     labelBoostButton.setBounds(buttonBoost.getX(), buttonBoost.getY() - 30, 50, 20);
     buttonIROnOff.setBounds(irName.getX(), getHeight() - 50, 30, 30);

@@ -84,9 +84,12 @@ public:
         auto bounds = container;
         int sliderMargin = 18;
         
-        sliderNoiseGateThresh.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33)));
+        sliderNoiseGateThresh.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33)).reduced(sliderMargin));
+        labelNoiseGateThresh.setBounds(sliderNoiseGateThresh.getX() + 45, sliderNoiseGateThresh.getY() - sliderMargin, 76, 38);
+        labelNoiseGateThreshVal.setBounds(sliderNoiseGateThresh.getX() + 45, sliderNoiseGateThresh.getY() + 80, 40, 30);
         
         buttonBoost.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33)));
+        labelBoostButton.setBounds(buttonBoost.getX(), buttonBoost.getY() - 10, 78, 38);
         
         buttonIROnOff.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.33)).removeFromTop(container.proportionOfHeight(0.5f)));
     }
